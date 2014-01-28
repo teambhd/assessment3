@@ -1,2 +1,5 @@
 # Ignore build directory
 bin
+
+# Ignore local eclipse configuration
+.settings
