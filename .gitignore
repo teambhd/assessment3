@@ -3,3 +3,4 @@ bin
 
 # Ignore local eclipse configuration
 .settings
+.classpath
