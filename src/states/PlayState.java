@@ -23,7 +23,6 @@ public class PlayState extends BasicGameState {
 	Image cursorImg;
 	public static float time;
 	private Sound endOfGameSound;
-	private Music gameplayMusic;
 	public static TrueTypeFont font;
 	private Image controlBarImage, clockImage, backgroundImage, difficultyBackground, easyButton, easyHover, mediumButton, mediumHover, hardButton, hardHover;
 	private String stringTime;
@@ -61,9 +60,8 @@ public class PlayState extends BasicGameState {
 			e.printStackTrace();
 		}
 		
-		// Music
+		// Sound Effects
 		
-		gameplayMusic = new Music("res/music/Jarvic 8.ogg");
 		endOfGameSound = new Sound("res/music/175385__digitaldominic__scream.wav");
 	
 		
@@ -265,7 +263,6 @@ public class PlayState extends BasicGameState {
 			if (airspace.getSeparationRules().getGameOverViolation() == true){
 				airspace.getSeparationRules().setGameOverViolation(false);
 				airspace.resetAirspace();
-				gameplayMusic.stop();
 				endOfGameSound.play();
 				sbg.enterState(2);
 				gameEnded = true;
@@ -281,12 +278,6 @@ public class PlayState extends BasicGameState {
 				sbg.enterState(3);
 			}
 			
-						
-			if (!gameplayMusic.playing()){
-				//Loops gameplay music based on random number created in init
-							
-				gameplayMusic.loop(1.0f, 0.5f);
-			}
 			
 		}
 		
