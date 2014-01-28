@@ -2,7 +2,6 @@ package states;
 
 import java.awt.Font;
 import java.io.InputStream;
-import java.math.*;
 
 import logicClasses.Airspace;
 
@@ -19,7 +18,6 @@ import org.newdawn.slick.Image;
 public class PlayState extends BasicGameState {
 
 	private Airspace airspace;
-	private int i;
 	Image cursorImg;
 	public static float time;
 	private Sound endOfGameSound;
@@ -39,7 +37,6 @@ public class PlayState extends BasicGameState {
 		settingDifficulty = true;
 		time = 0;
 		airspace = new Airspace();
-		i = 1;
 		this.stringTime="";
 		
 		gc.setAlwaysRender(true);

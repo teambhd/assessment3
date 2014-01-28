@@ -1,18 +1,14 @@
 package states;
 
-import java.awt.Font;
-import java.io.InputStream;
-
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.util.ResourceLoader;
 import org.lwjgl.input.Mouse;
 
 
 public class ControlsState extends BasicGameState {
 	
 	private int pageNumber;
-	private Image controlsBackgroundPage1,controlsBackgroundPage2, backButton, nextPageButton, previousPageButton, menuButton, quitButton, backButtonHover;
+	private Image controlsBackgroundPage1,controlsBackgroundPage2, backButton, nextPageButton, previousPageButton, quitButton, backButtonHover;
     private Image nextPageHover, previousPageHover, quitHover;
     
 	public ControlsState(int state){
@@ -108,10 +104,6 @@ public class ControlsState extends BasicGameState {
 		int posY = Mouse.getY();
 		
 		posY = 600 - posY;
-		
-		Input input = gc.getInput();
-		
-
 		
 		
 		if((posX > 20 && posX < 40) && (posY > 20 && posY < 40)) {
