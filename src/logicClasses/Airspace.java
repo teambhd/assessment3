@@ -34,7 +34,7 @@ public class Airspace {
 		this.listOfWayppoints = new ArrayList<Waypoint>();
 		this.listofEntrypoints = new ArrayList<EntryPoint>();
 		this.listOfExitPoints = new ArrayList<ExitPoint>();
-		this.airport = new Airport();
+		this.airport = new Airport(572,197, "Airport");
 		this.numberOfGameLoopsSinceLastFlightAdded = 0; // Stores how many loops since the last flight was spawned before another flight can enter
 		this.numberOfGameLoops = 0; // Stores how many loops there have been in total
 		this.numberOfGameLoopsWhenDifficultyIncreases = 3600; // this is how many loops until planes come more quickly, difficulty increase once a minute
@@ -89,6 +89,18 @@ public class Airspace {
 			}
 		} return false;
 	}
+	
+	public boolean newAirport(int x, int y)  {
+		if (x < 1250 && x > 150 && y < 650 && y > -50){ // x and y must be within these bounds to be within screen space
+			
+			Airport tmpAp = new Airport(x, y, "Airport");
+			
+			if (this.addAirport(tmpAp)) {
+				return true;
+			}
+		} return false;
+	}
+
 	
 	/**
 	 * newExitPoint: Add a new exitpoint to the list in the airspace
@@ -251,7 +263,7 @@ public class Airspace {
 		for (int i = 0; i < this.listOfWayppoints.size(); i++) { // Initialising waypoints
 			this.listOfWayppoints.get(i).init(gc);
 		}
-		
+		this.airport.init(gc);
 		for (int i = 0; i < this.listOfExitPoints.size(); i++) { // Initailising exit points
 			this.listOfExitPoints.get(i).init(gc);
 		}
@@ -301,11 +313,12 @@ public class Airspace {
 	 */
 	public void render(Graphics g, GameContainer gc) throws SlickException { 
 		
-		this.airport.render(g, gc);
+	//	this.airport.render(g, gc);
 
 		for (int i = 0; i < this.listOfWayppoints.size(); i++) { // Draws waypoints
 			this.listOfWayppoints.get(i).render(g, this);
 		}
+		this.airport.render(g,this);
 		for (int i = 0; i < this.listOfExitPoints.size(); i++) { // Draws exit points
 			this.listOfExitPoints.get(i).render(g, this);
 		}
@@ -361,6 +374,10 @@ public class Airspace {
 			this.listOfWayppoints.add(waypoint);
 			return true;
 		}
+	}
+	
+	public boolean addAirport (Airport airport) {
+		return true;
 	}
 
 	public boolean addEntryPoint(EntryPoint entrypoint) {
