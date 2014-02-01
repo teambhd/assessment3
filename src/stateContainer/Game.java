@@ -15,6 +15,7 @@ import states.ControlsState;
 public class Game extends StateBasedGame {
 
 	public static final String NAME = "Turbulence";
+    
 	public static final int MENUSTATE = 0;
 	public static final int PLAYSTATE = 1;
 	public static final int GAMEOVERSTATE = 2;
@@ -32,19 +33,15 @@ public class Game extends StateBasedGame {
 
 	public Game(String NAME) {
 		super(NAME);
+	}
+
+	public void initStatesList(GameContainer gc) throws SlickException {
 		this.addState(new MenuState(MENUSTATE));
 		this.addState(new PlayState(PLAYSTATE));
 		this.addState(new GameOverState(GAMEOVERSTATE));
 		this.addState(new PauseState(PAUSESTATE));
 		this.addState(new CreditsState(CREDITSSTATE));
 		this.addState(new ControlsState(CONTROLSSTATE));
-		this.enterState(MENUSTATE);
-	}
-
-	public void initStatesList(GameContainer gc) throws SlickException {
-
-		
-
 	}
 
 	public static void main(String[] args) {
