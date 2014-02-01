@@ -1,6 +1,9 @@
 # Ignore build directory
 bin
 
+# Ignore junit output directory
+junit
+
 # Ignore local eclipse configuration
 .settings
 
