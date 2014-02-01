@@ -52,7 +52,7 @@
         </java>
     </target>
     
-    <target name="tests">
+    <target name="test">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
@@ -64,7 +64,7 @@
         </junit>
     </target>
     
-    <target name="junitreport">
+    <target name="report">
         <junitreport todir="${junit.output.dir}">
             <fileset dir="${junit.output.dir}">
                 <include name="TEST-*.xml"/>
