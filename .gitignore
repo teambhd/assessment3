@@ -4,6 +4,9 @@ bin
 # Ignore junit output directory
 junit
 
+# Ignore runnables output directory
+dist
+
 # Ignore local eclipse configuration
 .settings
 
