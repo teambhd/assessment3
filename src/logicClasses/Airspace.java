@@ -295,6 +295,9 @@ public class Airspace {
 				this.removeSpecificFlight(i);
 			}
 			else if (this.checkIfFlightHasLeftAirspace(this.getListOfFlights().get(i))) {
+				if (this.listOfFlightsInAirspace.get(i).getFlightPlan().getCurrentRoute().size() != 0){ //Checks if a flight has gone by all of its waypoints.
+					this.changeScore (-200); // if not, -200 to score.
+				}
 				this.removeSpecificFlight(i);
 			}
 			
