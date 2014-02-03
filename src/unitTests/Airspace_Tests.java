@@ -33,6 +33,8 @@ public class Airspace_Tests {
     	airspace.newExitPoint(800, 0, "1");
     	airspace.newExitPoint(150, 200, "2");
     	airspace.newExitPoint(1200, 300, "3");
+    	//Airport
+    	airspace.newAirport(572, 197);
     	// Get a Flight
     	flight1 = new Flight(airspace);
     	
@@ -64,6 +66,17 @@ public class Airspace_Tests {
 		assertFalse(airspace.newWaypoint(-10000, 151, "TEST2"));
 		assertFalse(airspace.newWaypoint(50, 0, "TEST3"));
 	}
+	
+	//Testing new_airport ()
+	
+	public void newAirportTest(){
+		// Tests that airport added when placed within airspace. Also
+		// tests that airport isn't added when outside range of the airspace.
+		assertTrue(airspace.newAirport(151, 500));
+		assertFalse(airspace.newAirport(-10000, 151));
+		assertFalse(airspace.newAirport(50, 0));
+	}
+
 	
 	
 	// Testing new_exit_point()
