@@ -125,6 +125,18 @@ public class Flight {
 	}
 	
 	/**
+	 * changeVelocity: sets the target velocity to certain amount. It is set up to be within some limits.
+	 * @param newTarget
+	 */
+	
+	public void changeVelocity (double newTarget) {
+		if (newTarget<=400 || newTarget>=0){
+			flightPlan.setVelocity(newTarget);
+		}
+		
+	}
+	
+	/**
 	 * giveHeading: Changes the target heading to newHeading. Whenever a command is issued by the user to change the heading,
 	 * the method is passed the value of that command. The heading is always adjusted to a value between 0 and 359. This is 
 	 * done using newHeading % 360.
@@ -281,6 +293,17 @@ public class Flight {
 		this.y -= velocity * Math.cos(Math.toRadians(this.currentHeading));
 
 	}
+	/**
+	 * updateVeloity: updates the velocity of the plane depending on user input.
+	 */
+	public void updateVelocity (){
+		if (this.flightPlan.getVelocity() > this.flightPlan.getTarget()){
+			this.flightPlan.setVelocity(this.flightPlan.getVelocity()-0.25);
+		}
+		else if (this.flightPlan.getVelocity()<this.flightPlan.getTarget()){
+			this.flightPlan.setVelocity(this.flightPlan.getVelocity()+0.25);
+		}
+	}
 
 	/**
 	 * updateAltitude(): If the target altitude is higher than the current altitude, increase current altitude.
@@ -290,11 +313,11 @@ public class Flight {
 	
 	public void updateAltitude() {
 		if (this.currentAltitude > this.targetAltitude) {
-			this.currentAltitude -= 1;
+			this.currentAltitude -= 4;
 		}
 
 		else if (this.currentAltitude < this.targetAltitude) {
-			this.currentAltitude += 1;
+			this.currentAltitude += 4;
 		}
 	}
 	
@@ -393,6 +416,7 @@ public class Flight {
 		this.updateCurrentHeading();
 		this.updateXYCoordinates();
 		this.updateAltitude();
+		this.updateVelocity();
 		this.flightPlan.update();
 	}
 	
