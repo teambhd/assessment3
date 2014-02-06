@@ -8,7 +8,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Flight {
-
 	// FIELDS
 	private double x, y, currentHeading, targetHeading;
 	private int currentAltitude, targetAltitude, flightNumber;
@@ -18,10 +17,7 @@ public class Flight {
 	private Image regularFlightImage, selectedFlightInformationBackgroundImage, slowFlightImage, fastFlightImage, shadowImage;
 	private boolean selected;
 	private Airspace airspace;
-
 	
-	
-
 	// CONSTRUCTOR
 	public Flight(Airspace airspace) {
 		this.x = 0;
@@ -35,12 +31,9 @@ public class Flight {
 		this.airspace = airspace;
 		this.flightPlan = new FlightPlan(airspace, this);
 		this.selected = false;
-		
-
 	}
 
 	// METHODS
-	
 	
 	/**
 	 * generateAltitude: Randomly assigns one of three different altitudes to a flight
@@ -71,7 +64,6 @@ public class Flight {
  */
 	
 	public double calculateHeadingToFirstWaypoint(double desX, double desY) {
-		
 		double deltaX;
 		double deltaY;
 		deltaY = desY - this.y;
@@ -93,7 +85,6 @@ public class Flight {
 	 */
 	
 	public void turnFlightLeft(int degreeTurnedBy) {
-
 		this.turningRight = false;
 		this.turningLeft = true;
 
@@ -112,16 +103,14 @@ public class Flight {
 	 */
 	
 	public void turnFlightRight(int degreeTurnedBy) {
-
 		this.turningLeft = false;
 		this.turningRight = true;
 		
 		this.targetHeading = Math.round(this.currentHeading) + degreeTurnedBy;
-		if(this.targetHeading >= 360){
+		
+        if(this.targetHeading >= 360){
 			this.targetHeading = this.targetHeading - 360;
 		}
-
-
 	}
 	
 	/**
@@ -130,10 +119,9 @@ public class Flight {
 	 */
 	
 	public void changeVelocity (double newTarget) {
-		if (newTarget<=400 && newTarget>=0){
+		if ((newTarget <= 400) && (newTarget >= 0)){
 			flightPlan.setTarget(newTarget);
 		}
-		
 	}
 	
 	/**
@@ -157,14 +145,13 @@ public class Flight {
 	 * @return True if flight is at it's next waypoint.
 	 */
 	
-	public boolean checkIfFlightAtWaypoint(Point waypoint) {
-		
+	public boolean checkIfFlightAtWaypoint(Point waypoint) {		
 		if (((Math.abs(Math.round(this.x) - Math.round(waypoint.getX()))) <= 15)
 				&& (Math.abs(Math.round(this.y) - Math.round(waypoint.getY()))) <= 15) {
 			this.airspace.changeScore(100);
 			return true;
 		}
-
+        
 		return false;
 	}
 
@@ -178,73 +165,61 @@ public class Flight {
 	 * @param gc - GameContainer required by slick2d.
 	 */
 	
-	public void drawFlight(Graphics g, GameContainer gc ){
+	public void drawFlight(Graphics g, GameContainer gc) {
+        g.setColor(Color.white);
+        g.setWorldClip(150, 0, 1200, 600);
 
-				g.setColor(Color.white);
-				g.setWorldClip(150, 0, 1200, 600);
+        // Scale the shadow in accordance to the altitude of the flight
+        float shadowScale = (float) (36 - (this.currentAltitude / 1000))/10; 
+        shadowImage.setRotation((int) currentHeading);
+        shadowImage.draw((int) this.x-35, (int) this.y, shadowScale);
 
-				
-				float shadowScale = (float) (36 - (this.currentAltitude / 1000))/10; // Scale the shadow in accordance to the altitude of the flight
-				shadowImage.setRotation((int) currentHeading);
-				shadowImage.draw((int) this.x-35, (int) this.y, shadowScale);
-				
-				//Depending on a plane's speed, different images for the plane are drawn
-					
-				if(this.flightPlan.getVelocity() <= 275){
-					
-					slowFlightImage.setRotation((int) currentHeading);
-					slowFlightImage.draw((int) this.x-10, (int) this.y-10);
-					
-				}
-				
-				else if(this.flightPlan.getVelocity() > 270 && this.flightPlan.getVelocity() < 340){
-					
-					regularFlightImage.setRotation((int) currentHeading);
-					regularFlightImage.draw((int) this.x-10, (int) this.y-10);
-			
-				}
-				
-				else{
-					fastFlightImage.setRotation((int) currentHeading);
-					fastFlightImage.draw((int) this.x-10, (int) this.y-10);
-					
-				}
-				
-				// Drawing Separation Circle
-				
-				g.drawOval((int) this.x - 50, (int) this.y - 50, 100, 100);
-				
-				
-				// Drawing information around flight
-				// If flight is selected then also display current heading
-				
-				if (this.selected){
-					g.setColor(Color.white);
-					g.drawString(this.flightName, (int) this.x-24, (int) this.y-44);
-					g.drawString(Math.round(this.currentAltitude) + "ft",(int) this.x-25, (int) this.y + 10);
-					g.drawString(Math.round(this.currentHeading) + "\u00B0",(int) this.x - 13, (int) this.y + 25); // "\u00B0" = degrees
-					
-					if (this.flightPlan.getCurrentRoute().size() > 0) {
-						g.drawString("Aim: "+this.flightPlan.getPointByIndex(0).getPointRef(),(int) this.x -22, (int)this.y-28);
-						
-					}
+        // Depending on a plane's speed, different images for the plane are drawn
+        if(this.flightPlan.getVelocity() <= 275){
+        	slowFlightImage.setRotation((int) currentHeading);
+        	slowFlightImage.draw((int) this.x-10, (int) this.y-10);
+        }
+
+        else if((this.flightPlan.getVelocity() > 270) && (this.flightPlan.getVelocity() < 340)) {
+        	regularFlightImage.setRotation((int) currentHeading);
+        	regularFlightImage.draw((int) this.x-10, (int) this.y-10);
+        }
+
+        else {
+        	fastFlightImage.setRotation((int) currentHeading);
+        	fastFlightImage.draw((int) this.x-10, (int) this.y-10);
+        }
+
+        // Drawing Separation Circle
+        g.drawOval((int) this.x - 50, (int) this.y - 50, 100, 100);
+
+
+        // Drawing information around flight (If flight is selected then also display current heading)
+        if (this.selected) {
+        	g.setColor(Color.white);
+        	g.drawString(this.flightName, (int) this.x-24, (int) this.y-44);
+        	g.drawString(Math.round(this.currentAltitude) + "ft",(int) this.x-25, (int) this.y + 10);
+        	g.drawString(Math.round(this.currentHeading) + "\u00B0",(int) this.x - 13, (int) this.y + 25); // "\u00B0" = degrees
 	
-				}
-				
-				// If flight isn't selected then don't display current heading
-				else{
-					g.setColor(Color.lightGray);
-					g.drawString(this.flightName, (int) this.x-24, (int) this.y-44);
-					g.drawString(Math.round(this.currentAltitude) + "ft",(int) this.x-25, (int) this.y + 10);
-					
-					if (this.flightPlan.getCurrentRoute().size() > 0) {
-						g.drawString("Aim: "+this.flightPlan.getPointByIndex(0).getPointRef(),(int) this.x -22, (int)this.y-28);
-					}
-					g.drawOval((int) this.x - 50, (int) this.y - 50, 100, 100);
-				}
-				
-				g.setWorldClip(0, 0, 1200, 600);
-		
+        	if (this.flightPlan.getCurrentRoute().size() > 0) {
+        		g.drawString("Aim: "+this.flightPlan.getPointByIndex(0).getPointRef(),(int) this.x -22, (int)this.y-28);
+        	}
+        }
+
+        // If flight isn't selected then don't display current heading
+        else {
+        	g.setColor(Color.lightGray);
+        	g.drawString(this.flightName, (int) this.x-24, (int) this.y-44);
+        	g.drawString(Math.round(this.currentAltitude) + "ft",(int) this.x-25, (int) this.y + 10);
+	
+        	if (this.flightPlan.getCurrentRoute().size() > 0) {
+        		g.drawString("Aim: "+this.flightPlan.getPointByIndex(0).getPointRef(),(int) this.x -22, (int)this.y-28);
+        	}
+            
+        	g.drawOval((int) this.x - 50, (int) this.y - 50, 100, 100);
+        }
+
+        g.setWorldClip(0, 0, 1200, 600);
 	}
 	
 	/**
@@ -254,7 +229,6 @@ public class Flight {
 	 */
 	
 	public void drawSelectedFlightInformation(Graphics g, GameContainer gc) {
-		
 		this.selectedFlightInformationBackgroundImage.draw(0,450);
 		g.setColor(Color.white);
 		g.drawString(this.flightName,  10, 460);
@@ -265,16 +239,11 @@ public class Flight {
 			plan += this.flightPlan.getCurrentRoute().get(i).getPointRef()+", ";
 		}
 		
-		
 		g.setColor(Color.white);
 		g.drawString(plan, 10, 500);
-		g.drawString(Math.round(this.currentAltitude) + "ft",
-			 10, 520);
-		g.drawString(Math.round(this.currentHeading) + "\u00B0",
-			10, 540);
-		g.drawString(Math.round(this.getFlightPlan().getVelocity()) + "mph",
-			10, 560);
-		
+		g.drawString(Math.round(this.currentAltitude) + "ft", 10, 520);
+		g.drawString(Math.round(this.currentHeading) + "\u00B0", 10, 540);
+		g.drawString(Math.round(this.getFlightPlan().getVelocity()) + "mph", 10, 560);	
 	}
 	
 	// UPDATE METHODS
@@ -287,12 +256,10 @@ public class Flight {
 
 	public void updateXYCoordinates() {
 		double velocity = (this.flightPlan.getVelocity()) / 1000;
-
 		this.x += velocity * Math.sin(Math.toRadians(this.currentHeading));
-
 		this.y -= velocity * Math.cos(Math.toRadians(this.currentHeading));
-
 	}
+    
 	/**
 	 * updateVeloity: updates the velocity of the plane depending on user input.
 	 */
@@ -300,7 +267,8 @@ public class Flight {
 		if (this.flightPlan.getVelocity() > this.flightPlan.getTarget()){
 			this.flightPlan.setVelocity(this.flightPlan.getVelocity()-0.25);
 		}
-		else if (this.flightPlan.getVelocity()<this.flightPlan.getTarget()){
+	
+    	else if (this.flightPlan.getVelocity()<this.flightPlan.getTarget()){
 			this.flightPlan.setVelocity(this.flightPlan.getVelocity()+0.25);
 		}
 	}
@@ -328,7 +296,6 @@ public class Flight {
 	 */
 
 	public void updateCurrentHeading() {
-	
 		double rate = 0.5;
 		if (Math.round(this.targetHeading) != Math.round(this.currentHeading)) {
 			
@@ -344,21 +311,21 @@ public class Flight {
 					this.turningRight = true;
 				} 
 				
-				else if (this.currentHeading + 180 <= 359){
-					
+				else if (this.currentHeading + 180 <= 359) {
 					if (this.targetHeading < this.currentHeading + 180 && this.targetHeading > this.currentHeading){
 						this.turningRight = true;
 					}
+                    
 					else {
 						this.turningLeft = true;
 					}
 				}
 				
 				else {
-					
 					if (this.targetHeading > this.currentHeading - 180 && this.targetHeading < this.currentHeading){
 						this.turningLeft = true;
 					}
+                    
 					else {
 						this.turningRight = true;
 					}
@@ -367,7 +334,6 @@ public class Flight {
 			}
 			
 			// If plane is already turning right or user has told it to turn right
-			
 			if (this.turningRight == true) {
 				this.currentHeading += rate;
 				if (Math.round(this.currentHeading) >= 360 && this.targetHeading != 360) {
@@ -376,7 +342,6 @@ public class Flight {
 			}
 
 			// If plane is already turning left or user has told it to turn left
-			
 			if (this.turningLeft == true) {
 				this.currentHeading -= rate;
 				if (Math.round(this.currentHeading) <= 0 && this.targetHeading != 0) {
@@ -385,8 +350,6 @@ public class Flight {
 			}
 		}
 	}
-	
-	
 
 
 	// UPDATE, RENDER, INIT
@@ -397,13 +360,11 @@ public class Flight {
 	 */
 	
 	public void init(GameContainer gc) throws SlickException {
-		
 		this.regularFlightImage = new Image("res/graphics/flight.png");
 		this.shadowImage = new Image("res/graphics/flight_shadow.png");
 		this.slowFlightImage = new Image("res/graphics/flight_slow.png");
 		this.fastFlightImage = new Image("res/graphics/flight_fast.png");
 		this.selectedFlightInformationBackgroundImage = new Image("res/graphics/selected_flight2.jpg");
-
 	}
 	
 	
@@ -412,7 +373,6 @@ public class Flight {
  */
 
 	public void update() {
-
 		this.updateCurrentHeading();
 		this.updateXYCoordinates();
 		this.updateAltitude();
@@ -428,22 +388,17 @@ public class Flight {
 	
 
 	public void render(Graphics g, GameContainer gc) throws SlickException {
-		
-		this.drawFlight(g,  gc);
-		this.flightPlan.render(g,gc);
+		this.drawFlight(g, gc);
+		this.flightPlan.render(g, gc);
 
-		if(this.selected) {
+		if (this.selected) {
 			this.drawSelectedFlightInformation(g, gc);
-			
-
 		}
-		
 	}
 	
 
 	// MUTATORS AND ACCESSORS
 	
-
 	public double getX() {
 		return this.x;
 	}
@@ -551,8 +506,6 @@ public class Flight {
 		return flightPlan;
 	}
 	
-
-	
 	public Airspace getAirspace(){
 		return airspace;
 	}
@@ -560,7 +513,5 @@ public class Flight {
 	public boolean getSelected(){
 		return this.selected;
 	}
-
-
-
+    
 }

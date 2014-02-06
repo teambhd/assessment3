@@ -27,13 +27,9 @@ public class PlayState extends BasicGameState {
 	private String stringTime, stringScore;
 	private boolean settingDifficulty, gameEnded;
 
-	public PlayState(int state) {
-		
-
-	}
+	public PlayState(int state) {}
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		
 		gameEnded = false;
 		settingDifficulty = true;
 		time = 0;
@@ -46,26 +42,20 @@ public class PlayState extends BasicGameState {
 		gc.setUpdateOnlyWhenVisible(true);	
 		
 		// Font
-		
-		try{
+		try {
 			InputStream inputStream = ResourceLoader.getResourceAsStream("res/blue_highway_font/bluehigh.ttf");
 			Font awtFont= Font.createFont(Font.TRUETYPE_FONT, inputStream);
 			awtFont = awtFont.deriveFont(20f);
 			font = new TrueTypeFont(awtFont, true);
-			
-			
-		}catch(Exception e){
+		}
+        catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		// Sound Effects
-		
+		// Sound Effects		
 		endOfGameSound = new Sound("res/music/175385__digitaldominic__scream.wav");
 	
-		
-		
 		//Images
-		
 		controlBarImage = new Image("res/graphics/control_bar_vertical.png");
 		clockImage = new Image("res/graphics/clock.png");
 		backgroundImage = new Image("res/graphics/background.png");
@@ -75,12 +65,9 @@ public class PlayState extends BasicGameState {
 		mediumButton = new Image("res/menu_graphics/medium.png");
 		mediumHover = new Image("res/menu_graphics/medium_hover.png");
 		hardButton = new Image("res/menu_graphics/hard.png");
-		hardHover = new Image("res/menu_graphics/hard_hover.png");
+		hardHover = new Image("res/menu_graphics/hard_hover.png");		
 		
-		//initialise the airspace object;
-		
-		
-    	//Waypoints
+    	// Initialise Waypoints
     	airspace.newWaypoint(350, 150, "A");
     	airspace.newWaypoint(400, 470, "B");
     	airspace.newWaypoint(700, 60,  "C");
@@ -91,17 +78,18 @@ public class PlayState extends BasicGameState {
     	airspace.newWaypoint(1050, 272,"H");
     	airspace.newWaypoint(900, 420, "I");
     	airspace.newWaypoint(240, 250, "J");
-    	//EntryPoints
+        
+    	// Initialise EntryPoints
     	airspace.newEntryPoint(150, 400);
     	airspace.newEntryPoint(1200, 200);
     	airspace.newEntryPoint(600, 0);
-    	// Exit Points
+        
+    	// Initialise Exit Points
     	airspace.newExitPoint(800, 0, "1");
     	airspace.newExitPoint(150, 200, "2");
     	airspace.newExitPoint(1200, 300, "3");
-    	airspace.init(gc);
-		
-
+    	
+        airspace.init(gc);
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)

@@ -15,16 +15,20 @@ public class Controls {
 
 	// FIELDS
 	private TrueTypeFont font;
-	private TextField headingControlTextBox; //Object for heading control
+	
+    private TextField headingControlTextBox; //Object for heading control
 	private TextField turnRightTextBox; //Object for turn right control
 	private TextField turnLeftTextBox; // Object for turn left control
-	private boolean selectingHeadingUsingTextBox; // Has the text box been reset?
+	
+    private boolean selectingHeadingUsingTextBox; // Has the text box been reset?
 	private boolean mouseHeldDownOnsideButton, mouseHeldDownOnFlight, headingAlreadyChangedByMouse;
-	private final int MAXIMUMALTITUDE = 9000;
-	private final int MINIMUMALTITUDE = 1000;
-	private final int MAXIMUMVELOCITY = 400;
-	private final int MINIMUMVELOCITY = 0;
-	private Flight selectedFlight;
+	
+    private final int MAXIMUM_ALTITUDE = 9000;
+	private final int MINIMUM_ALTITUDE = 1000;
+	private final int MAXIMUM_VELOCITY = 400;
+	private final int MINIMUM_VELOCITY = 0;
+	
+    private Flight selectedFlight;
 	private String text; //Used for parsing textbox inputs
 	private Image sideButton, changePlanButton;
 	private int difficultyValueOfGame; //Sets the difficulty of the control scheme
@@ -78,13 +82,13 @@ public class Controls {
 		posY = 600 - posY; // Mapping Mouse coords onto graphic coords
 		
 		if(posX>10&&posX<150&&posY<380&&posY>360&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the decrease velocity button and is the button being held down?
-			if(this.selectedFlight.getFlightPlan().getTarget() > MINIMUMVELOCITY) { //Is the target velocity already at the min value?
+			if(this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) { //Is the target velocity already at the min value?
 				this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()-25); //Set the target velocity 25 lower
 			}
 		}
 		
 		if(posX>10&&posX<150&&posY<350&&posY>330&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase velocity button and is the button being held down?
-			if(this.selectedFlight.getFlightPlan().getTarget() < MAXIMUMVELOCITY) { //Is the target velocity already at the maximum value?
+			if(this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) { //Is the target velocity already at the maximum value?
 				this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()+25); //Set the target velocity 25 higher
 			}
 		}
@@ -92,13 +96,13 @@ public class Controls {
 
 		
 			if(posX>10&&posX<150&&posY<410&&posY>390&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase altitude button and is the button being held down?
-				if(this.selectedFlight.getTargetAltitude() < MAXIMUMALTITUDE) { //Is the target altitude already at the maximum value?
+				if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) { //Is the target altitude already at the maximum value?
 					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()+1000); //Set the target altitude 1000 higher
 				}
 			}
 
 			else if(posX>10&&posX<150&&posY<440&&posY>420&&Mouse.isButtonDown(0)) {//Is the mouse position in the area enclosed by the decrease altitude button and is the button being held down?
-				if(this.selectedFlight.getTargetAltitude()> MINIMUMALTITUDE) { //Is the target altitude already at the minimum value?
+				if(this.selectedFlight.getTargetAltitude()> MINIMUM_ALTITUDE) { //Is the target altitude already at the minimum value?
 					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()-1000); //Set the target altitude 1000 lower
 				}
 			}
@@ -371,13 +375,13 @@ public class Controls {
 					g.drawString ("At min speed", 10, 360);
 				}
 				
-				if(this.selectedFlight.getTargetAltitude() != MAXIMUMALTITUDE){
+				if(this.selectedFlight.getTargetAltitude() != MAXIMUM_ALTITUDE){
 					g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
 				}
 				else {
 					g.drawString("At max altitude", 10, 390);
 				}
-				if(this.selectedFlight.getTargetAltitude() != MINIMUMALTITUDE){
+				if(this.selectedFlight.getTargetAltitude() != MINIMUM_ALTITUDE){
 					g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
 				}
 				else {
@@ -441,12 +445,12 @@ public class Controls {
 				
 				//ALTITUDE KEYS
 				if(input.isKeyPressed(Input.KEY_UP)){
-					if(this.selectedFlight.getTargetAltitude() < MAXIMUMALTITUDE) {
+					if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) {
 						this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()+1000);
 					}
 				}
 				if(input.isKeyPressed(Input.KEY_DOWN)){
-					if(this.selectedFlight.getTargetAltitude() > MINIMUMALTITUDE) {
+					if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE) {
 						this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()-1000);
 					}
 				}
