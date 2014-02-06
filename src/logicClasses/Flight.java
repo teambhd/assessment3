@@ -52,11 +52,11 @@ public class Flight {
 		int check = rand.nextInt(3);
 		switch(check) {
 		case 0:
-			return 28000;
+			return 6000;
 		case 1:
-			return 29000;
+			return 7000;
 		case 2:
-			return 30000;
+			return 5000;
 		}
 		return 27000; // Default state (this won't ever be returned)
 	}

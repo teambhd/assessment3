@@ -47,7 +47,7 @@ public class Flight_Tests {
 	public void generateAltitudeTest1() {
 		// Testing the function returns an altitude within a certain range.
     	int result = flight1.generateAltitude();
-    	assertTrue(result >=27000 && result<= 30000);
+    	assertTrue(result >=1000 && result<= 10000);
     	
 	}
 	
@@ -240,50 +240,50 @@ public class Flight_Tests {
 	@Test
 	public void updateAltitudeTest1(){
 		// Testing that the Flight moves towards the target altitude.
-		flight1.setAltitude(27000);
-		flight1.setTargetAltitude(28000);
+		flight1.setAltitude(5996);
+		flight1.setTargetAltitude(6000);
 		flight1.updateAltitude();
-		assertEquals(27001, flight1.getAltitude(), 0.1);
+		assertEquals(6000, flight1.getAltitude(), 0.1);
 		
 	}
 	
 	@Test
 	public void updateAltitudeTest2(){
 		// Testing that the Flight doesn't move when at the target altitude.
-		flight1.setCurrentAltitude(27000);
-		flight1.setTargetAltitude(27000);
+		flight1.setCurrentAltitude(4000);
+		flight1.setTargetAltitude(4000);
 		flight1.updateAltitude();
-		assertEquals(27000, flight1.getAltitude(), 0.1);
+		assertEquals(4000, flight1.getAltitude(), 0.1);
 		
 	}
 	
 	@Test
 	public void updateAltitudeTest3(){
 		// Testing that the Flight moves towards the target altitude.
-		flight1.setCurrentAltitude(26999);
-		flight1.setTargetAltitude(27000);
+		flight1.setCurrentAltitude(2996);
+		flight1.setTargetAltitude(3000);
 		flight1.updateAltitude();
-		assertEquals(27000, flight1.getAltitude(), 0.1);
+		assertEquals(3000, flight1.getAltitude(), 0.1);
 		
 	}
 	
 	@Test
 	public void updateAltitudeTest4(){
 		// Testing that the Flight moves towards the target altitude.
-		flight1.setCurrentAltitude(28000);
-		flight1.setTargetAltitude(27000);
+		flight1.setCurrentAltitude(5004);
+		flight1.setTargetAltitude(5000);
 		flight1.updateAltitude();
-		assertEquals(27999, flight1.getAltitude(), 0.1);
+		assertEquals(5000, flight1.getAltitude(), 0.1);
 		
 	}
 	
 	@Test
 	public void updateAltitudeTest5(){
 		// Testing that the Flight moves towards the target altitude.
-		flight1.setCurrentAltitude(27001);
-		flight1.setTargetAltitude(27000);
+		flight1.setCurrentAltitude(8004);
+		flight1.setTargetAltitude(8000);
 		flight1.updateAltitude();
-		assertEquals(27000, flight1.getAltitude(), 0.1);
+		assertEquals(8000, flight1.getAltitude(), 0.1);
 		
 	}
 	

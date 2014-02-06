@@ -28,7 +28,7 @@ public class Airspace {
 	// CONSTRUCTOR
 
 	public Airspace() {
-		this.maximumNumberOfFlightsInAirspace = 5;
+		this.maximumNumberOfFlightsInAirspace = 10;
 		this.score = 0;
 		this.listOfFlightsInAirspace = new ArrayList<Flight>();
 		this.listOfWayppoints = new ArrayList<Waypoint>();
@@ -57,6 +57,7 @@ public class Airspace {
 		
 		this.numberOfGameLoopsSinceLastFlightAdded = 0; 
 		this.numberOfGameLoops = 0; 
+		this.score = 0;
 		this.numberOfGameLoopsWhenDifficultyIncreases = 3600;
 		this.separationRules.setGameOverViolation(false); // Prevents user immediately entering game over state upon replay
 		this.controls.setSelectedFlight(null); // Prevents information about flight from previous game being displayed 

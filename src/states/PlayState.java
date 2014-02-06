@@ -20,10 +20,11 @@ public class PlayState extends BasicGameState {
 	private Airspace airspace;
 	Image cursorImg;
 	public static float time;
+	public static int score;
 	private Sound endOfGameSound;
 	public static TrueTypeFont font;
 	private Image controlBarImage, clockImage, backgroundImage, difficultyBackground, easyButton, easyHover, mediumButton, mediumHover, hardButton, hardHover;
-	private String stringTime;
+	private String stringTime, stringScore;
 	private boolean settingDifficulty, gameEnded;
 
 	public PlayState(int state) {
@@ -36,8 +37,10 @@ public class PlayState extends BasicGameState {
 		gameEnded = false;
 		settingDifficulty = true;
 		time = 0;
+		score = 0;
 		airspace = new Airspace();
 		this.stringTime="";
+		this.stringScore="";
 		
 		gc.setAlwaysRender(true);
 		gc.setUpdateOnlyWhenVisible(true);
@@ -156,6 +159,10 @@ public class PlayState extends BasicGameState {
 			g.drawString(this.stringTime, 25, 11);
 		
 		}
+			
+			//Drawing Score
+			g.setColor (Color.white);
+			g.drawString (stringScore, 80 ,11);
 		
 
 		
@@ -173,6 +180,7 @@ public class PlayState extends BasicGameState {
 			
 			airspace.resetAirspace();
 	    	time = 0;
+	    	score = 0;
 	    	gameEnded = false;
 	    	settingDifficulty = true;
 			
@@ -251,6 +259,7 @@ public class PlayState extends BasicGameState {
 			}
 						
 			this.stringTime=stringMins+":"+stringSecs;
+			this.stringScore=Integer.toString(this.airspace.getScore());
 						
 						
 			// Updating Airspace

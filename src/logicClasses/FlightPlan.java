@@ -32,6 +32,7 @@ public class FlightPlan {
 	public FlightPlan(Airspace airspace, Flight flight) {
 		this.flight = flight;
 		this.velocity = generateVelocity();
+		this.targetVelo = this.velocity;
 		this.entryPoint = generateEntryPoint(airspace);
 		this.currentRoute = buildRoute(airspace, this.entryPoint);
 		this.waypointsAlreadyVisited = new ArrayList<Point>();

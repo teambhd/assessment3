@@ -20,8 +20,8 @@ public class Controls {
 	private TextField turnLeftTextBox; // Object for turn left control
 	private boolean selectingHeadingUsingTextBox; // Has the text box been reset?
 	private boolean mouseHeldDownOnAltitudeButton, mouseHeldDownOnFlight, headingAlreadyChangedByMouse;
-	private final int  MAXIMUMALTITUDE = 31000;
-	private final int  MINIMUMALTITUDE = 26000;
+	private final int  MAXIMUMALTITUDE = 10000;
+	private final int  MINIMUMALTITUDE = 1000;
 	private Flight selectedFlight;
 	private String text; //Used for parsing textbox inputs
 	private Image altitudeButton, changePlanButton;
