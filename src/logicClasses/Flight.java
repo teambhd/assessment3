@@ -130,8 +130,8 @@ public class Flight {
 	 */
 	
 	public void changeVelocity (double newTarget) {
-		if (newTarget<=400 || newTarget>=0){
-			flightPlan.setVelocity(newTarget);
+		if (newTarget<=400 && newTarget>=0){
+			flightPlan.setTarget(newTarget);
 		}
 		
 	}

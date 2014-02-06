@@ -136,7 +136,7 @@ public class FlightPlan {
 	 * setTarget: Sets target velocity according to user input
 	 */
 	
-	public void generateTarget(double target){
+	public void setTarget(double target){
 		this.targetVelo = target;
 	}
 	

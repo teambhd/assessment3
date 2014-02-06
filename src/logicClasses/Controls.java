@@ -19,12 +19,14 @@ public class Controls {
 	private TextField turnRightTextBox; //Object for turn right control
 	private TextField turnLeftTextBox; // Object for turn left control
 	private boolean selectingHeadingUsingTextBox; // Has the text box been reset?
-	private boolean mouseHeldDownOnAltitudeButton, mouseHeldDownOnFlight, headingAlreadyChangedByMouse;
+	private boolean mouseHeldDownOnsideButton, mouseHeldDownOnFlight, headingAlreadyChangedByMouse;
 	private final int  MAXIMUMALTITUDE = 10000;
 	private final int  MINIMUMALTITUDE = 1000;
+	private final int MAXIMUMVELOCITY = 400;
+	private final int MINIMUMVELOCITY = 0;
 	private Flight selectedFlight;
 	private String text; //Used for parsing textbox inputs
-	private Image altitudeButton, changePlanButton;
+	private Image sideButton, changePlanButton;
 	private int difficultyValueOfGame; //Sets the difficulty of the control scheme
 	
 	
@@ -32,7 +34,7 @@ public class Controls {
 	public Controls() {
 		//Initializes all boolean values controlling selections to false
 		this.selectingHeadingUsingTextBox = false; 
-		this.mouseHeldDownOnAltitudeButton=false;
+		this.mouseHeldDownOnsideButton=false;
 		this.mouseHeldDownOnFlight = false;
 		this.headingAlreadyChangedByMouse = false;
 		this.selectedFlight = null;
@@ -52,8 +54,8 @@ public class Controls {
 		this.turnLeftTextBox.setMaxLength(3); //Makes sure that user cannot enter more than three letters as a heading (360 is max)
 		this.turnRightTextBox.setMaxLength(3);
 		this.headingControlTextBox.setMaxLength(3);
-		altitudeButton = new Image("res/graphics/altitudebutton.png");
-		changePlanButton = new Image("res/graphics/altitudebutton.png"); // same as altitude button
+		sideButton = new Image("res/graphics/sideButton.png");
+		changePlanButton = new Image("res/graphics/sideButton.png"); // same as altitude button
 		
 	}
 	
@@ -62,23 +64,36 @@ public class Controls {
 	// METHODS
 	
 	/**
-	 * handleAndUpdateAltitudeButtons: Deals with analysing and updating the selected flights altitude
+	 * handleAndUpdatesideButtons: Deals with analysing and updating the selected flights altitude
 	 * based on the altitude adjustment buttons
 	 */
 	
-	public void handleAndUpdateAltitudeButtons() {
+	public void handleAndUpdatesideButtons() {
 		
-		if(this.mouseHeldDownOnAltitudeButton) {
+		if(this.mouseHeldDownOnsideButton) {
 			return;
 		}
 		else{
-			this.mouseHeldDownOnAltitudeButton = true;
+			this.mouseHeldDownOnsideButton = true;
 		}
 		
 		int posX=Mouse.getX(); //Get the mouse positions 
 		int posY=Mouse.getY();
 		
 		posY = 600 - posY; // Mapping Mouse coords onto graphic coords
+		
+		if(posX>10&&posX<150&&posY<380&&posY>360&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the decrease velocity button and is the button being held down?
+			if(this.selectedFlight.getFlightPlan().getTarget() > MINIMUMVELOCITY) { //Is the target velocity already at the min value?
+				this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()-25); //Set the target velocity 25 lower
+			}
+		}
+		
+		if(posX>10&&posX<150&&posY<350&&posY>330&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase velocity button and is the button being held down?
+			if(this.selectedFlight.getFlightPlan().getTarget() < MAXIMUMVELOCITY) { //Is the target velocity already at the maximum value?
+				this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()+25); //Set the target velocity 25 higher
+			}
+		}
+
 
 		
 			if(posX>10&&posX<150&&posY<410&&posY>390&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase altitude button and is the button being held down?
@@ -339,20 +354,36 @@ public class Controls {
 				g.drawString("DEG", 114, 294);
 				
 				
-				g.drawString("Change Altitude:", 10, 330);
+		//		g.drawString("Change Altitude:", 10, 330);
 				g.setColor(Color.blue);
-				altitudeButton.draw(0,390);
-				altitudeButton.draw(0,420);
+				sideButton.draw (0, 330);
+				sideButton.draw (0, 360);
+				sideButton.draw(0,390);
+				sideButton.draw(0,420);
 				g.setColor(Color.white);
-				g.drawString("Target: "+this.selectedFlight.getTargetAltitude()+"Ft", 10, 360);
-				if(this.selectedFlight.getTargetAltitude() != Math.round(31000)){
-					g.drawString("Increase to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
+			//	g.drawString("Target: "+this.selectedFlight.getTargetAltitude()+"Ft", 10, 360);
+				if (this.selectedFlight.getFlightPlan().getTarget()+25 < Math.round(400)){
+					g.drawString("Accelerate to " + (this.selectedFlight.getFlightPlan().getVelocity()+25), 10, 330);
+				}
+				else {
+					g.drawString ("At max speed", 10, 330);
+				}
+				
+				if (this.selectedFlight.getFlightPlan().getTarget()-25 > Math.round(0)){
+					g.drawString("Decelerate to " + (this.selectedFlight.getFlightPlan().getVelocity()-25), 10, 360);
+				}
+				else {
+					g.drawString ("At min speed", 10, 360);
+				}
+				
+				if(this.selectedFlight.getTargetAltitude() != Math.round(10000)){
+					g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
 				}
 				else {
 					g.drawString("At max altitude", 10, 390);
 				}
-				if(this.selectedFlight.getTargetAltitude() != Math.round(26000)){
-					g.drawString("Decrease to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
+				if(this.selectedFlight.getTargetAltitude() != Math.round(1000)){
+					g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
 				}
 				else {
 					g.drawString("At min altitude", 10, 420);
@@ -410,7 +441,7 @@ public class Controls {
 				
 				// Handle and update Altitude Buttons
 				
-				this.handleAndUpdateAltitudeButtons();
+				this.handleAndUpdatesideButtons();
 				
 				
 				//ALTITUDE KEYS
@@ -447,7 +478,7 @@ public class Controls {
 		
 		if(!Mouse.isButtonDown(0)){
 			this.mouseHeldDownOnFlight = false;
-			this.mouseHeldDownOnAltitudeButton = false;
+			this.mouseHeldDownOnsideButton = false;
 		}
 		
 		if (!Mouse.isButtonDown(1)){
