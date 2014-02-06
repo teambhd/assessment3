@@ -25,8 +25,8 @@ public class Airport extends Point {
     	
     		this.airportImage.draw(572-121,197-64); //In order to be centered - the airport.png is a multi-pixel image.
 	    	
-    	g.setColor(Color.red);
-    	g.drawString(this.pointRef, 572, 197);
+    	//g.setColor(Color.red);
+    	//g.drawString(this.pointRef, 572, 197);
 	
     }
 
