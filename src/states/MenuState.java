@@ -4,6 +4,8 @@ import org.newdawn.slick.state.*;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.TrueTypeFont;
 
+import java.awt.Desktop;
+import java.net.URI;
 
 
 public class MenuState extends BasicGameState {
@@ -32,12 +34,8 @@ public class MenuState extends BasicGameState {
 
 	}
 
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
-			throws SlickException {
-		g.setColor(Color.white);
-		g.setFont(font);
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		menuBackground.draw(0,0);
-
 
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
@@ -68,9 +66,7 @@ public class MenuState extends BasicGameState {
 			controlsButton.draw(490,534);
 		}
 
-		g.setColor(Color.white);
 		gc.setShowFPS(false);
-
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -116,6 +112,12 @@ public class MenuState extends BasicGameState {
 			if( (posX>20 && posX< 178 && posY>534 && posY<575) && Mouse.isButtonDown(0)) {
 				this.mouseBeenReleased=false;
 				sbg.enterState(4);
+                // try {
+                //     Desktop.getDesktop().browse(new URI("http://bhdwebsite.example/credits.html")); 
+                // }
+                // catch(Exception ex) {
+                //        ex.printStackTrace();
+                // }
 			}
 		}
 	}
