@@ -44,7 +44,7 @@ public class Flight {
 	
 	/**
 	 * generateAltitude: Randomly assigns one of three different altitudes to a flight
-	 * @return A random altitude (either 28000, 29000 or 30000)
+	 * @return A random altitude (either 5000, 6000 or 7000)
 	 */
 
 	public int generateAltitude() {
@@ -52,13 +52,13 @@ public class Flight {
 		int check = rand.nextInt(3);
 		switch(check) {
 		case 0:
-			return 6000;
-		case 1:
-			return 7000;
-		case 2:
 			return 5000;
+		case 1:
+			return 6000;
+		case 2:
+			return 7000;
 		}
-		return 27000; // Default state (this won't ever be returned)
+		return 7000; // Default state (this won't ever be returned)
 	}
 
 /**
@@ -221,7 +221,7 @@ public class Flight {
 				if (this.selected){
 					g.setColor(Color.white);
 					g.drawString(this.flightName, (int) this.x-24, (int) this.y-44);
-					g.drawString(Math.round(this.currentAltitude) + "ft",(int) this.x-30, (int) this.y + 10);
+					g.drawString(Math.round(this.currentAltitude) + "ft",(int) this.x-25, (int) this.y + 10);
 					g.drawString(Math.round(this.currentHeading) + "\u00B0",(int) this.x - 13, (int) this.y + 25); // "\u00B0" = degrees
 					
 					if (this.flightPlan.getCurrentRoute().size() > 0) {
@@ -235,7 +235,7 @@ public class Flight {
 				else{
 					g.setColor(Color.lightGray);
 					g.drawString(this.flightName, (int) this.x-24, (int) this.y-44);
-					g.drawString(Math.round(this.currentAltitude) + "ft",(int) this.x-30, (int) this.y + 10);
+					g.drawString(Math.round(this.currentAltitude) + "ft",(int) this.x-25, (int) this.y + 10);
 					
 					if (this.flightPlan.getCurrentRoute().size() > 0) {
 						g.drawString("Aim: "+this.flightPlan.getPointByIndex(0).getPointRef(),(int) this.x -22, (int)this.y-28);

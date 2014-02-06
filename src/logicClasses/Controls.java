@@ -20,8 +20,8 @@ public class Controls {
 	private TextField turnLeftTextBox; // Object for turn left control
 	private boolean selectingHeadingUsingTextBox; // Has the text box been reset?
 	private boolean mouseHeldDownOnsideButton, mouseHeldDownOnFlight, headingAlreadyChangedByMouse;
-	private final int  MAXIMUMALTITUDE = 10000;
-	private final int  MINIMUMALTITUDE = 1000;
+	private final int MAXIMUMALTITUDE = 9000;
+	private final int MINIMUMALTITUDE = 1000;
 	private final int MAXIMUMVELOCITY = 400;
 	private final int MINIMUMVELOCITY = 0;
 	private Flight selectedFlight;
@@ -38,9 +38,6 @@ public class Controls {
 		this.mouseHeldDownOnFlight = false;
 		this.headingAlreadyChangedByMouse = false;
 		this.selectedFlight = null;
-		
-		
-
 	}
 
 
@@ -56,11 +53,9 @@ public class Controls {
 		this.headingControlTextBox.setMaxLength(3);
 		sideButton = new Image("res/graphics/sideButton.png");
 		changePlanButton = new Image("res/graphics/sideButton.png"); // same as altitude button
-		
 	}
 	
-	
-
+    
 	// METHODS
 	
 	/**
@@ -376,13 +371,13 @@ public class Controls {
 					g.drawString ("At min speed", 10, 360);
 				}
 				
-				if(this.selectedFlight.getTargetAltitude() != Math.round(10000)){
+				if(this.selectedFlight.getTargetAltitude() != MAXIMUMALTITUDE){
 					g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
 				}
 				else {
 					g.drawString("At max altitude", 10, 390);
 				}
-				if(this.selectedFlight.getTargetAltitude() != Math.round(1000)){
+				if(this.selectedFlight.getTargetAltitude() != MINIMUMALTITUDE){
 					g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
 				}
 				else {
