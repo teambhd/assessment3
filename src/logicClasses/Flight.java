@@ -22,13 +22,16 @@ public class Flight {
 	public Flight(Airspace airspace) {
 		this.x = 0;
 		this.y = 0;
-		this.targetAltitude = 0;
+		
+        this.targetAltitude = 0;
 		this.currentAltitude = generateAltitude();
-		this.targetHeading = 0;
+		
+        this.targetHeading = 0;
 		this.currentHeading = 0;
 		this.turningRight = false;
 		this.turningLeft = false;
-		this.airspace = airspace;
+		
+        this.airspace = airspace;
 		this.flightPlan = new FlightPlan(airspace, this);
 		this.selected = false;
 	}

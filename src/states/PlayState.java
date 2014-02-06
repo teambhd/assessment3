@@ -125,36 +125,26 @@ public class PlayState extends BasicGameState {
 		}		
 		}
 		
-		else{
-		
+		else {
 			g.setFont(font);
-			
 			
 			// Drawing Side Images
 			backgroundImage.draw(150,0);
 			controlBarImage.draw(0,0);
 			
 			// Drawing Airspace and elements within it
-			g.setColor(Color.white);
 			airspace.render(g, gc);
-			
-			
-			// Drawing Clock and Time
+            
 			g.setColor(Color.white);
-			clockImage.draw(0,5);
+            
+			// Drawing Clock and Time
+			clockImage.draw(0, 5);
 			g.drawString(this.stringTime, 25, 11);
-		
+            
+			//Drawing Score
+			g.drawString (stringScore, 80, 11);
 		}
 			
-			//Drawing Score
-			g.setColor (Color.white);
-			g.drawString (stringScore, 80 ,11);
-		
-
-		
-		
-		
-
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)

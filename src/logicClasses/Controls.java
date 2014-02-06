@@ -352,24 +352,23 @@ public class Controls {
 				this.turnRightTextBox.render(gc, g);
 				g.drawString("DEG", 114, 294);
 				
-				
-		//		g.drawString("Change Altitude:", 10, 330);
 				g.setColor(Color.blue);
 				sideButton.draw (0, 330);
 				sideButton.draw (0, 360);
 				sideButton.draw(0,390);
 				sideButton.draw(0,420);
-				g.setColor(Color.white);
-			//	g.drawString("Target: "+this.selectedFlight.getTargetAltitude()+"Ft", 10, 360);
+				
+                g.setColor(Color.white);
+
 				if (this.selectedFlight.getFlightPlan().getTarget()+25 < Math.round(400)){
-					g.drawString("Accelerate to " + (this.selectedFlight.getFlightPlan().getVelocity()+25), 10, 330);
+					g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
 				}
 				else {
 					g.drawString ("At max speed", 10, 330);
 				}
 				
 				if (this.selectedFlight.getFlightPlan().getTarget()-25 > Math.round(0)){
-					g.drawString("Decelerate to " + (this.selectedFlight.getFlightPlan().getVelocity()-25), 10, 360);
+					g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
 				}
 				else {
 					g.drawString ("At min speed", 10, 360);
