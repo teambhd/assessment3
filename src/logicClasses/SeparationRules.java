@@ -7,7 +7,6 @@ import org.newdawn.slick.Graphics;
 public class SeparationRules {
 	
 	//FIELDS
-
 	private int warningLateralSeparation, warningVerticalSeparation; 
 	private int gameOverLateralSeparation, gameOverVerticalSeparation;
 	private boolean gameOverViolation; 

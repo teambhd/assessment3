@@ -10,7 +10,7 @@ public class Airport extends Point {
 	Image airportImage;
 	
 	public Airport (double xcoord, double ycoord, String name) {
-		super (xcoord, ycoord, name);
+		super(xcoord, ycoord, name);
 	    System.out.println("Airport " + pointRef + " set:(" + x + "," + y +").");
 	}
 	
@@ -22,4 +22,5 @@ public class Airport extends Point {
         // In order to be centered - the airport.png is a multi-pixel image
     	this.airportImage.draw(572-121,197-64);
     }
+    
 }

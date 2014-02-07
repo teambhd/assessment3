@@ -343,7 +343,6 @@ public class FlightPlan {
 
 	public void setVelocity(double newVelocity){
 		this.velocity = newVelocity;
-		
 	}
 	
 	public double getVelocity() {
@@ -354,14 +353,12 @@ public class FlightPlan {
 		return this.targetVelo;
 	}
 
-
 	public ArrayList<Point> getCurrentRoute() {
 		return currentRoute;
 	}
 
 	public Point getPointByIndex(int i) {
 		return this.currentRoute.get(i);
-
 	}
 	
 	public boolean getChangingPlan(){

@@ -11,6 +11,7 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.GameContainer;
 
+
 public class Controls {
 
 	// FIELDS
@@ -488,29 +489,20 @@ public class Controls {
 	}
 	
 	//MUTATORS AND ACCESSORS
-
-	
-
-	public void setSelectedFlight(Flight flight1){
+	public void setSelectedFlight(Flight flight1) {
 		this.selectedFlight = flight1;
 	}
 
-
-	
 	public TextField getHeadingControlTB() {
 		return headingControlTextBox;
 	}
-
 	
-	public Flight getSelectedFlight(){
+	public Flight getSelectedFlight() {
 		return this.selectedFlight;
 	}
 	
-	public void setDifficultyValueOfGame(int value){
-		this.difficultyValueOfGame = value;
-		
+	public void setDifficultyValueOfGame(int value) {
+		this.difficultyValueOfGame = value;	
 	}
+    
 }
-
-
-

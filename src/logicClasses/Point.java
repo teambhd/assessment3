@@ -6,32 +6,24 @@ public class Point {
     protected double x;
     protected double y;
     protected String pointRef;
-    
-
-	
+    	
 	// CONSTRUCTORS
     
-    //Point Constructor taking two doubles for X then Y coordinates.
+    // Point Constructor taking two doubles for X then Y coordinates.
     public Point(double xcoord, double ycoord) {
-
         x = xcoord;
-        y = ycoord;
-        
+        y = ycoord;    
      }
     
-    //Point Constructor that also takes pointRef string, more commonly used.
-    public Point(double xcoord, double ycoord, String name){
-    x = xcoord; 
-    y = ycoord;
-    pointRef = name;
-    System.out.println("Point " + pointRef + " set:(" + x + "," + y +").");
+    // Point Constructor that also takes pointRef string, more commonly used.
+    public Point(double xcoord, double ycoord, String name) {
+        x = xcoord; 
+        y = ycoord;
+        pointRef = name;
+        System.out.println("Point " + pointRef + " set:(" + x + "," + y +").");
     }
-    
-
-    
-    
+        
     // MUTATORS AND ACCESSORS
-    
     public double getX() {
     	return this.x;
     }
@@ -56,19 +48,13 @@ public class Point {
   		this.pointRef = pointRef;
   	}
     
-
-
-    
-    public boolean equals(Point point){
-    	if(point instanceof Point){
-    		if ((point.getX() ==  this.x) && (point.getY() == this.y)){
+    public boolean equals(Point point) {
+    	if (point instanceof Point) {
+    		if ((point.getX() == this.x) && (point.getY() == this.y)) {
     			return true;
     		}
     	}
     	return false;
    }
-
-
-
-
+   
 }

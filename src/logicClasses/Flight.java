@@ -8,6 +8,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Flight {
+    
 	// FIELDS
 	private double x, y, currentHeading, targetHeading;
 	private int currentAltitude, targetAltitude, flightNumber;

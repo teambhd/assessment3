@@ -1,4 +1,5 @@
 package states;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.lwjgl.input.Mouse;
@@ -13,14 +14,11 @@ public class MenuState extends BasicGameState {
 	private Image creditsHover, controlsHover, menuBackground, playButton, quitButton, playHover, quitHover, creditsButton, controlsButton;
 	private boolean mouseBeenReleased;
 
-
 	public MenuState(int state) {
 		this.mouseBeenReleased=false;
 	}
 
-	public void init(GameContainer gc, StateBasedGame sbg)
-			throws SlickException {
-
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		menuBackground = new Image("res/menu_graphics/menu_screen.png");
 		playButton = new Image("res/menu_graphics/play_button.png");
 		playHover = new Image("res/menu_graphics/play_hover.png");
@@ -30,8 +28,6 @@ public class MenuState extends BasicGameState {
 		creditsHover = new Image("res/menu_graphics/credits_hover.png");
 		controlsButton = new Image("res/menu_graphics/controls_silver.png");
 		controlsHover = new Image("res/menu_graphics/controls_hover.png");
-
-
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -125,5 +121,5 @@ public class MenuState extends BasicGameState {
 	public int getID() {
 		return 0;
 	}
-
+    
 }

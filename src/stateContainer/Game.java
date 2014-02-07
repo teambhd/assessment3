@@ -12,49 +12,41 @@ import states.PlayState;
 import states.CreditsState;
 import states.ControlsState;
 
+
 public class Game extends StateBasedGame {
-
-	public static final String NAME = "Turbulence";
+	public static final String NAME = "Don't Crash";
     
-	public static final int MENUSTATE = 0;
-	public static final int PLAYSTATE = 1;
-	public static final int GAMEOVERSTATE = 2;
-	public static final int PAUSESTATE = 3;
-	public static final int CREDITSSTATE = 4;
-	public static final int CONTROLSSTATE = 5;
+	public static final int MENU_STATE = 0;
+	public static final int PLAY_STATE = 1;
+	public static final int GAMEOVER_STATE = 2;
+	public static final int PAUSE_STATE = 3;
+	public static final int CREDITS_STATE = 4;
+	public static final int CONTROLS_STATE = 5;
 	
-	public static final int MAXIMUMWIDTH = 1200;
-	public static final int MAXIMUMHEIGHT = 600;
+	public static final int MAXIMUM_WIDTH = 1200;
+	public static final int MAXIMUM_HEIGHT = 600;
+	public static final int FRAME_RATE = 60;
 	
-	/**
-	 * Adds all states to a container 
-	 * @param NAME The game's title
-	 */
-
 	public Game(String NAME) {
 		super(NAME);
 	}
 
 	public void initStatesList(GameContainer gc) throws SlickException {
-		this.addState(new MenuState(MENUSTATE));
-		this.addState(new PlayState(PLAYSTATE));
-		this.addState(new GameOverState(GAMEOVERSTATE));
-		this.addState(new PauseState(PAUSESTATE));
-		this.addState(new CreditsState(CREDITSSTATE));
-		this.addState(new ControlsState(CONTROLSSTATE));
+		this.addState(new MenuState(MENU_STATE));
+		this.addState(new PlayState(PLAY_STATE));
+		this.addState(new GameOverState(GAMEOVER_STATE));
+		this.addState(new PauseState(PAUSE_STATE));
+		this.addState(new CreditsState(CREDITS_STATE));
+		this.addState(new ControlsState(CONTROLS_STATE));
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SlickException {
 		AppGameContainer appgc;
-		try {
-			appgc = new AppGameContainer(new Game(NAME));
-			appgc.setDisplayMode(MAXIMUMWIDTH, MAXIMUMHEIGHT, false);
-			appgc.setTargetFrameRate(60);
-			
-			appgc.setIcon("res/graphics/icon.png");
-			appgc.start(); 
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+		appgc = new AppGameContainer(new Game(NAME));
+		appgc.setDisplayMode(MAXIMUM_WIDTH, MAXIMUM_HEIGHT, false);
+		appgc.setTargetFrameRate(FRAME_RATE);
+		appgc.setIcon("res/graphics/icon.png");
+		appgc.start(); 
 	}
+    
 }

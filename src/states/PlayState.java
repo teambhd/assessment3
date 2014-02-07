@@ -23,7 +23,8 @@ public class PlayState extends BasicGameState {
 	public static int score;
 	private Sound endOfGameSound;
 	public static TrueTypeFont font;
-	private Image controlBarImage, clockImage, backgroundImage, difficultyBackground, easyButton, easyHover, mediumButton, mediumHover, hardButton, hardHover;
+	private Image controlBarImage, clockImage, backgroundImage, difficultyBackground;
+    private Image easyButton, easyHover, mediumButton, mediumHover, hardButton, hardHover;
 	private String stringTime, stringScore;
 	private boolean settingDifficulty, gameEnded;
 
@@ -204,7 +205,7 @@ public class PlayState extends BasicGameState {
 		
 		}
 		
-		else{
+		else {
 			
 			// Updating Clock and Time
 			
@@ -262,10 +263,6 @@ public class PlayState extends BasicGameState {
 			
 			
 		}
-		
-		
-		
-		
 
 	}
 
@@ -281,7 +278,5 @@ public class PlayState extends BasicGameState {
 	public void setAirspace(Airspace airspace) {
 		this.airspace = airspace;
 	}
-	
-
 
 }
