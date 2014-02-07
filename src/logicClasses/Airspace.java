@@ -12,7 +12,6 @@ import org.newdawn.slick.SlickException;
 public class Airspace {
 
 	// FIELDS
-
 	private int maximumNumberOfFlightsInAirspace;
 	private int score, numberOfGameLoopsSinceLastFlightAdded, numberOfGameLoops,
 				numberOfGameLoopsWhenDifficultyIncreases, randomNumberForFlightGeneration;
@@ -26,7 +25,6 @@ public class Airspace {
 	private Controls controls;
 	
 	// CONSTRUCTOR
-
 	public Airspace() {
 		this.maximumNumberOfFlightsInAirspace = 10;
 		this.score = 0;
@@ -34,15 +32,13 @@ public class Airspace {
 		this.listOfWayppoints = new ArrayList<Waypoint>();
 		this.listofEntrypoints = new ArrayList<EntryPoint>();
 		this.listOfExitPoints = new ArrayList<ExitPoint>();
-		this.airport = new Airport(572,197, "Airport");
-		this.numberOfGameLoopsSinceLastFlightAdded = 0; // Stores how many loops since the last flight was spawned before another flight can enter
+		this.airport = new Airport(572, 197, "Airport");
+		this.numberOfGameLoopsSinceLastFlightAdded = 0; // Stores how many loops since the last flight was spawned
 		this.numberOfGameLoops = 0; // Stores how many loops there have been in total
-		this.numberOfGameLoopsWhenDifficultyIncreases = 3600; // this is how many loops until planes come more quickly, difficulty increase once a minute
+		this.numberOfGameLoopsWhenDifficultyIncreases = 3600; // this is how many loops until planes come more quickly (= 1min)
 		this.randomNumberForFlightGeneration = 500;
 		this.controls = new Controls();
 		this.difficultyValueOfGame = 0; // This value will be changed when the user selects a difficulty in the playstate
-		
-		
 	}
 
 	// METHODS
@@ -51,18 +47,14 @@ public class Airspace {
 	 * resetAirspace: Reset all of the attributes in airspace back to default
 	 */
 	
-	public void resetAirspace() {
-		
+	public void resetAirspace() {		
 		this.listOfFlightsInAirspace = new ArrayList<Flight>();
-		
 		this.numberOfGameLoopsSinceLastFlightAdded = 0; 
 		this.numberOfGameLoops = 0; 
 		this.score = 0;
 		this.numberOfGameLoopsWhenDifficultyIncreases = 3600;
 		this.separationRules.setGameOverViolation(false); // Prevents user immediately entering game over state upon replay
 		this.controls.setSelectedFlight(null); // Prevents information about flight from previous game being displayed 
-		
-		
 	}
 	
 	/**
@@ -402,7 +394,6 @@ public class Airspace {
 		}
 	}
 	public boolean addFlight(Flight flight) {
-
 		// Checks whether the flight was already added before, and if it won't pass the maximum number of flights allowed
 		if ((this.listOfFlightsInAirspace.contains(flight))
 				&& (this.listOfFlightsInAirspace.size() > this.maximumNumberOfFlightsInAirspace - 1)) {
@@ -438,7 +429,6 @@ public class Airspace {
 	public SeparationRules getSeparationRules(){
 		return this.separationRules;
 	}
-
 	
 	public void setListOfEntryPoints(List<EntryPoint> listOfEntryPoints) {
 		this.listofEntrypoints = listOfEntryPoints;
@@ -450,7 +440,6 @@ public class Airspace {
 	
 	public void setDifficultyValueOfGame(int i){
 		this.difficultyValueOfGame = i;
-		
 	}
 	
 	public int getDifficultyValueOfGame(){
@@ -464,4 +453,5 @@ public class Airspace {
 	public int getNumberOfGameLoopsWhenDifficultyIncreases(){
 		return this.numberOfGameLoopsWhenDifficultyIncreases;
 	}
+    
 }
