@@ -41,6 +41,7 @@ public class PlayState extends BasicGameState {
 		
 		gc.setAlwaysRender(true);
 		gc.setUpdateOnlyWhenVisible(true);	
+		gc.setShowFPS(false);
 		
 		// Font
 		try {

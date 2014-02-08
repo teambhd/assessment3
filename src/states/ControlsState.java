@@ -15,8 +15,7 @@ public class ControlsState extends BasicGameState {
 		
 	}
 	
-	public void init(GameContainer gc, StateBasedGame sbg)
-			throws SlickException {
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 	
 		try{
 			pageNumber = 1;
@@ -152,7 +151,7 @@ public class ControlsState extends BasicGameState {
 	}
 
 	public int getID(){
-		return 5;
+		return 4;
 	}
 	
 	

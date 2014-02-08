@@ -1,113 +1,138 @@
 package states;
 
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
-import org.lwjgl.input.Mouse;
-import org.newdawn.slick.TrueTypeFont;
-
+import java.awt.Font;
+import java.io.InputStream;
 import java.awt.Desktop;
 import java.net.URI;
 
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.util.ResourceLoader;
+import org.lwjgl.input.Mouse;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.Color;
+
 
 public class MenuState extends BasicGameState {
-	public static TrueTypeFont font;
+
+	public static TrueTypeFont titleFont, mainButtonFont, smallButtonFont;
 	private Image creditsHover, controlsHover, menuBackground, playButton, quitButton, playHover, quitHover, creditsButton, controlsButton;
-	private boolean mouseBeenReleased;
+    private String playString, websiteString, controlsString;
+    private int playStringWidth, playStringHeight;
+    private int websiteStringWidth, websiteStringHeight;
+    private int controlsStringWidth, controlsStringHeight;
+    private boolean mouseBeenReleased;
 
 	public MenuState(int state) {
 		this.mouseBeenReleased=false;
 	}
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		menuBackground = new Image("res/menu_graphics/menu_screen.png");
-		playButton = new Image("res/menu_graphics/play_button.png");
-		playHover = new Image("res/menu_graphics/play_hover.png");
-		quitButton = new Image("res/menu_graphics/quit_button.png");
-		quitHover = new Image("res/menu_graphics/quit_hover.png");
-		creditsButton = new Image("res/menu_graphics/credits.png");
-		creditsHover = new Image("res/menu_graphics/credits_hover.png");
-		controlsButton = new Image("res/menu_graphics/controls_silver.png");
-		controlsHover = new Image("res/menu_graphics/controls_hover.png");
+		menuBackground = new Image("res/menu_graphics/background.png");
+        
+		try {
+			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");
+			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+			titleFont = new TrueTypeFont(awtFont.deriveFont(60f), true);
+			mainButtonFont = new TrueTypeFont(awtFont.deriveFont(50f), true);
+            smallButtonFont = new TrueTypeFont(awtFont.deriveFont(30f), true);
+		}
+        
+        catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		menuBackground.draw(0,0);
+        
+        // Draw the title and subtitle
+        titleFont.drawString(17, 10, "Don't Crash", Color.lightGray);
+        smallButtonFont.drawString(20, 80, "by Team BHD", Color.lightGray);
 
+        // Get the mouse position for reference below
 		int posX = Mouse.getX();
-		int posY = Mouse.getY();
+		int posY = 600 - Mouse.getY(); // Mouse has origin in bottom-left not top-left like OpenGL
 
-		if ((posX > 439 && posX < 762) && (posY > 165 && posY < 255)){
-			playHover.draw(439,349);
-		}
-		else{
-			playButton.draw(439,349);
-		}
+        // Draw the Play button
+        playString = "Play";
+        playStringWidth = mainButtonFont.getWidth(playString);
+        playStringHeight = mainButtonFont.getHeight(playString);
 
-		if((posX > 1140 && posX < 1262) && (posY > 25 && posY < 50)){
-			quitHover.draw(1148,556);
+		if (posX >= 20 && posX <= (20 + playStringWidth) && posY >= 480 && posY <= (480 + playStringHeight)) {
+            mainButtonFont.drawString(18, 480, playString, Color.white);
 		}
-		else{
-			quitButton.draw(1148,556);
+        
+		else {
+            mainButtonFont.drawString(18, 480, playString, Color.lightGray);
 		}
-
-		if (posX>20 && posX< 136 && posY>20 && posY<66){
-			creditsHover.draw(20,534);
-		} else {
-			creditsButton.draw(20,534);
+        
+        // Draw the controls string
+        controlsString = "Help";
+        controlsStringWidth = smallButtonFont.getWidth(controlsString);
+        controlsStringHeight = smallButtonFont.getHeight(controlsString);
+        
+		if (posX >= 20 && posX <= (20 + controlsStringWidth) && posY >= 550 && posY <= (550 + controlsStringHeight)) {
+			smallButtonFont.drawString(20, 550, controlsString, Color.white);
+		} 
+        
+        else {
+			smallButtonFont.drawString(20, 550, controlsString, Color.lightGray);
 		}
-
-		if (posX>490 && posX<725 && posY>20 && posY<66){
-			controlsHover.draw(490,534);
-		} else {
-			controlsButton.draw(490,534);
-		}
-
-		gc.setShowFPS(false);
+        
+        // Draw the website string
+        websiteString = "Team Website";
+        websiteStringWidth = smallButtonFont.getWidth(websiteString);
+        websiteStringHeight = smallButtonFont.getHeight(websiteString);
+        
+		if (posX >= (40 + controlsStringWidth) && posX <= (40 + controlsStringWidth + websiteStringWidth) && posY >= 550 && posY <= (550 + websiteStringHeight)) {
+			smallButtonFont.drawString(40 + controlsStringWidth, 550, websiteString, Color.white);
+		} 
+        
+        else {
+			smallButtonFont.drawString(40 + controlsStringWidth, 550, websiteString, Color.lightGray);
+		}     
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 
+        // Get the mouse position for reference below
 		int posX = Mouse.getX();
-		int posY = Mouse.getY();
+		int posY = 600 - Mouse.getY(); // Mouse has origin in bottom-left not top-left like OpenGL
 
 		// Mapping Mouse coords onto graphics coords
-		posY = 600 - posY;
-		if(!this.mouseBeenReleased) {
-			if(!Mouse.isButtonDown(0)) {
+		if (!this.mouseBeenReleased) {
+			if (!Mouse.isButtonDown(0)) {
 				this.mouseBeenReleased=true;
 			}
 		}
+        
 		if (Mouse.isButtonDown(0)) {
 			System.out.println(posX);
 			System.out.println(posY);
 		}
-		if(this.mouseBeenReleased){
-			if ((posX > 439 && posX < 762) && (posY > 349 && posY < 439)) {
-				
+        
+		if (this.mouseBeenReleased) {
+            
+            // Handle clicking of play button
+    		if (posX >= 20 && posX <= (20 + playStringWidth) && posY >= 480 && posY <= (480 + playStringHeight)) {
 				if (Mouse.isButtonDown(0)) {
-					this.mouseBeenReleased=false;
-					sbg.enterState(1);
+					this.mouseBeenReleased = false;
+					sbg.enterState(1); //PlayState
 				}
-
 			} 
 
-			if ((posX > 490 && posX < 725) && (posY > 534 && posY < 596)) {
+            // Handle clicking of controls button
+    		if (posX >= 20 && posX <= (20 + controlsStringWidth) && posY >= 550 && posY <= (550 + controlsStringHeight)) {
 				if (Mouse.isButtonDown(0)) {
-					this.mouseBeenReleased=false;
-					sbg.enterState(5);
+					this.mouseBeenReleased = false;
+					sbg.enterState(4); //ControlsState
 				}
-
 			} 
 
-			if ((posX > 1148 && posX < 1172) && (posY > 556 && posY < 582)) {
-				if (Mouse.isButtonDown(0)) {
-					System.exit(0);
-				}
-			}
-
-			if( (posX>20 && posX< 178 && posY>534 && posY<575) && Mouse.isButtonDown(0)) {
+            // Handle clicking of website button
+    		if (posX >= (40 + controlsStringWidth) && posX <= (40 + controlsStringWidth + websiteStringWidth) && posY >= 550 && posY <= (550 + websiteStringHeight)) {
 				this.mouseBeenReleased=false;
-				sbg.enterState(4);
                 // try {
                 //     Desktop.getDesktop().browse(new URI("http://bhdwebsite.example/credits.html")); 
                 // }
