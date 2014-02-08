@@ -29,3 +29,9 @@ This section describes the steps needed to produce standalone executables (conta
 The first step in the process is to create a runnable JAR file, which will contain the game and all platform-independent dependencies. The easiest way to do this is to run `ant mkrunnable` within the project directory. That command will create the file runnable.jar within the dist folder.
 
 The next step is to use JarSplice (included in the tools directory) to create a so-called "fat JAR" which includes the needed native libraries. In the JarSplice screen, add the runnable.jar file on the "ADD JARS" tab, add the entire contents of lib/natives on the "ADD NATIVES" tab and enter "stateContainer.Game" in the "MAIN CLASS" tab. Finally click *Create Fat Jar* on the "CREATE FAT JAR" tab and choose an appropriate location. The JarSplice program can also be used to create .exe files for Windows and .app files for Mac OS X.
+
+## Attribution
+
+The game uses several open-source and Creative Commons resources, which are as follows:
+
+* 

@@ -17,6 +17,7 @@ import org.newdawn.slick.Image;
 
 public class PlayState extends BasicGameState {
 
+    private int stateID;
 	private Airspace airspace;
 	Image cursorImg;
 	public static float time;
@@ -28,7 +29,9 @@ public class PlayState extends BasicGameState {
 	private String stringTime, stringScore;
 	private boolean settingDifficulty, gameEnded;
 
-	public PlayState(int state) {}
+	public PlayState(int state) {
+	    stateID = state;
+	}
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		gameEnded = false;
@@ -38,11 +41,7 @@ public class PlayState extends BasicGameState {
 		airspace = new Airspace();
 		this.stringTime="";
 		this.stringScore="";
-		
-		gc.setAlwaysRender(true);
-		gc.setUpdateOnlyWhenVisible(true);	
-		gc.setShowFPS(false);
-		
+				
 		// Font
 		try {
 			InputStream inputStream = ResourceLoader.getResourceAsStream("res/blue_highway_font/bluehigh.ttf");
@@ -266,17 +265,16 @@ public class PlayState extends BasicGameState {
 
 	}
 
-
-	public int getID() {
-		return 1;
-	}
-
 	public Airspace getAirspace() {
 		return airspace;
 	}
 
 	public void setAirspace(Airspace airspace) {
 		this.airspace = airspace;
+	}
+    
+	public int getID() {
+		return stateID;
 	}
 
 }

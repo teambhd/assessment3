@@ -14,6 +14,8 @@ import org.newdawn.slick.Color;
 
 
 public class MenuState extends BasicGameState {
+    
+    private int stateID;
 
 	public static TrueTypeFont titleFont, mainButtonFont, smallButtonFont;
 	private Image creditsHover, controlsHover, menuBackground, playButton, quitButton, playHover, quitHover, creditsButton, controlsButton;
@@ -24,7 +26,8 @@ public class MenuState extends BasicGameState {
     private boolean mouseBeenReleased;
 
 	public MenuState(int state) {
-		this.mouseBeenReleased=false;
+		this.mouseBeenReleased = false;
+	    stateID = state;
 	}
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -144,7 +147,7 @@ public class MenuState extends BasicGameState {
 	}
 
 	public int getID() {
-		return 0;
+		return stateID;
 	}
     
 }

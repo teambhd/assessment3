@@ -44,7 +44,10 @@ public class Game extends StateBasedGame {
 		appgc.setDisplayMode(MAXIMUM_WIDTH, MAXIMUM_HEIGHT, false);
 		appgc.setTargetFrameRate(FRAME_RATE);
 		appgc.setIcon("res/graphics/icon.png");
-		appgc.start(); 
+		appgc.setAlwaysRender(true);
+		appgc.setUpdateOnlyWhenVisible(true);	
+		appgc.setShowFPS(false);
+        appgc.start(); 
 	}
     
 }

@@ -9,6 +9,8 @@ import java.io.InputStream;
 
 public class PauseState extends BasicGameState {
 	
+    private int stateID;
+    
 	public static TrueTypeFont font;
 	private int pageNumber;
 
@@ -16,7 +18,7 @@ public class PauseState extends BasicGameState {
 	
 	
 	public PauseState(int state) {
-		
+	    stateID = state;
 	}
 
 	public void init(GameContainer gc, StateBasedGame sbj) throws SlickException {
@@ -148,7 +150,7 @@ public class PauseState extends BasicGameState {
 		}
 	}
 	
-	public int getID(){
-		return 3;
+	public int getID() {
+		return stateID;
 	}
 }

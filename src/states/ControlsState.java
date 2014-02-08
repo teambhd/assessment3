@@ -8,35 +8,26 @@ import org.lwjgl.input.Mouse;
 public class ControlsState extends BasicGameState {
 	
 	private int pageNumber;
-	private Image controlsBackgroundPage1,controlsBackgroundPage2, backButton, nextPageButton, previousPageButton, quitButton, backButtonHover;
-    private Image nextPageHover, previousPageHover, quitHover;
+    private int stateID;
+	private Image controlsBackgroundPage1, controlsBackgroundPage2;
+    private Image backButton, nextPageButton, previousPageButton;
+    private Image backButtonHover, nextPageHover, previousPageHover;
     
-	public ControlsState(int state){
-		
+	public ControlsState(int state) {
+	    stateID = state;
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-	
-		try{
-			pageNumber = 1;
-			
-			controlsBackgroundPage1 = new Image("res/menu_graphics/controls1.jpg");
-			controlsBackgroundPage2 = new Image("res/menu_graphics/controls2.jpg");
-			backButton = new Image("res/menu_graphics/back.png");
-			backButtonHover = new Image("res/menu_graphics/back_hover.png");
-			nextPageButton = new Image("res/menu_graphics/next page.png");
-			nextPageHover = new Image("res/menu_graphics/next page_hover.png");
-			previousPageButton = new Image("res/menu_graphics/previous page.png");
-			previousPageHover = new Image("res/menu_graphics/previous hover.png");
-			quitButton = new Image("res/menu_graphics/quit_button.png");
-			quitHover = new Image("res/menu_graphics/quit_hover.png");
-			
-			
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	
+		pageNumber = 1;
+		
+		controlsBackgroundPage1 = new Image("res/menu_graphics/controls1.jpg");
+		controlsBackgroundPage2 = new Image("res/menu_graphics/controls2.jpg");
+		backButton = new Image("res/menu_graphics/back.png");
+		backButtonHover = new Image("res/menu_graphics/back_hover.png");
+		nextPageButton = new Image("res/menu_graphics/next page.png");
+		nextPageHover = new Image("res/menu_graphics/next page_hover.png");
+		previousPageButton = new Image("res/menu_graphics/previous page.png");
+		previousPageHover = new Image("res/menu_graphics/previous hover.png");
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
@@ -55,15 +46,7 @@ public class ControlsState extends BasicGameState {
 				nextPageHover.draw(1030,280);
 			} else {
 				nextPageButton.draw(1030,280);
-			}
-			//menuButton.draw(1050, 20);
-			
-			if ((posX > 1150 && posX < 1170) && (posY > 550 && posY < 580)){
-				quitHover.draw(1148,556);
-			} else {
-				quitButton.draw(1148,556);
-			}
-			
+			}			
 		}
 		
 		else if (pageNumber == 2){
@@ -74,16 +57,7 @@ public class ControlsState extends BasicGameState {
 				previousPageHover.draw(30,280);
 			} else {
 				previousPageButton.draw(30,280);
-			}
-			
-			//menuButton.draw(1050, 20);
-			
-			if ((posX > 1150 && posX < 1170) && (posY > 550 && posY < 580)){
-				quitHover.draw(1148,556);
-			} else {
-				quitButton.draw(1148,556);
-			}
-			
+			}			
 		}
 		
 		if ((posX > 20 && posX < 40) && (posY > 20 && posY < 40)){
@@ -150,8 +124,8 @@ public class ControlsState extends BasicGameState {
 	
 	}
 
-	public int getID(){
-		return 4;
+	public int getID() {
+		return stateID;
 	}
 	
 	

@@ -6,18 +6,20 @@ import org.newdawn.slick.state.*;
 
 
 public class GameOverState extends BasicGameState {
-	private Image gameOverBackground, playAgainButton, quitButton, menuButton;
-	private Image playAgainHover, quitHover, menuHover;
+    
+    private int stateID;
+	private Image gameOverBackground, playAgainButton, menuButton;
+	private Image playAgainHover, menuHover;
 	
-	public GameOverState(int state) {}
+	public GameOverState(int state) {
+	    stateID = state;
+	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		gameOverBackground = new Image("res/menu_graphics/gameover_screen.png");
 		playAgainButton = new Image("res/menu_graphics/playagain_button.png");
-		quitButton = new Image("res/menu_graphics/quit_button.png");
 		menuButton = new Image("res/menu_graphics/menu_button.png");
 		playAgainHover = new Image("res/menu_graphics/playagain_hover.png");
-		quitHover = new Image("res/menu_graphics/quit_hover.png");
 		menuHover = new Image("res/menu_graphics/menu_hover.png");
 	}
 
@@ -44,14 +46,6 @@ public class GameOverState extends BasicGameState {
         else {
 			playAgainButton.draw(354, 380);
 		}
-		
-		if (posX > 1150 && posX < 1170 && posY > 550 && posY < 580) {
-			quitHover.draw(1148, 556);
-		} 
-        
-        else {
-			quitButton.draw(1148, 556);
-		}
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -74,7 +68,7 @@ public class GameOverState extends BasicGameState {
 	}
 
 	public int getID() {
-		return 2;
+		return stateID;
 	}
 
 }
