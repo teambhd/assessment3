@@ -23,7 +23,7 @@ public class PlayState extends BasicGameState {
 	public static int score;
 	private Sound endOfGameSound;
 	public static TrueTypeFont font;
-	private Image controlBarImage, clockImage, backgroundImage, difficultyBackground;
+	private Image controlBarImage, clockImage, scoreImage, backgroundImage, difficultyBackground;
     private Image easyButton, easyHover, mediumButton, mediumHover, hardButton, hardHover;
 	private String stringTime, stringScore;
 	private boolean settingDifficulty, gameEnded;
@@ -58,7 +58,8 @@ public class PlayState extends BasicGameState {
 	
 		//Images
 		controlBarImage = new Image("res/graphics/control_bar_vertical.png");
-		clockImage = new Image("res/graphics/clock.png");
+		clockImage = new Image("res/icons/clock.png");
+		scoreImage = new Image("res/icons/asterisk_orange.png");
 		backgroundImage = new Image("res/graphics/background.png");
 		difficultyBackground = new Image("res/menu_graphics/difficulty.jpg");
 		easyButton = new Image("res/menu_graphics/easy.png");
@@ -93,11 +94,8 @@ public class PlayState extends BasicGameState {
         airspace.init(gc);
 	}
 
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
-			throws SlickException {
-		
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		// Checks whether the user is still choosing the difficulty
-		
 		if(settingDifficulty){
 			
 			int posX = Mouse.getX();
@@ -139,11 +137,12 @@ public class PlayState extends BasicGameState {
 			g.setColor(Color.white);
             
 			// Drawing Clock and Time
-			clockImage.draw(0, 5);
+			clockImage.draw(5, 12);
 			g.drawString(this.stringTime, 25, 11);
             
 			//Drawing Score
-			g.drawString (stringScore, 80, 11);
+            scoreImage.draw(75, 12);
+			g.drawString(stringScore, 95, 11);
 		}
 			
 	}
