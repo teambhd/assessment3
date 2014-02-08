@@ -1,4 +1,4 @@
-This directory contains the source code for Team BHD's Assessment 3 submission. It is based on the Assessment 2 project inherited from Team WAW.
+This directory contains the source code for Team BHD's Assessment 3 submission. It is based on the Assessment 2 project inherited from [Team WAW](http://teamwaw.co.uk).
 
 ## Building and Running the Game
 
@@ -21,10 +21,6 @@ Firstly, we'll need to import the downloaded project into Eclipse. In the main m
 To run the game, select the top-level "Game" item in the Package Explorer on the left-hand side of the screen and then go to *Run* > *Run Configurations...*. In the window that appears, expand the "Java Application" item in the left-hand column and then double click on the "game" item beneath it. 
 
 To run the tests go to the same dialog box and double-click the "tests" item within the "JUnit" category.
-
-## Understanding the Source Code
-
-TODO
 
 ## Packaging for Distribution
 

@@ -14,6 +14,7 @@ import states.ControlsState;
 
 
 public class Game extends StateBasedGame {
+    
 	public static final String NAME = "Don't Crash";
     
 	public static final int MENU_STATE = 0;
