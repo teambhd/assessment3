@@ -18,7 +18,7 @@ public class MenuState extends BasicGameState {
     private int stateID;
 
 	public static TrueTypeFont titleFont, mainButtonFont, smallButtonFont;
-	private Image creditsHover, controlsHover, menuBackground, playButton, quitButton, playHover, quitHover, creditsButton, controlsButton;
+	private Image menuBackground;
     private String playString, websiteString, controlsString;
     private int playStringWidth, playStringHeight;
     private int websiteStringWidth, websiteStringHeight;
@@ -47,7 +47,7 @@ public class MenuState extends BasicGameState {
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		menuBackground.draw(0,0);
+		menuBackground.draw(0, 0);
         
         // Draw the title and subtitle
         titleFont.drawString(17, 10, "Don't Crash", Color.lightGray);
