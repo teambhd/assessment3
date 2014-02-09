@@ -23,11 +23,14 @@ public class PlayState extends BasicGameState {
 	public static float time;
 	public static int score;
 	private Sound endOfGameSound;
-	public static TrueTypeFont font;
+	public static TrueTypeFont font, smallButtonFont, titleFont;
 	private Image controlBarImage, clockImage, scoreImage, backgroundImage, difficultyBackground;
-    private Image easyButton, easyHover, mediumButton, mediumHover, hardButton, hardHover;
 	private String stringTime, stringScore;
 	private boolean settingDifficulty, gameEnded;
+    private String easyString, mediumString, hardString;
+    private int easyStringHeight, easyStringWidth; 
+    private int mediumStringHeight, mediumStringWidth; 
+    private int hardStringHeight, hardStringWidth;
 
 	public PlayState(int state) {
 	    stateID = state;
@@ -44,14 +47,20 @@ public class PlayState extends BasicGameState {
 				
 		// Font
 		try {
-			InputStream inputStream = ResourceLoader.getResourceAsStream("res/blue_highway_font/bluehigh.ttf");
-			Font awtFont= Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			awtFont = awtFont.deriveFont(20f);
-			font = new TrueTypeFont(awtFont, true);
+			InputStream inputStream1 = ResourceLoader.getResourceAsStream("res/blue_highway_font/bluehigh.ttf");
+			Font awtFont1 = Font.createFont(Font.TRUETYPE_FONT, inputStream1);
+			awtFont1 = awtFont1.deriveFont(20f);
+			font = new TrueTypeFont(awtFont1, true);
+            
+			InputStream inputStream2 = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");
+			Font awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream2);
+			titleFont = new TrueTypeFont(awtFont2.deriveFont(58f), true);
+            smallButtonFont = new TrueTypeFont(awtFont2.deriveFont(30f), true);
 		}
+        
         catch(Exception e){
 			e.printStackTrace();
-		}
+		}        
 		
 		// Sound Effects		
 		endOfGameSound = new Sound("res/music/175385__digitaldominic__scream.wav");
@@ -61,13 +70,7 @@ public class PlayState extends BasicGameState {
 		clockImage = new Image("res/icons/clock.png");
 		scoreImage = new Image("res/icons/asterisk_orange.png");
 		backgroundImage = new Image("res/graphics/background.png");
-		difficultyBackground = new Image("res/menu_graphics/difficulty.jpg");
-		easyButton = new Image("res/menu_graphics/easy.png");
-		easyHover = new Image("res/menu_graphics/easy_hover.png");
-		mediumButton = new Image("res/menu_graphics/medium.png");
-		mediumHover = new Image("res/menu_graphics/medium_hover.png");
-		hardButton = new Image("res/menu_graphics/hard.png");
-		hardHover = new Image("res/menu_graphics/hard_hover.png");		
+		difficultyBackground = new Image("res/menu_graphics/background.png");
 		
     	// Initialise Waypoints
     	airspace.newWaypoint(350, 150, "A");
@@ -95,34 +98,55 @@ public class PlayState extends BasicGameState {
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		// Checks whether the user is still choosing the difficulty
-		if(settingDifficulty){
-			
-			int posX = Mouse.getX();
-			int flippedposY=Mouse.getY();
-			//Fixing posY to reflect graphics coords
-			int posY = 600 - flippedposY;
-			
+		if (settingDifficulty) {
 			difficultyBackground.draw(0,0);
+            
+            // Draw the page title
+            titleFont.drawString(17, 10, "Set the difficulty", Color.lightGray);
+            
+            // Get the mouse position for reference below
+    		int posX = Mouse.getX();
+    		int posY = 600 - Mouse.getY(); // Mouse has origin in bottom-left not top-left like OpenGL
 
-		if (posX>100 && posX<216 && posY>300 && posY<354){
-			easyHover.draw(100,300);
-		} else {
-			easyButton.draw(100,300);
-		}
-
-		if (posX>100 && posX<284 && posY>400 && posY<454){
-			mediumHover.draw(100,400);
-		} else {
-			mediumButton.draw(100,400);
-		}
-		
-		if (posX>100 && posX<227 && posY>500 && posY<554){
-			hardHover.draw(100,500);
-		} else {
-			hardButton.draw(100,500);
-		}		
-		}
+            // Easy
+            easyString = "Easy";
+            easyStringWidth = smallButtonFont.getWidth(easyString);
+            easyStringHeight = smallButtonFont.getHeight(easyString);
+        
+    		if (posX >= 20 && posX <= (20 + easyStringWidth) && posY >= 550 && posY <= (550 + easyStringHeight)) {
+    			smallButtonFont.drawString(20, 550, easyString, Color.white);
+    		} 
+        
+            else {
+    			smallButtonFont.drawString(20, 550, easyString, Color.lightGray);
+    		}
+        
+            // Medium
+            mediumString = "Medium";
+            mediumStringWidth = smallButtonFont.getWidth(mediumString);
+            mediumStringHeight = smallButtonFont.getHeight(mediumString);
+        
+    		if (posX >= (40 + easyStringWidth) && posX <= (40 + easyStringWidth + mediumStringWidth) && posY >= 550 && posY <= (550 + mediumStringHeight)) {
+    			smallButtonFont.drawString(40 + easyStringWidth, 550, mediumString, Color.white);
+    		} 
+        
+            else {
+    			smallButtonFont.drawString(40 + easyStringWidth, 550, mediumString, Color.lightGray);
+    		}         
+            
+            // Hard
+            hardString = "Hard";
+            hardStringWidth = smallButtonFont.getWidth(hardString);
+            hardStringHeight = smallButtonFont.getHeight(hardString);
+        
+    		if (posX >= (60 + easyStringWidth + mediumStringWidth) && posX <= (60 + easyStringWidth + mediumStringWidth + hardStringWidth) && posY >= 550 && posY <= (550 + hardStringHeight)) {
+    			smallButtonFont.drawString(60 + easyStringWidth + mediumStringWidth, 550, hardString, Color.white);
+    		} 
+        
+            else {
+    			smallButtonFont.drawString(60 + easyStringWidth + mediumStringWidth, 550, hardString, Color.lightGray);
+    		}         
+    	}
 		
 		else {
 			g.setFont(font);
@@ -147,61 +171,45 @@ public class PlayState extends BasicGameState {
 			
 	}
 
-	public void update(GameContainer gc, StateBasedGame sbg, int delta)
-			throws SlickException {
-		
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		// Checks if the game has been retried and if it has resets the airspace
-		
-		if (gameEnded){
-			
+		if (gameEnded) {
 			airspace.resetAirspace();
 	    	time = 0;
 	    	score = 0;
 	    	gameEnded = false;
 	    	settingDifficulty = true;
-			
 		}
 		
 		// Checks whether the user is still choosing the difficulty
-		
-		if(settingDifficulty){
-		
-			int posX = Mouse.getX();
-			int posY = Mouse.getY();
-			
-			posY = 600-posY;
-			
-			if((posX>100&&posX<216) && (posY>300&&posY<354) && Mouse.isButtonDown(0)) {
-				
+		if (settingDifficulty) {
+            // Get the mouse position for reference below
+    		int posX = Mouse.getX();
+    		int posY = 600 - Mouse.getY(); // Mouse has origin in bottom-left not top-left like OpenGL
+						
+            // Easy
+    		if (posX >= 20 && posX <= (20 + easyStringWidth) && posY >= 550 && posY <= (550 + easyStringHeight) && Mouse.isButtonDown(0)) {
 				airspace.setDifficultyValueOfGame(1);
 				airspace.getControls().setDifficultyValueOfGame(1);
 				airspace.createAndSetSeparationRules();
 				settingDifficulty = false;
-				
-				
 			}
 			
-			
-			if((posX>100&&posX<284) && (posY>400&&posY<454) && Mouse.isButtonDown(0)) {
-				
+            // Medium
+    		if (posX >= (40 + easyStringWidth) && posX <= (40 + easyStringWidth + mediumStringWidth) && posY >= 550 && posY <= (550 + mediumStringHeight) && Mouse.isButtonDown(0)) {
 				airspace.setDifficultyValueOfGame(2);
 				airspace.getControls().setDifficultyValueOfGame(2);
 				airspace.createAndSetSeparationRules();
 				settingDifficulty = false;
-				
 			}
 			
-			
-			if((posX>100&&posX<227) && (posY>500&&posY<554) && Mouse.isButtonDown(0)) {
-				
+            // Hard
+    		if (posX >= (60 + easyStringWidth + mediumStringWidth) && posX <= (60 + easyStringWidth + mediumStringWidth + hardStringWidth) && posY >= 550 && posY <= (550 + hardStringHeight) && Mouse.isButtonDown(0)) {
 				airspace.setDifficultyValueOfGame(3);
 				airspace.getControls().setDifficultyValueOfGame(3);
 				airspace.createAndSetSeparationRules();
 				settingDifficulty = false;
-				
 			}
-			
-		
 		}
 		
 		else {

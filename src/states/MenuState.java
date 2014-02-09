@@ -26,7 +26,7 @@ public class MenuState extends BasicGameState {
     private boolean mouseBeenReleased;
 
 	public MenuState(int state) {
-		this.mouseBeenReleased = false;
+		mouseBeenReleased = false;
 	    stateID = state;
 	}
 
@@ -36,7 +36,7 @@ public class MenuState extends BasicGameState {
 		try {
 			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");
 			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			titleFont = new TrueTypeFont(awtFont.deriveFont(60f), true);
+			titleFont = new TrueTypeFont(awtFont.deriveFont(58f), true);
 			mainButtonFont = new TrueTypeFont(awtFont.deriveFont(50f), true);
             smallButtonFont = new TrueTypeFont(awtFont.deriveFont(30f), true);
 		}
@@ -109,12 +109,7 @@ public class MenuState extends BasicGameState {
 				this.mouseBeenReleased=true;
 			}
 		}
-        
-		if (Mouse.isButtonDown(0)) {
-			System.out.println(posX);
-			System.out.println(posY);
-		}
-        
+                
 		if (this.mouseBeenReleased) {
             
             // Handle clicking of play button

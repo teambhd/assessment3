@@ -31,7 +31,7 @@ public class ControlsState extends BasicGameState {
 		try {
 			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");
 			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			titleFont = new TrueTypeFont(awtFont.deriveFont(60f), true);
+			titleFont = new TrueTypeFont(awtFont.deriveFont(58f), true);
 			bodyFont = new TrueTypeFont(awtFont.deriveFont(20f), true);
             smallButtonFont = new TrueTypeFont(awtFont.deriveFont(30f), true);
 		}
