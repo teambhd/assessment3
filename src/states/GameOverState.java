@@ -1,74 +1,109 @@
 package states;
 
-import org.lwjgl.input.Mouse;
+import java.awt.Font;
+import java.io.InputStream;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+import org.newdawn.slick.util.ResourceLoader;
+import org.lwjgl.input.Mouse;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.Color;
 
 
 public class GameOverState extends BasicGameState {
-    
-    private int stateID;
-	private Image gameOverBackground, playAgainButton, menuButton;
-	private Image playAgainHover, menuHover;
 	
+    private int stateID;
+	private Image menuBackground;
+	public static TrueTypeFont titleFont, bodyFont, smallButtonFont;
+    private String againString, menuString;
+    private int againStringWidth, againStringHeight;
+    private int menuStringWidth, menuStringHeight;
+    private boolean mouseBeenReleased;
+    
 	public GameOverState(int state) {
+		mouseBeenReleased = false;
 	    stateID = state;
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		gameOverBackground = new Image("res/menu_graphics/gameover_screen.png");
-		playAgainButton = new Image("res/menu_graphics/playagain_button.png");
-		menuButton = new Image("res/menu_graphics/menu_button.png");
-		playAgainHover = new Image("res/menu_graphics/playagain_hover.png");
-		menuHover = new Image("res/menu_graphics/menu_hover.png");
+		menuBackground = new Image("res/graphics/menu_background.png");
+        		        
+		try {
+			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");
+			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+			titleFont = new TrueTypeFont(awtFont.deriveFont(58f), true);
+			bodyFont = new TrueTypeFont(awtFont.deriveFont(20f), true);
+            smallButtonFont = new TrueTypeFont(awtFont.deriveFont(30f), true);
+		}
+        
+        catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		gameOverBackground.draw(0, 0);
-		
+		menuBackground.draw(0, 0);
+        
+        // Draw the page title
+        titleFont.drawString(17, 10, "Game Over", Color.lightGray);
+        
+        // Get the mouse position for reference below
 		int posX = Mouse.getX();
-		int flippedposY = Mouse.getY();
-		//Fixing posY to reflect graphics coords
-		int posY = 600 - flippedposY;
-		
-		if (posX > 728 && posX < 844 && posY > 380 && posY < 426) {
-			menuHover.draw(728, 380);
+		int posY = 600 - Mouse.getY(); // Mouse has origin in bottom-left not top-left like OpenGL
+                                    
+        // Draw the play again string
+        againString = "Play Again";
+        againStringWidth = smallButtonFont.getWidth(againString);
+        againStringHeight = smallButtonFont.getHeight(againString);
+        
+		if (posX >= 20 && posX <= (20 + againStringWidth) && posY >= 550 && posY <= (550 + againStringHeight)) {
+			smallButtonFont.drawString(20, 550, againString, Color.white);
 		} 
         
         else {
-			menuButton.draw(728, 380);
+			smallButtonFont.drawString(20, 550, againString, Color.lightGray);
 		}
-		
-		if (posX > 354 && posX < 582 && posY > 380 && posY < 424) {
-			playAgainHover.draw(354, 380);
+        
+        // Draw the menu string
+        menuString = "Menu";
+        menuStringWidth = smallButtonFont.getWidth(menuString);
+        menuStringHeight = smallButtonFont.getHeight(menuString);
+        
+		if (posX >= (40 + againStringWidth) && posX <= (40 + againStringWidth + menuStringWidth) && posY >= 550 && posY <= (550 + menuStringHeight)) {
+			smallButtonFont.drawString(40 + againStringWidth, 550, menuString, Color.white);
 		} 
         
         else {
-			playAgainButton.draw(354, 380);
-		}
+			smallButtonFont.drawString(40 + againStringWidth, 550, menuString, Color.lightGray);
+		}     
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        // Get the mouse position for reference below
 		int posX = Mouse.getX();
-		int posY = Mouse.getY();
-		
-		posY = 600 - posY;
-		
-		if (posX > 354 && posX < 582 && posY > 380 && posY < 424 && Mouse.isButtonDown(0)) {
-			sbg.enterState(1);
+		int posY = 600 - Mouse.getY(); // Mouse has origin in bottom-left not top-left like OpenGL
+        
+		if (!mouseBeenReleased) {
+			if (!Mouse.isButtonDown(0)) {
+				mouseBeenReleased=true;
+			}
 		}
 		
-		if (posX > 728 && posX < 844 && posY > 380 && posY < 426 && Mouse.isButtonDown(0)) {
-			sbg.enterState(0);
-		}
-		
-		if(posX > 1150 && posX < 1170 && posY > 550 && posY < 580 && Mouse.isButtonDown(0)) {
-			System.exit(0);			
-		}
+        // handle clicking the play again button
+		if (posX >= 20 && posX <= (20 + againStringWidth) && posY >= 550 && posY <= (550 + againStringHeight) && Mouse.isButtonDown(0) && mouseBeenReleased) {
+			mouseBeenReleased = false;
+			sbg.enterState(1); // PlayState
+		} 
+        
+		if (posX >= (40 + againStringWidth) && posX <= (40 + againStringWidth + menuStringWidth) && posY >= 550 && posY <= (550 + menuStringHeight) && Mouse.isButtonDown(0) && mouseBeenReleased) {
+			mouseBeenReleased = false;
+			sbg.enterState(0); // MenuState
+        }
 	}
 
 	public int getID() {
 		return stateID;
 	}
-
+	
 }

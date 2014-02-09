@@ -21,7 +21,7 @@ public class PauseState extends BasicGameState {
 	}
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		menuBackground = new Image("res/menu_graphics/background.png");
+		menuBackground = new Image("res/graphics/menu_background.png");
         
 		try {
 			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");

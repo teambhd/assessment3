@@ -68,7 +68,7 @@ public class PlayState extends BasicGameState {
 		clockImage = new Image("res/icons/clock.png");
 		scoreImage = new Image("res/icons/asterisk_orange.png");
 		backgroundImage = new Image("res/graphics/background.png");
-		difficultyBackground = new Image("res/menu_graphics/background.png");
+		difficultyBackground = new Image("res/graphics/menu_background.png");
 		
     	// Initialise Waypoints
     	airspace.newWaypoint(350, 150, "A");
