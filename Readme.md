@@ -34,4 +34,4 @@ The next step is to use JarSplice (included in the tools directory) to create a 
 
 The game uses several open-source and Creative Commons resources, which are as follows:
 
-* 
+* The background image on menu screens is a cropped version of ["Dark Clouds"](http://www.flickr.com/photos/comedynose/7475003854/) by [comedy_nose](http://www.flickr.com/photos/comedynose/) on Flickr.
