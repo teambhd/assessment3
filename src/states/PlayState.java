@@ -21,7 +21,6 @@ public class PlayState extends BasicGameState {
 	private Airspace airspace;
 	Image cursorImg;
 	public static float time;
-	public static int score;
 	private Sound endOfGameSound;
 	public static TrueTypeFont font, smallButtonFont, titleFont;
 	private Image controlBarImage, clockImage, scoreImage, backgroundImage, difficultyBackground;
@@ -40,7 +39,6 @@ public class PlayState extends BasicGameState {
 		gameEnded = false;
 		settingDifficulty = true;
 		time = 0;
-		score = 0;
 		airspace = new Airspace();
 		this.stringTime="";
 		this.stringScore="";
@@ -176,7 +174,6 @@ public class PlayState extends BasicGameState {
 		if (gameEnded) {
 			airspace.resetAirspace();
 	    	time = 0;
-	    	score = 0;
 	    	gameEnded = false;
 	    	settingDifficulty = true;
 		}
