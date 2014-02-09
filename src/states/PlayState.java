@@ -47,7 +47,7 @@ public class PlayState extends BasicGameState {
 				
 		// Font
 		try {
-			InputStream inputStream1 = ResourceLoader.getResourceAsStream("res/blue_highway_font/bluehigh.ttf");
+			InputStream inputStream1 = ResourceLoader.getResourceAsStream("res/fonts/blue.ttf");
 			Font awtFont1 = Font.createFont(Font.TRUETYPE_FONT, inputStream1);
 			awtFont1 = awtFont1.deriveFont(20f);
 			font = new TrueTypeFont(awtFont1, true);
