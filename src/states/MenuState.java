@@ -50,7 +50,7 @@ public class MenuState extends BasicGameState {
 		menuBackground.draw(0, 0);
         
         // Draw the title and subtitle
-        titleFont.drawString(17, 10, "Don't Crash", Color.lightGray);
+        titleFont.drawString(17, 10, sbg.getTitle(), Color.lightGray);
         smallButtonFont.drawString(20, 80, "by Team BHD", Color.lightGray);
 
         // Get the mouse position for reference below
