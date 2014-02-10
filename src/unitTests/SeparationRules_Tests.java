@@ -36,8 +36,8 @@ public class SeparationRules_Tests {
     	airspace.newExitPoint(150, 200, "2");
     	airspace.newExitPoint(1200, 300, "3");
     	
-		flight1 = new Flight(airspace);
-		flight2 = new Flight(airspace);
+		flight1 = new Flight(airspace, 1);
+		flight2 = new Flight(airspace, 4);
 		
 		airspace.addFlight(flight1);
 		airspace.addFlight(flight2);

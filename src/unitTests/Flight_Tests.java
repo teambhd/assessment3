@@ -32,7 +32,7 @@ public class Flight_Tests {
     	airspace.newExitPoint(800, 0, "1");
     	airspace.newExitPoint(150, 200, "2");
     	airspace.newExitPoint(1200, 300, "3");
-    	flight1 = new Flight(airspace);
+    	flight1 = new Flight(airspace, 0);
 		
 	}
 	
@@ -46,7 +46,7 @@ public class Flight_Tests {
 	@Test
 	public void generateAltitudeTest1() {
 		// Testing the function returns an altitude within a certain range.
-    	int result = flight1.generateAltitude();
+    	int result = flight1.generateAltitude(3);
     	assertTrue(result >=1000 && result<= 10000);
     	
 	}

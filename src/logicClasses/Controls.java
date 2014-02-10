@@ -87,12 +87,12 @@ public class Controls {
 			//has taken off and not landed.
 
 			if(posX>10&&posX<150&&posY<290&&posY>270&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the land button and is the button being held down?
-				//	if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 250) { //Have we recently used airport?
+				//	if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 500) { //Have we recently used airport?
 				this.selectedFlight.LandFlight(); //Land
 			}
 
 			if(posX>10&&posX<150&&posY<320&&posY>300&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the take off button and is the button being held down?
-				//	if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 250) { //Have we recently used airport?
+				//	if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 500) { //Have we recently used airport?
 				this.selectedFlight.TakeOff(); //Take off
 			}
 
@@ -120,7 +120,7 @@ public class Controls {
 			}
 
 			else if(posX>10&&posX<150&&posY<440&&posY>420&&Mouse.isButtonDown(0)) {//Is the mouse position in the area enclosed by the decrease altitude button and is the button being held down?
-				if(this.selectedFlight.getTargetAltitude()> MINIMUM_ALTITUDE) { //Is the target altitude already at the minimum value?
+				if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE) { //Is the target altitude already at the minimum value?
 					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()-1000); //Set the target altitude 1000 lower
 				}
 			}
@@ -394,7 +394,15 @@ public class Controls {
 				g.drawString("Take off", 10, 300);
 
 				if (this.selectedFlight.getTakeoff()==true && this.selectedFlight.getLanding()==false){
+					
+					if (this.selectedFlight.getAltitude()>1000 || 
+							this.selectedFlight.getFlightPlan().getVelocity()<50){
+					//		this.airspace.getNumberOfGameLoopsSinceLastFlightAirport()<500){
+						g.drawString ("Cannot land", 10, 270);
+					}
+					else{
 					g.drawString("Land", 10, 270);
+					}
 
 
 					if (this.selectedFlight.getFlightPlan().getTarget()+25 < Math.round(400)){
@@ -411,13 +419,13 @@ public class Controls {
 						g.drawString ("At min speed", 10, 360);
 					}
 
-					if(this.selectedFlight.getTargetAltitude() != MAXIMUM_ALTITUDE){
+					if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE){
 						g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
 					}
 					else {
 						g.drawString("At max altitude", 10, 390);
 					}
-					if(this.selectedFlight.getTargetAltitude() != MINIMUM_ALTITUDE){
+					if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE){
 						g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
 					}
 					else {

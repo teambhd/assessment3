@@ -29,11 +29,11 @@ public class FlightPlan {
 	// CONSTRUCTOR
 	
 
-	public FlightPlan(Airspace airspace, Flight flight) {
+	public FlightPlan(Airspace airspace, Flight flight, int entry) {
 		this.flight = flight;
 		this.velocity = generateVelocity();
 		this.targetVelo = this.velocity;
-		this.entryPoint = generateEntryPoint(airspace);
+		this.entryPoint = generateEntryPoint(airspace, entry);
 		this.currentRoute = buildRoute(airspace, this.entryPoint);
 		this.waypointsAlreadyVisited = new ArrayList<Point>();
 		this.changingPlan = false;
@@ -49,14 +49,20 @@ public class FlightPlan {
 	 * @return airspace.getListofEntryPoints 
 	 */
 	
-	public EntryPoint generateEntryPoint(Airspace airspace){
+	public EntryPoint generateEntryPoint(Airspace airspace, int entry){
 		
 		Random rand = new Random();
 		int randomNumber = rand.nextInt(3);
 			
 		// Setting flights x and y to the coordinates of it's entrypoint
+		if (entry == 4){ //20% chance to initialize the flight at the airport.
+			flight.setX(airspace.getAirport().getX());
+			flight.setY(airspace.getAirport().getY());
+		}
+		else {
 		flight.setX(airspace.getListOfEntryPoints().get(randomNumber).getX()); // choose one a get the x and y values
 		flight.setY(airspace.getListOfEntryPoints().get(randomNumber).getY());
+		}
 		
 		return airspace.getListOfEntryPoints().get(randomNumber);
 		
