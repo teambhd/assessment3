@@ -424,6 +424,15 @@ public class Airspace {
 
 		}
 	}
+	
+	public void removeFlightInstance (Flight flight) {
+		this.listOfFlightsInAirspace.remove(flight);
+		
+		// If flight was selected, de-select it
+		if (!(this.listOfFlightsInAirspace.contains(this.controls.getSelectedFlight()))) {
+			this.controls.setSelectedFlight(null);
+		}
+	}
 
 	public void removeWaypoint(Waypoint waypoint) {
 		this.listOfWayppoints.remove(waypoint);

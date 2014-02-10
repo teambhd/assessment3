@@ -95,7 +95,7 @@ public class Flight {
 			
 			this.takenoff = false;
 			this.landing = true;
-			this.airspace.removeSpecificFlight(this.flightNumber);
+			this.airspace.removeFlightInstance (this);
 			this.airspace.changeScore(200);
 		}
 	}
