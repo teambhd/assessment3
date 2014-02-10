@@ -31,7 +31,7 @@ public class Flight {
 		this.turningRight = false;
 		this.turningLeft = false;
 		this.landing = false;
-		this.takenoff = false;
+		this.takenoff = true;
 		
         this.airspace = airspace;
 		this.flightPlan = new FlightPlan(airspace, this);
@@ -95,7 +95,8 @@ public class Flight {
 			
 			this.takenoff = false;
 			this.landing = true;
-			this.airspace.removeFlightInstance (this);
+			this.getFlightPlan().setTarget(0);
+			this.airspace.resetNumberOfGameLoopsSinceLastFlightAirport();
 			this.airspace.changeScore(200);
 		}
 	}
@@ -108,7 +109,7 @@ public class Flight {
 			
 			
 			this.takenoff = true;
-			this.landing = false;
+			this.airspace.resetNumberOfGameLoopsSinceLastFlightAirport();
 		}
 	}
 
@@ -191,6 +192,22 @@ public class Flight {
         
 		return false;
 	}
+	/**
+	 * checkIfAtAirport: checks whether a flight is close enough to the airport to be considered at the airport.
+	 * @param Airport - The Airport.
+	 * @return True if flight is at airport.
+	 */
+	
+	public boolean checkIfAtAirport(Point airport) {		
+		if (((Math.abs(Math.round(this.x) - Math.round(airport.getX()))) <= 45)
+				&& (Math.abs(Math.round(this.y) - Math.round(airport.getY()))) <= 45) {
+			this.airspace.changeScore(100);
+			return true;
+		}
+        
+		return false;
+	}
+
 
 	
 	// DRAWING METHODS
@@ -486,6 +503,14 @@ public class Flight {
 
 	public boolean getTurningRight() {
 		return this.turningRight;
+	}
+	
+	public boolean getLanding(){
+		return this.landing;
+	}
+	
+	public boolean getTakeoff(){
+		return this.takenoff;
 	}
 
 	public void setTurningRight(boolean turningRight) {
