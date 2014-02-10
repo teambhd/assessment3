@@ -37,8 +37,8 @@ public class FlightPlan_Tests {
     	airspace.newExitPoint(800, 0, "1");
     	airspace.newExitPoint(150, 200, "2");
     	airspace.newExitPoint(1200, 300, "3");
-    	flight1 = new Flight(airspace);
-    	flightplan = new FlightPlan(airspace, flight1);
+    	flight1 = new Flight(airspace, 2);
+    	flightplan = new FlightPlan(airspace, flight1, 4);
     	
 		
 	}
@@ -48,7 +48,7 @@ public class FlightPlan_Tests {
 	@Test
 	public void generateEntryPointTest1(){
 		// Testing that the function generates a entrypoint that is contained within the entrypoint list
-    	EntryPoint result = flight1.getFlightPlan().generateEntryPoint(airspace);
+    	EntryPoint result = flight1.getFlightPlan().generateEntryPoint(airspace, 2);
     	assertTrue(result == airspace.getListOfEntryPoints().get(0) || result == airspace.getListOfEntryPoints().get(1) || result == airspace.getListOfEntryPoints().get(2));
 		
 	}
@@ -119,7 +119,7 @@ public class FlightPlan_Tests {
     	airspaceMissingExitPoints.newWaypoint(900, 420, "I");
     	airspaceMissingExitPoints.newWaypoint(240, 250, "J");
     	
-    	Flight flight1 = new Flight(airspaceMissingExitPoints);
+    	Flight flight1 = new Flight(airspaceMissingExitPoints, 2);
     	
     	ArrayList<Point> route = flightplan.buildRoute(airspaceMissingExitPoints, flight1.getFlightPlan().getEntryPoint());
     	assertTrue(route.size() == 0);
@@ -142,7 +142,7 @@ public class FlightPlan_Tests {
     	airspaceMissingWaypoints.newExitPoint(150, 200, "2");
     	airspaceMissingWaypoints.newExitPoint(1200, 300, "3");
     	
-    	Flight flight1 = new Flight(airspaceMissingWaypoints);
+    	Flight flight1 = new Flight(airspaceMissingWaypoints, 4);
     	
     	ArrayList<Point> route = flightplan.buildRoute(airspaceMissingWaypoints, flight1.getFlightPlan().getEntryPoint());
     	assertTrue(route.size() == 0);

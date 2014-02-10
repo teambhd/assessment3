@@ -36,7 +36,7 @@ public class Airspace_Tests {
     	//Airport
     	airspace.newAirport(572, 197);
     	// Get a Flight
-    	flight1 = new Flight(airspace);
+    	flight1 = new Flight(airspace, 0);
     	
     	airspace.setDifficultyValueOfGame(1);
     	airspace.createAndSetSeparationRules();

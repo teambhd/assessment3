@@ -19,12 +19,12 @@ public class Flight {
 	private Airspace airspace;
 	
 	// CONSTRUCTOR
-	public Flight(Airspace airspace) {
+	public Flight(Airspace airspace, int entry) {
 		this.x = 0;
 		this.y = 0;
 		
         this.targetAltitude = 0;
-		this.currentAltitude = generateAltitude();
+		this.currentAltitude = generateAltitude(entry);
 		
         this.targetHeading = 0;
 		this.currentHeading = 0;
@@ -34,7 +34,7 @@ public class Flight {
 		this.takenoff = true;
 		
         this.airspace = airspace;
-		this.flightPlan = new FlightPlan(airspace, this);
+		this.flightPlan = new FlightPlan(airspace, this, entry);
 		this.selected = false;
 	}
 
@@ -45,7 +45,11 @@ public class Flight {
 	 * @return A random altitude (either 5000, 6000 or 7000)
 	 */
 
-	public int generateAltitude() {
+	public int generateAltitude(int entry) {
+		if (entry == 4){
+			return 0;
+		}
+		else{
 		Random rand = new Random();
 		int check = rand.nextInt(3);
 		switch(check) {
@@ -57,6 +61,7 @@ public class Flight {
 			return 7000;
 		}
 		return 7000; // Default state (this won't ever be returned)
+	}
 	}
 
 /**
@@ -89,13 +94,14 @@ public class Flight {
 	public void LandFlight (){
 		if (this.currentAltitude <= 4000 && 
 				this.flightPlan.getVelocity()<100 && 
-				this.checkIfFlightAtWaypoint(airspace.getAirport()) && 
+				this.checkIfAtAirport(airspace.getAirport()) && 
 				this.airspace.getNumberOfGameLoopsSinceLastFlightAirport()>250){
 			
 			
 			this.takenoff = false;
 			this.landing = true;
 			this.getFlightPlan().setTarget(0);
+			this.setTargetAltitude(0);
 			this.airspace.resetNumberOfGameLoopsSinceLastFlightAirport();
 			this.airspace.changeScore(200);
 		}
@@ -104,12 +110,14 @@ public class Flight {
 	public void TakeOff (){
 		if (this.currentAltitude == 0 && 
 				this.flightPlan.getVelocity()== 0 && 
-				this.checkIfFlightAtWaypoint(airspace.getAirport()) &&
+				this.checkIfAtAirport(airspace.getAirport()) &&
 				this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 250){
 			
 			
 			this.takenoff = true;
-			this.airspace.resetNumberOfGameLoopsSinceLastFlightAirport();
+			this.flightPlan.setTarget(25);
+			this.setTargetAltitude(1000);
+			
 		}
 	}
 
