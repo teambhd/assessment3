@@ -13,7 +13,7 @@ public class Airspace {
 
 	// FIELDS
 	private int maximumNumberOfFlightsInAirspace;
-	private int score, numberOfGameLoopsSinceLastFlightAdded, numberOfGameLoops,
+	private int score, numberOfGameLoopsSinceLastFlightAdded, numberOfGameLoopsSinceLastFlightAirport, numberOfGameLoops,
 				numberOfGameLoopsWhenDifficultyIncreases, randomNumberForFlightGeneration;
 	private List<Flight> listOfFlightsInAirspace;
 	private List<Waypoint> listOfWayppoints;
@@ -34,6 +34,7 @@ public class Airspace {
 		this.listOfExitPoints = new ArrayList<ExitPoint>();
 		this.airport = new Airport(572, 197, "Airport");
 		this.numberOfGameLoopsSinceLastFlightAdded = 0; // Stores how many loops since the last flight was spawned
+		this.numberOfGameLoopsSinceLastFlightAirport = 0; // Stores how many loops since the last flight interacted with airport
 		this.numberOfGameLoops = 0; // Stores how many loops there have been in total
 		this.numberOfGameLoopsWhenDifficultyIncreases = 3600; // this is how many loops until planes come more quickly (= 1min)
 		this.randomNumberForFlightGeneration = 500;
@@ -50,6 +51,7 @@ public class Airspace {
 	public void resetAirspace() {		
 		this.listOfFlightsInAirspace = new ArrayList<Flight>();
 		this.numberOfGameLoopsSinceLastFlightAdded = 0; 
+		this.numberOfGameLoopsSinceLastFlightAirport = 0;
 		this.numberOfGameLoops = 0; 
 		this.score = 0;
 		this.numberOfGameLoopsWhenDifficultyIncreases = 3600;
@@ -142,7 +144,7 @@ public class Airspace {
 
 		if (this.listOfFlightsInAirspace.size() < this.maximumNumberOfFlightsInAirspace) {
 			
-			if ((this.numberOfGameLoopsSinceLastFlightAdded >= 850  || this.listOfFlightsInAirspace.isEmpty())) {
+			if ((this.numberOfGameLoopsSinceLastFlightAdded >= 350  || this.listOfFlightsInAirspace.isEmpty())) {
 					
 				Random rand = new Random();
 				int checkNumber;
@@ -275,6 +277,7 @@ public class Airspace {
 	public void update(GameContainer gc) {
 		
 		this.numberOfGameLoopsSinceLastFlightAdded++;
+		this.numberOfGameLoopsSinceLastFlightAirport++;
 		this.numberOfGameLoops++;
 		if (this.numberOfGameLoops >= this.numberOfGameLoopsWhenDifficultyIncreases) {
 			this.increaseDifficulty();
@@ -357,6 +360,14 @@ public class Airspace {
 
 	public List<ExitPoint> getListOfExitPoints() {
 		return this.listOfExitPoints;
+	}
+	
+	public Point getAirport (){
+		return this.airport;
+	}
+	
+	public int getNumberOfGameLoopsSinceLastFlightAirport (){
+		return numberOfGameLoopsSinceLastFlightAirport;
 	}
 
 	public void setMaxNumberOfFlights(int maxNumberOfFlights) {

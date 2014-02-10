@@ -12,11 +12,10 @@ public class Flight {
 	// FIELDS
 	private double x, y, currentHeading, targetHeading;
 	private int currentAltitude, targetAltitude, flightNumber;
-	private boolean turningRight, turningLeft;
+	private boolean turningRight, turningLeft, landing, takenoff, selected;
 	private String flightName;
 	private FlightPlan flightPlan;
 	private Image regularFlightImage, selectedFlightInformationBackgroundImage, slowFlightImage, fastFlightImage, shadowImage;
-	private boolean selected;
 	private Airspace airspace;
 	
 	// CONSTRUCTOR
@@ -31,6 +30,8 @@ public class Flight {
 		this.currentHeading = 0;
 		this.turningRight = false;
 		this.turningLeft = false;
+		this.landing = false;
+		this.takenoff = false;
 		
         this.airspace = airspace;
 		this.flightPlan = new FlightPlan(airspace, this);
@@ -79,6 +80,38 @@ public class Flight {
 		}
 		return angle;
 	}
+	
+	/**
+	 * Land: Removes a flight from the airspace. 
+	 * Only works if a flight is positioned at the airport waypoint and has a low altitude and speed.
+	 */
+	
+	public void LandFlight (){
+		if (this.currentAltitude <= 4000 && 
+				this.flightPlan.getVelocity()<100 && 
+				this.checkIfFlightAtWaypoint(airspace.getAirport()) && 
+				this.airspace.getNumberOfGameLoopsSinceLastFlightAirport()>250){
+			
+			
+			this.takenoff = false;
+			this.landing = true;
+			this.airspace.removeSpecificFlight(this.flightNumber);
+			this.airspace.changeScore(200);
+		}
+	}
+	
+	public void TakeOff (){
+		if (this.currentAltitude == 0 && 
+				this.flightPlan.getVelocity()== 0 && 
+				this.checkIfFlightAtWaypoint(airspace.getAirport()) &&
+				this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 250){
+			
+			
+			this.takenoff = true;
+			this.landing = false;
+		}
+	}
+
 	
 	/**
 	 * turnFlightLeft: sets the target heading to certain amount to to the left of the flight's current heading. 

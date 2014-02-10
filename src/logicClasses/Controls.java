@@ -31,6 +31,7 @@ public class Controls {
 	
     private Flight selectedFlight;
 	private String text; //Used for parsing textbox inputs
+	private Airspace airspace;
 	private Image sideButton, changePlanButton;
 	private int difficultyValueOfGame; //Sets the difficulty of the control scheme
 	
@@ -50,9 +51,9 @@ public class Controls {
 	public void init(GameContainer gc) throws SlickException {
 		Font awtFont = new Font("Courier", Font.BOLD, 15); // Setting up fonts used in text boxes
 		font = new TrueTypeFont(awtFont, false);
-		this.turnLeftTextBox = new TextField(gc, font, 10, 145, 100, 23); //Creating textboxes
-		this.headingControlTextBox = new TextField(gc, font, 10, 215, 100, 23);
-		this.turnRightTextBox = new TextField(gc, font, 10, 285, 100, 23);
+		this.turnLeftTextBox = new TextField(gc, font, 10, 120, 100, 23); //Creating textboxes
+		this.headingControlTextBox = new TextField(gc, font, 10, 170, 100, 23);
+		this.turnRightTextBox = new TextField(gc, font, 10, 220, 100, 23);
 		this.turnLeftTextBox.setMaxLength(3); //Makes sure that user cannot enter more than three letters as a heading (360 is max)
 		this.turnRightTextBox.setMaxLength(3);
 		this.headingControlTextBox.setMaxLength(3);
@@ -82,17 +83,30 @@ public class Controls {
 		
 		posY = 600 - posY; // Mapping Mouse coords onto graphic coords
 		
+		if(posX>10&&posX<150&&posY<290&&posY>270&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the land button and is the button being held down?
+		//	if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 250) { //Have we recently used airport?
+				this.selectedFlight.LandFlight(); //Land
+			}
+		
+		if(posX>10&&posX<150&&posY<320&&posY>300&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the take off button and is the button being held down?
+		//	if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 250) { //Have we recently used airport?
+				this.selectedFlight.TakeOff(); //Take off
+			}
+
+
+		if(posX>10&&posX<150&&posY<350&&posY>330&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase velocity button and is the button being held down?
+			if(this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) { //Is the target velocity already at the maximum value?
+				this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()+25); //Set the target velocity 25 higher
+			}
+		}
+
+		
 		if(posX>10&&posX<150&&posY<380&&posY>360&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the decrease velocity button and is the button being held down?
 			if(this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) { //Is the target velocity already at the min value?
 				this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()-25); //Set the target velocity 25 lower
 			}
 		}
 		
-		if(posX>10&&posX<150&&posY<350&&posY>330&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase velocity button and is the button being held down?
-			if(this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) { //Is the target velocity already at the maximum value?
-				this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()+25); //Set the target velocity 25 higher
-			}
-		}
 
 
 		
@@ -341,25 +355,41 @@ public class Controls {
 			if(!this.selectedFlight.getFlightPlan().getChangingPlan()){
 				g.setColor(Color.white);
 				
-				g.drawString("Turn Left:", 10, 125);
+				g.drawString("Turn Left:", 10, 100);
 				this.turnLeftTextBox.render(gc, g);
-				g.drawString("DEG", 114, 153);
+				g.drawString("DEG", 114, 125);
 				
-				g.drawString("Target Heading:", 10, 195);
+				g.drawString("Target Heading:", 10, 150);
 				this.headingControlTextBox.render(gc, g);
-				g.drawString("DEG", 114, 224);
+				g.drawString("DEG", 114, 175);
 				
-				g.drawString("Turn Right:", 10, 265);
+				g.drawString("Turn Right:", 10, 200);
 				this.turnRightTextBox.render(gc, g);
-				g.drawString("DEG", 114, 294);
+				g.drawString("DEG", 114, 225);
 				
 				g.setColor(Color.blue);
+				sideButton.draw (0, 270);
+				sideButton.draw (0, 300);
 				sideButton.draw (0, 330);
 				sideButton.draw (0, 360);
 				sideButton.draw(0,390);
 				sideButton.draw(0,420);
 				
                 g.setColor(Color.white);
+                
+              /*  if (this.airspace.getNumberOfGameLoopsSinceLastFlightAirport()<250){
+                	g.setColor (Color.gray);
+                	g.drawString("Airport occupied", 10, 270);
+                }
+                else { */
+                
+                //Causes a game crash, likely due to updating too fast.
+                
+                	g.drawString("Land", 10, 270);
+                
+                	g.drawString("Take off", 10, 300);
+
+                
 
 				if (this.selectedFlight.getFlightPlan().getTarget()+25 < Math.round(400)){
 					g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
