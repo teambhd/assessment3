@@ -106,11 +106,11 @@ public class FlightPlan {
 
 			// Adding ExitPoint to Plan
 
-			if (entry != 4){
+			if (entry != 4){ //If we didn't start at the airport...
 
 				int choice = rand.nextInt (5);
 
-				if (choice != 4){
+				if (choice != 4){ //80% chance to NOT have airport as exit point.
 
 					int ExitPointIndex = rand.nextInt(tempListOfExitPoints.size());
 
@@ -136,7 +136,7 @@ public class FlightPlan {
 				}
 
 			}
-			else {
+			else { //If we started at the airport.
 				int ExitPointIndex = rand.nextInt(tempListOfExitPoints.size());
 
 				while (exitpointAdded == false){
