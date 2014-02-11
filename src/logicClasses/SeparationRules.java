@@ -71,6 +71,8 @@ public class SeparationRules {
 				
 				if ((lateralDistanceBetweenFlights(airspace.getListOfFlights().get(i), airspace.getListOfFlights().get(j)) < this.gameOverLateralSeparation)){
 					if ((verticalDistanceBetweenFlights(airspace.getListOfFlights().get(i), airspace.getListOfFlights().get(j)) < this.gameOverVerticalSeparation)){
+						System.out.print (airspace.getListOfFlights().get(i));
+						System.out.print (airspace.getListOfFlights().get(j));
 					this.gameOverViolation = true;
 					}
 				}

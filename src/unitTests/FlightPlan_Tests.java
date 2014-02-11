@@ -69,7 +69,7 @@ public class FlightPlan_Tests {
 		
 		// Testing Length of Route
 		for (int i = 0; i < 100; i++){
-			ArrayList<Point> route = flightplan.buildRoute(airspace, flight1.getFlightPlan().getEntryPoint());
+			ArrayList<Point> route = flightplan.buildRoute(airspace, flight1.getFlightPlan().getEntryPoint(), 4);
 			assertTrue(route.size() >= 2 && route.size() <= 5);
 		}
 	}
@@ -79,7 +79,7 @@ public class FlightPlan_Tests {
 		
 		//Testing that it doesn't repeat waypoints
 		for (int i = 0; i < 100; i++){
-			ArrayList<Point> route = flightplan.buildRoute(airspace, flight1.getFlightPlan().getEntryPoint());
+			ArrayList<Point> route = flightplan.buildRoute(airspace, flight1.getFlightPlan().getEntryPoint(), 3);
 			boolean samePoint = false;
 			
 			
@@ -121,7 +121,7 @@ public class FlightPlan_Tests {
     	
     	Flight flight1 = new Flight(airspaceMissingExitPoints, 2);
     	
-    	ArrayList<Point> route = flightplan.buildRoute(airspaceMissingExitPoints, flight1.getFlightPlan().getEntryPoint());
+    	ArrayList<Point> route = flightplan.buildRoute(airspaceMissingExitPoints, flight1.getFlightPlan().getEntryPoint(),2);
     	assertTrue(route.size() == 0);
 		
 	}
@@ -144,7 +144,7 @@ public class FlightPlan_Tests {
     	
     	Flight flight1 = new Flight(airspaceMissingWaypoints, 4);
     	
-    	ArrayList<Point> route = flightplan.buildRoute(airspaceMissingWaypoints, flight1.getFlightPlan().getEntryPoint());
+    	ArrayList<Point> route = flightplan.buildRoute(airspaceMissingWaypoints, flight1.getFlightPlan().getEntryPoint(),0);
     	assertTrue(route.size() == 0);
 		
 	}
