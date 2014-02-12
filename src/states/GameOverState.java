@@ -27,7 +27,7 @@ public class GameOverState extends BasicGameState {
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		menuBackground = new Image("res/graphics/menu_background.png");
+		menuBackground = new Image("res/graphics/game_over_background.png");
         		        
 		try {
 			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/fira-sans-bold.ttf");
