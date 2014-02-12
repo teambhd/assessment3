@@ -51,7 +51,7 @@ public class Airspace {
 	public void resetAirspace() {		
 		this.listOfFlightsInAirspace = new ArrayList<Flight>();
 		this.numberOfGameLoopsSinceLastFlightAdded = 0; 
-		this.numberOfGameLoopsSinceLastFlightAirport = 0;
+		this.numberOfGameLoopsSinceLastFlightAirport = 500;
 		this.numberOfGameLoops = 0; 
 		this.score = 0;
 		this.numberOfGameLoopsWhenDifficultyIncreases = 3600;
@@ -306,9 +306,12 @@ public class Airspace {
 		this.numberOfGameLoopsSinceLastFlightAdded++;
 		this.numberOfGameLoopsSinceLastFlightAirport++;
 		this.numberOfGameLoops++;
+		System.out.println(this.getNumberOfGameLoops());
+		System.out.println(this.numberOfGameLoopsSinceLastFlightAdded);
+		System.out.println(this.getNumberOfGameLoopsSinceLastFlightAirport());
+
 		if (this.numberOfGameLoops >= this.numberOfGameLoopsWhenDifficultyIncreases) {
 			this.increaseDifficulty();
-
 		}
 
 
@@ -400,7 +403,7 @@ public class Airspace {
 	}
 
 	public int getNumberOfGameLoopsSinceLastFlightAirport (){
-		return numberOfGameLoopsSinceLastFlightAirport;
+		return this.numberOfGameLoopsSinceLastFlightAirport;
 	}
 
 	public void resetNumberOfGameLoopsSinceLastFlightAirport (){

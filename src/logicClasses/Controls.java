@@ -87,13 +87,15 @@ public class Controls {
 			//has taken off and not landed.
 
 			if(posX>10&&posX<150&&posY<290&&posY>270&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the land button and is the button being held down?
-				//	if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 500) { //Have we recently used airport?
-				this.selectedFlight.LandFlight(); //Land
+				if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 500) { //Have we recently used airport?
+					this.selectedFlight.LandFlight(); //Land
+				}
 			}
 
 			if(posX>10&&posX<150&&posY<320&&posY>300&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the take off button and is the button being held down?
-				//	if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 500) { //Have we recently used airport?
-				this.selectedFlight.TakeOff(); //Take off
+				if(this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 500) { //Have we recently used airport?
+					this.selectedFlight.TakeOff(); //Take off
+				}
 			}
 
 
@@ -353,9 +355,7 @@ public class Controls {
 	 * @param gc The slick2d game container
 	 * @throws SlickException
 	 */
-
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-
 		if(this.selectedFlight != null) {
 			if(!this.selectedFlight.getFlightPlan().getChangingPlan()){
 				g.setColor(Color.white);
@@ -381,58 +381,58 @@ public class Controls {
 				sideButton.draw(0,420);
 
 				g.setColor(Color.white);
-
-				/*  if (this.airspace.getNumberOfGameLoopsSinceLastFlightAirport()<250){
-                	g.setColor (Color.gray);
-                	g.drawString("Airport occupied", 10, 270);
-                }
-                else { */
-
-				//Causes a game crash, likely due to updating too fast.
-
-
-				g.drawString("Take off", 10, 300);
-
-				if (this.selectedFlight.getTakeoff()==true && this.selectedFlight.getLanding()==false){
-					
-					if (this.selectedFlight.getAltitude()>1000 || 
-							this.selectedFlight.getFlightPlan().getVelocity()<50){
-					//		this.airspace.getNumberOfGameLoopsSinceLastFlightAirport()<500){
-						g.drawString ("Cannot land", 10, 270);
-					}
-					else{
-					g.drawString("Land", 10, 270);
-					}
-
-
-					if (this.selectedFlight.getFlightPlan().getTarget()+25 < Math.round(400)){
-						g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
-					}
-					else {
-						g.drawString ("At max speed", 10, 330);
-					}
-
-					if (this.selectedFlight.getFlightPlan().getTarget()-25 > Math.round(0)){
-						g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
-					}
-					else {
-						g.drawString ("At min speed", 10, 360);
-					}
-
-					if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE){
-						g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
-					}
-					else {
-						g.drawString("At max altitude", 10, 390);
-					}
-					if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE){
-						g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
-					}
-					else {
-						g.drawString("At min altitude", 10, 420);
-					}
-				}
 				
+				if (this.selectedFlight.getTakeoff()==true && this.selectedFlight.getLanding()==false){
+				
+				if (this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() < 250){
+					
+					g.setColor (Color.gray);
+
+					g.drawString("Airport occupied", 10, 270);
+
+					g.drawString("Airport occupied", 10, 300);
+					
+				}
+
+				else {
+					//Causes a game crash, likely due to updating too fast.
+					g.drawString("Take off", 10, 300);
+						if (this.selectedFlight.getAltitude()>1000 || 
+								this.selectedFlight.getFlightPlan().getVelocity()<50 ||
+								this.airspace.getNumberOfGameLoopsSinceLastFlightAirport()<500){
+							g.drawString ("Cannot land", 10, 270);
+						}
+						else {
+							g.drawString ("Land", 10, 270);
+						}	
+				}
+				if (this.selectedFlight.getFlightPlan().getTarget()+25 < Math.round(400)){
+					g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
+				}
+				else {
+					g.drawString ("At max speed", 10, 330);
+				}
+
+				if (this.selectedFlight.getFlightPlan().getTarget()-25 > Math.round(0)){
+					g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
+				}
+				else {
+					g.drawString ("At min speed", 10, 360);
+				}
+
+				if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE){
+					g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
+				}
+				else {
+					g.drawString("At max altitude", 10, 390);
+				}
+				if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE){
+					g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
+				}
+				else {
+					g.drawString("At min altitude", 10, 420);
+				}
+		}
 				else {								//If the flight has not taken off yet or is landing, no navigation.
 					g.drawString("Taxi", 10, 270);
 					g.drawString("Taxi", 10, 330);
@@ -440,28 +440,26 @@ public class Controls {
 					g.drawString("Taxi", 10, 390);
 					g.drawString("Taxi", 10, 420);
 				}
-
-
+				
+				changePlanButton.draw(0,45);
+				changePlanButton.draw(0, 75);
 			}
-			changePlanButton.draw(0,45);
-			changePlanButton.draw(0, 75);
+
 			if(this.selectedFlight.getFlightPlan().getChangingPlan() == true){
 				g.setColor(Color.white);
 				g.drawString("Plan Mode", 10, 45);
 				g.setColor(Color.lightGray);
 				g.drawString("Navigator Mode", 10, 75);
 			}
-			else{
-				g.setColor(Color.white);
-				g.drawString("Navigator Mode", 10, 75);
-				g.setColor(Color.lightGray);
-				g.drawString("Plan Mode", 10, 45);
 
-			}
-		}	
 	}
-
-
+		else{
+			g.setColor(Color.white);
+			g.drawString("Navigator Mode", 10, 75);
+			g.setColor(Color.lightGray);
+			g.drawString("Plan Mode", 10, 45);
+		}
+	}
 
 
 	public void update(GameContainer gc, Airspace airspace) {
