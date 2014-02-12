@@ -45,14 +45,14 @@ public class PlayState extends BasicGameState {
 				
 		// Font
 		try {
-			InputStream inputStream1 = ResourceLoader.getResourceAsStream("res/fonts/blue.ttf");
+			InputStream inputStream1 = ResourceLoader.getResourceAsStream("res/fonts/fira-sans.ttf");
 			Font awtFont1 = Font.createFont(Font.TRUETYPE_FONT, inputStream1);
-			awtFont1 = awtFont1.deriveFont(20f);
+			awtFont1 = awtFont1.deriveFont(16f);
 			font = new TrueTypeFont(awtFont1, true);
             
-			InputStream inputStream2 = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");
+			InputStream inputStream2 = ResourceLoader.getResourceAsStream("res/fonts/fira-sans-bold.ttf");
 			Font awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream2);
-			titleFont = new TrueTypeFont(awtFont2.deriveFont(58f), true);
+			titleFont = new TrueTypeFont(awtFont2.deriveFont(60f), true);
             smallButtonFont = new TrueTypeFont(awtFont2.deriveFont(30f), true);
 		}
         
@@ -100,7 +100,7 @@ public class PlayState extends BasicGameState {
 			difficultyBackground.draw(0,0);
             
             // Draw the page title
-            titleFont.drawString(17, 10, "Set the difficulty", Color.lightGray);
+            titleFont.drawString(18, 10, "Set the difficulty", Color.lightGray);
             
             // Get the mouse position for reference below
     		int posX = Mouse.getX();

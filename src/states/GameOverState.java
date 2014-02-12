@@ -30,9 +30,9 @@ public class GameOverState extends BasicGameState {
 		menuBackground = new Image("res/graphics/menu_background.png");
         		        
 		try {
-			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");
+			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/fira-sans-bold.ttf");
 			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			titleFont = new TrueTypeFont(awtFont.deriveFont(58f), true);
+			titleFont = new TrueTypeFont(awtFont.deriveFont(60f), true);
 			bodyFont = new TrueTypeFont(awtFont.deriveFont(20f), true);
             smallButtonFont = new TrueTypeFont(awtFont.deriveFont(30f), true);
 		}
@@ -46,7 +46,7 @@ public class GameOverState extends BasicGameState {
 		menuBackground.draw(0, 0);
         
         // Draw the page title
-        titleFont.drawString(17, 10, "Game Over", Color.lightGray);
+        titleFont.drawString(18, 10, "Game Over", Color.lightGray);
         
         // Get the mouse position for reference below
 		int posX = Mouse.getX();

@@ -34,9 +34,9 @@ public class MenuState extends BasicGameState {
 		menuBackground = new Image("res/graphics/menu_background.png");
         
 		try {
-			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/ubuntu-bold.ttf");
+			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/fira-sans-bold.ttf");
 			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			titleFont = new TrueTypeFont(awtFont.deriveFont(58f), true);
+			titleFont = new TrueTypeFont(awtFont.deriveFont(60f), true);
 			mainButtonFont = new TrueTypeFont(awtFont.deriveFont(50f), true);
             smallButtonFont = new TrueTypeFont(awtFont.deriveFont(30f), true);
 		}
@@ -50,7 +50,7 @@ public class MenuState extends BasicGameState {
 		menuBackground.draw(0, 0);
         
         // Draw the title and subtitle
-        titleFont.drawString(17, 10, sbg.getTitle(), Color.lightGray);
+        titleFont.drawString(18, 10, sbg.getTitle(), Color.lightGray);
         smallButtonFont.drawString(20, 80, "by Team BHD", Color.lightGray);
 
         // Get the mouse position for reference below
@@ -63,11 +63,11 @@ public class MenuState extends BasicGameState {
         playStringHeight = mainButtonFont.getHeight(playString);
 
 		if (posX >= 20 && posX <= (20 + playStringWidth) && posY >= 480 && posY <= (480 + playStringHeight)) {
-            mainButtonFont.drawString(18, 480, playString, Color.white);
+            mainButtonFont.drawString(19, 480, playString, Color.white);
 		}
         
 		else {
-            mainButtonFont.drawString(18, 480, playString, Color.lightGray);
+            mainButtonFont.drawString(19, 480, playString, Color.lightGray);
 		}
         
         // Draw the controls string
