@@ -32,7 +32,6 @@ public class Flight {
 		this.turningLeft = false;
 		this.landing = false;
 		this.takenoff = true;
-		
         this.airspace = airspace;
 		this.flightPlan = new FlightPlan(airspace, this, entry);
 		this.selected = false;
@@ -87,8 +86,9 @@ public class Flight {
 	}
 	
 	/**
-	 * Land: Removes a flight from the airspace. 
-	 * Only works if a flight is positioned at the airport waypoint and has a low altitude and speed.
+	 * LandFlight: Sets the landed flag, which will remove the flight from the airpsace
+	 * after 250 game loops. Only works if a flight is positioned at the airport waypoint 
+	 * and has a low altitude and speed.
 	 */
 	
 	public void LandFlight (){
@@ -105,6 +105,11 @@ public class Flight {
 			this.airspace.resetNumberOfGameLoopsSinceLastFlightAirport();
 		}
 	}
+	
+	/**
+	 * TakeOff: Sets the takenoff flag and targets the flight towards the lowest altitiude and
+	 * velocity obtainable via user controls.
+	 */
 	
 	public void TakeOff (){
 		if (this.currentAltitude == 0 && 
@@ -517,6 +522,10 @@ public class Flight {
 	
 	public boolean getTakeoff(){
 		return this.takenoff;
+	}
+	
+	public void setTakeoff (){
+		this.takenoff = false;
 	}
 
 	public void setTurningRight(boolean turningRight) {

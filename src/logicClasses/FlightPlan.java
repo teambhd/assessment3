@@ -56,6 +56,7 @@ public class FlightPlan {
 
 		// Setting flights x and y to the coordinates of it's entrypoint
 		if (entry == 4){ //20% chance to initialize the flight at the airport.
+			this.flight.setTakeoff();
 			flight.setX(airspace.getAirport().getX());
 			flight.setY(airspace.getAirport().getY());
 		}
