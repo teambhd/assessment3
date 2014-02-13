@@ -352,8 +352,19 @@ public class Controls {
 	 * @throws SlickException
 	 */
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		if(this.selectedFlight != null) {
-			if(!this.selectedFlight.getFlightPlan().getChangingPlan()){
+		if (this.selectedFlight != null) {
+            
+			// Draw backgrounds for the Navigator Mode and Plan Mode buttons
+            // The text of those buttons will be drawn in lower down
+            sideButton.draw(0, 45);
+			sideButton.draw(0, 75);
+            
+			if (!this.selectedFlight.getFlightPlan().getChangingPlan()) {
+    			g.setColor(Color.lightGray);
+    			g.drawString("Plan Mode", 10, 45);
+    			g.setColor(Color.white);
+    			g.drawString("Navigator Mode", 10, 75);  
+                
 				g.setColor(Color.white);
 
 				g.drawString("Turn Left:", 10, 100);
@@ -367,69 +378,58 @@ public class Controls {
 				g.drawString("Turn Right:", 10, 200);
 				this.turnRightTextBox.render(gc, g);
 				g.drawString("DEG", 114, 225);
-
-				g.setColor(Color.blue);
-				sideButton.draw (0, 270);
-				sideButton.draw (0, 300);
-				sideButton.draw (0, 330);
-				sideButton.draw (0, 360);
-				sideButton.draw(0,390);
-				sideButton.draw(0,420);
-
-
-				g.setColor(Color.white);
+                
+				sideButton.draw(0, 270);
+				sideButton.draw(0, 300);
+				sideButton.draw(0, 330);
+				sideButton.draw(0, 360);
+				sideButton.draw(0, 390);
+				sideButton.draw(0, 420);
+                
 				g.drawString("Take off", 10, 300);
 				g.drawString("Land", 10, 270);
 
+                if (this.selectedFlight.getFlightPlan().getTarget() + 25 < 400) {
+    				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
+    			}
+                
+    			else {
+    				g.drawString ("At max speed", 10, 330);
+    			}
 
-			}
-			if (this.selectedFlight.getFlightPlan().getTarget()+25 < Math.round(400)){
-				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
-			}
-			else {
-				g.drawString ("At max speed", 10, 330);
-			}
+    			if (this.selectedFlight.getFlightPlan().getTarget() - 25 > 0){
+    				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
+    			}
+    			
+                else {
+    				g.drawString ("At min speed", 10, 360);
+    			}
 
-			if (this.selectedFlight.getFlightPlan().getTarget()-25 > Math.round(0)){
-				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
-			}
-			else {
-				g.drawString ("At min speed", 10, 360);
-			}
-
-			if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE){
-				g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
-			}
-			else {
-				g.drawString("At max altitude", 10, 390);
-			}
-			if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE){
-				g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
-			}
-			else {
-				g.drawString("At min altitude", 10, 420);
-			}
-            
-			// Draw backgrounds for the Navigator Mode and Plan Mode buttons
-            sideButton.draw(0, 45);
-			sideButton.draw(0, 75);
+    			if (this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) {
+    				g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
+    			}
+    			
+                else {
+    				g.drawString("At max altitude", 10, 390);
+    			}
+    			
+                if (this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE) {
+    				g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
+    			}
+    			
+                else {
+    				g.drawString("At min altitude", 10, 420);
+    			}                            
+            }
             
             // If we are in Plan Mode
-			if (this.selectedFlight.getFlightPlan().getChangingPlan()) { 
+			else { 
 				g.setColor(Color.white);
 				g.drawString("Plan Mode", 10, 45);
 				g.setColor(Color.lightGray);
 				g.drawString("Navigator Mode", 10, 75);
 			}
-            
-            // If we are in Navigator Mode
-            else {
-    			g.setColor(Color.lightGray);
-    			g.drawString("Plan Mode", 10, 45);
-    			g.setColor(Color.white);
-    			g.drawString("Navigator Mode", 10, 75);
-            }
-		}
+    	}
 	}
 
 
