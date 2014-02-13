@@ -76,7 +76,7 @@ public class PlayState extends BasicGameState {
     	airspace.newWaypoint(700, 60,  "C");
     	airspace.newWaypoint(800, 320, "D");
     	airspace.newWaypoint(600, 418, "E");
-    	airspace.newWaypoint(500, 220, "F");
+    	airspace.newWaypoint(500, 260, "F");
     	airspace.newWaypoint(950, 188, "G");
     	airspace.newWaypoint(1050, 272,"H");
     	airspace.newWaypoint(900, 420, "I");
