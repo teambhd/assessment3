@@ -426,7 +426,7 @@ public class Flight {
 		this.shadowImage = new Image("res/graphics/flight_shadow.png");
 		this.slowFlightImage = new Image("res/graphics/flight_slow.png");
 		this.fastFlightImage = new Image("res/graphics/flight_fast.png");
-		this.selectedFlightInformationBackgroundImage = new Image("res/graphics/selected_flight2.jpg");
+		this.selectedFlightInformationBackgroundImage = new Image("res/graphics/selected_flight.jpg");
 	}
 	
 	

@@ -57,8 +57,8 @@ public class Controls {
 		this.turnLeftTextBox.setMaxLength(3); //Makes sure that user cannot enter more than three letters as a heading (360 is max)
 		this.turnRightTextBox.setMaxLength(3);
 		this.headingControlTextBox.setMaxLength(3);
-		sideButton = new Image("res/graphics/sideButton.png");
-		changePlanButton = new Image("res/graphics/sideButton.png"); // same as altitude button
+		sideButton = new Image("res/graphics/side_button.png");
+		changePlanButton = new Image("res/graphics/side_button.png"); // same as altitude button
 	}
 
 
