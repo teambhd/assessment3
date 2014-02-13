@@ -17,8 +17,8 @@ public class Controls {
 	// FIELDS
 	private TrueTypeFont font;
 
-	private TextField headingControlTextBox; //Object for heading control
-	private TextField turnRightTextBox; //Object for turn right control
+	private TextField headingControlTextBox; // Object for heading control
+	private TextField turnRightTextBox; // Object for turn right control
 	private TextField turnLeftTextBox; // Object for turn left control
 
 	private boolean selectingHeadingUsingTextBox; // Has the text box been reset?
@@ -27,19 +27,19 @@ public class Controls {
 	private final int MAXIMUM_ALTITUDE = 9000;
 	private final int MINIMUM_ALTITUDE = 1000;
 	private final int MAXIMUM_VELOCITY = 400;
-	private final int MINIMUM_VELOCITY = 0;
+	private final int MINIMUM_VELOCITY = 75;
 
 	private Flight selectedFlight;
-	private String text; //Used for parsing textbox inputs
-	private Image sideButton, changePlanButton;
-	private int difficultyValueOfGame; //Sets the difficulty of the control scheme
+	private String text; // Used for parsing textbox inputs
+	private Image sideButton;
+	private int difficultyValueOfGame; // Sets the difficulty of the control scheme
 
 
 	// CONSTRUCTOR
 	public Controls() {
 		//Initializes all boolean values controlling selections to false
 		this.selectingHeadingUsingTextBox = false; 
-		this.mouseHeldDownOnsideButton=false;
+		this.mouseHeldDownOnsideButton = false;
 		this.mouseHeldDownOnFlight = false;
 		this.headingAlreadyChangedByMouse = false;
 		this.selectedFlight = null;
@@ -57,7 +57,6 @@ public class Controls {
 		this.turnRightTextBox.setMaxLength(3);
 		this.headingControlTextBox.setMaxLength(3);
 		sideButton = new Image("res/graphics/side_button.png");
-		changePlanButton = new Image("res/graphics/side_button.png"); // same as altitude button
 	}
 
 
@@ -69,32 +68,33 @@ public class Controls {
 	 */
 
 	public void handleAndUpdatesideButtons() {
-
-		if(this.mouseHeldDownOnsideButton) {
+		if (this.mouseHeldDownOnsideButton) {
 			return;
 		}
-		else{
+        
+		else {
 			this.mouseHeldDownOnsideButton = true;
 		}
 
-		int posX=Mouse.getX(); //Get the mouse positions 
-		int posY=Mouse.getY();
+        // Mapping Mouse coords onto graphic coords
+		int posX = Mouse.getX();
+		int posY = 600 - Mouse.getY();
+        
+        // Handle clicking the Take Off button
+        if (!this.selectedFlight.getTakenOff()) {
+    		if (posX > 10 && posX < 150 && posY < 290 && posY > 270 && Mouse.isButtonDown(0)) {
+    			this.selectedFlight.TakeOff();
+    		}  
+        }
 
-		posY = 600 - posY; // Mapping Mouse coords onto graphic coords
-
-		if (this.selectedFlight.getTakeoff()==true && this.selectedFlight.getLanding()==false){ //Make sure that flight
-			//has taken off and not landed.
+        // Handle all remaining buttons
+		if (this.selectedFlight.getTakenOff() && !this.selectedFlight.getLanding()) { 
 
 			if(posX>10&&posX<150&&posY<290&&posY>270&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the land button and is the button being held down?
 				if(this.selectedFlight.getAirspace().getAvailableAirport()) { //Have we recently used airport?
 					this.selectedFlight.LandFlight(); //Land
 				}
 			}
-
-			if(posX>10&&posX<150&&posY<320&&posY>300&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the take off button and is the button being held down?
-				this.selectedFlight.TakeOff(); //Take off
-			}
-
 
 			if(posX>10&&posX<150&&posY<350&&posY>330&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase velocity button and is the button being held down?
 				if(this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) { //Is the target velocity already at the maximum value?
@@ -108,9 +108,6 @@ public class Controls {
 					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()-25); //Set the target velocity 25 lower
 				}
 			}
-
-
-
 
 			if(posX>10&&posX<150&&posY<410&&posY>390&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase altitude button and is the button being held down?
 				if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) { //Is the target altitude already at the maximum value?
@@ -224,7 +221,7 @@ public class Controls {
 
 		double deltaX, deltaY;
 		double distanceBetweenMouseAndPlane;
-		if (this.selectedFlight.getTakeoff()==true && this.selectedFlight.getLanding()==false){
+		if (this.selectedFlight.getTakenOff()==true && this.selectedFlight.getLanding()==false){
 			// If mouse is being held down don't change selected flight. 
 			if (this.headingAlreadyChangedByMouse){
 				return;
@@ -353,86 +350,95 @@ public class Controls {
 	 * @throws SlickException
 	 */
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		if(this.selectedFlight != null) {
-			if(!this.selectedFlight.getFlightPlan().getChangingPlan()){
-				g.setColor(Color.white);
+		if (this.selectedFlight != null) {
+            
+			// Draw backgrounds for the Navigator Mode and Plan Mode buttons
+            // The text of those buttons will be drawn in lower down
+            sideButton.draw(0, 45);
+			sideButton.draw(0, 75);
+            
+			if (!this.selectedFlight.getFlightPlan().getChangingPlan()) {
+    			g.setColor(Color.lightGray);
+    			g.drawString("Plan Mode", 10, 45);
+    			g.setColor(Color.white);
+    			g.drawString("Navigator Mode", 10, 75);  
+                                
+                if (!this.selectedFlight.getTakenOff()) {
+    				g.setColor(Color.white);
+    				sideButton.draw(0, 270);
+    				g.drawString("Take Off", 10, 270);
+                }
+                
+                else {
+    				g.setColor(Color.white);
 
-				g.drawString("Turn Left:", 10, 100);
-				this.turnLeftTextBox.render(gc, g);
-				g.drawString("DEG", 114, 125);
+    				g.drawString("Turn Left:", 10, 100);
+    				this.turnLeftTextBox.render(gc, g);
+    				g.drawString("DEG", 114, 125);
 
-				g.drawString("Target Heading:", 10, 150);
-				this.headingControlTextBox.render(gc, g);
-				g.drawString("DEG", 114, 175);
+    				g.drawString("Target Heading:", 10, 150);
+    				this.headingControlTextBox.render(gc, g);
+    				g.drawString("DEG", 114, 175);
 
-				g.drawString("Turn Right:", 10, 200);
-				this.turnRightTextBox.render(gc, g);
-				g.drawString("DEG", 114, 225);
+    				g.drawString("Turn Right:", 10, 200);
+    				this.turnRightTextBox.render(gc, g);
+    				g.drawString("DEG", 114, 225);
+                    
+    				sideButton.draw(0, 270);
+    				
+                    g.drawString("Land", 10, 270);
+                    
+    				sideButton.draw(0, 330);
+    
+                    if (this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) {
+        				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
+        			}
+                
+        			else {
+        				g.drawString ("At max speed", 10, 330);
+        			}
+                    
+    				sideButton.draw(0, 360);
 
-				g.setColor(Color.blue);
-				sideButton.draw (0, 270);
-				sideButton.draw (0, 300);
-				sideButton.draw (0, 330);
-				sideButton.draw (0, 360);
-				sideButton.draw(0,390);
-				sideButton.draw(0,420);
+        			if (this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) {
+        				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
+        			}
+    			
+                    else {
+        				g.drawString ("At min speed", 10, 360);
+        			}
+                    
+    				sideButton.draw(0, 390);
 
-
-				g.setColor(Color.white);
-				g.drawString("Take off", 10, 300);
-				g.drawString("Land", 10, 270);
-
-
-			}
-			if (this.selectedFlight.getFlightPlan().getTarget()+25 < Math.round(400)){
-				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
-			}
-			else {
-				g.drawString ("At max speed", 10, 330);
-			}
-
-			if (this.selectedFlight.getFlightPlan().getTarget()-25 > Math.round(0)){
-				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
-			}
-			else {
-				g.drawString ("At min speed", 10, 360);
-			}
-
-			if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE){
-				g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
-			}
-			else {
-				g.drawString("At max altitude", 10, 390);
-			}
-			if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE){
-				g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
-			}
-			else {
-				g.drawString("At min altitude", 10, 420);
-			}
-
-			changePlanButton.draw(0,45);
-			changePlanButton.draw(0, 75);
-			g.setColor(Color.white);
-			g.drawString("Plan Mode", 10, 45);
-			g.setColor(Color.lightGray);
-			g.drawString("Navigator Mode", 10, 75);
-
-
-			if(this.selectedFlight.getFlightPlan().getChangingPlan() == true){
+        			if (this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) {
+        				g.drawString("Climb to "+ (this.selectedFlight.getTargetAltitude()+1000), 10, 390);
+        			}
+    			
+                    else {
+        				g.drawString("At max altitude", 10, 390);
+        			}
+                    
+    				sideButton.draw(0, 420);
+    			
+                    if (this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE) {
+        				g.drawString("Descend to "+ (this.selectedFlight.getTargetAltitude()-1000), 10, 420);
+        			}
+    			
+                    else {
+        				g.drawString("At min altitude", 10, 420);
+        			}                            
+                }
+                
+            }
+            
+            // If we are in Plan Mode
+			else { 
 				g.setColor(Color.white);
 				g.drawString("Plan Mode", 10, 45);
 				g.setColor(Color.lightGray);
 				g.drawString("Navigator Mode", 10, 75);
 			}
-
-		}
-		else{
-			g.setColor(Color.white);
-			g.drawString("Navigator Mode", 10, 75);
-			g.setColor(Color.lightGray);
-			g.drawString("Plan Mode", 10, 45);
-		}
+    	}
 	}
 
 
@@ -442,74 +448,67 @@ public class Controls {
 		int posY=Mouse.getY();
 		posY = 600-Mouse.getY();
 
-		if (this.selectedFlight != null ){
-
-			// Only allow controls if user isn't changing a plan
-
-			if(!(this.selectedFlight.getFlightPlan().getChangingPlan())){
-
-				if(posX>10&&posX<150&&posY<65&&posY>45&&Mouse.isButtonDown(0)){
+		if (this.selectedFlight != null) {
+			
+            // Only allow controls if user isn't changing a plan
+			if (!this.selectedFlight.getFlightPlan().getChangingPlan()) {
+			
+                // Handle clicking on the Plan Mode button
+            	if (posX > 10 && posX < 150 && posY < 65 && posY > 45 && Mouse.isButtonDown(0)) {
 					this.selectedFlight.getFlightPlan().setChangingPlan(true);
 				}
-
-				if(Mouse.isButtonDown(1) && (this.difficultyValueOfGame != 3)){
-					this.giveHeadingWithMouse(posX, posY, airspace);
-				}
-
-				this.updateHeadingTextBox(input);
-				this.updateTurnLeftTextBox(input);
-				this.updateTurnRightTextBox(input);
-
-
-
-				// Handle and update Altitude Buttons
-
+                
+				// Handle and update altitude buttons
 				this.handleAndUpdatesideButtons();
+                
+                // Handle the rest of the interactions
+                if (this.selectedFlight.getTakenOff()) {
 
+    				if (Mouse.isButtonDown(1)) {
+    					this.giveHeadingWithMouse(posX, posY, airspace);
+    				}
 
-				//ALTITUDE KEYS
-				if(input.isKeyPressed(Input.KEY_UP)){
-					if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) {
-						this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()+1000);
-					}
-				}
-				if(input.isKeyPressed(Input.KEY_DOWN)){
-					if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE) {
-						this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()-1000);
-					}
-				}
+    				this.updateHeadingTextBox(input);
+    				this.updateTurnLeftTextBox(input);
+    				this.updateTurnRightTextBox(input);
+                    
+    				if (!this.headingControlTextBox.hasFocus()) {
+    					this.getHeadingControlTB().setText(String.valueOf(Math.round(this.selectedFlight.getTargetHeading())));
+    				}
 
+    				// Handle up and down arrow keys
+    				if (input.isKeyPressed(Input.KEY_UP) && this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) {
+    					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude() + 1000);
+    				}
+                
+    				if(input.isKeyPressed(Input.KEY_DOWN) && this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE) {
+    					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude() - 1000);
+    				}
+                
+                }
+			
+            }
 
-				if (!this.headingControlTextBox.hasFocus()) {
-					this.getHeadingControlTB().setText(
-							String.valueOf(Math.round(this.selectedFlight.getTargetHeading())));
-				}
-
-			}
-
-			else{
-				if(posX>10&&posX<150&&posY<95&&posY>75&&Mouse.isButtonDown(0)){
+			else {
+                // Handle clicking of the Navigator Mode button
+				if (posX > 10 && posX < 150 && posY < 95 && posY > 75 && Mouse.isButtonDown(0)) {
 					this.selectedFlight.getFlightPlan().setChangingPlan(false);
 				}
 			}
-
 		}
 
-		if(Mouse.isButtonDown(0)){
+		if (Mouse.isButtonDown(0)) {
 			this.checkSelected(posX,posY,airspace);
 		}
 
-		if(!Mouse.isButtonDown(0)){
+		if (!Mouse.isButtonDown(0)) {
 			this.mouseHeldDownOnFlight = false;
 			this.mouseHeldDownOnsideButton = false;
 		}
 
-		if (!Mouse.isButtonDown(1)){
+		if (!Mouse.isButtonDown(1)) {
 			this.headingAlreadyChangedByMouse = false;
 		}
-
-
-
 	}
 
 	//MUTATORS AND ACCESSORS

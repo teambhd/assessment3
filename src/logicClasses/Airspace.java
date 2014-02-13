@@ -311,21 +311,17 @@ public class Airspace {
 		this.numberOfGameLoopsSinceLastFlightAdded++;
 		this.numberOfGameLoopsSinceLastFlightAirport++;
 		this.numberOfGameLoops++;
-		System.out.println(this.getNumberOfGameLoops());
-		System.out.println(this.numberOfGameLoopsSinceLastFlightAdded);
-		System.out.println(this.numberOfGameLoopsSinceLastFlightAirport);
 
 		if (this.numberOfGameLoops >= this.numberOfGameLoopsWhenDifficultyIncreases) {
 			this.increaseDifficulty();
 		}
 		
-		if (this.numberOfGameLoopsSinceLastFlightAirport>500){
+		if (this.numberOfGameLoopsSinceLastFlightAirport > 500) {
 			this.AirportAvailable=true;
-			System.out.println(this.getAvailableAirport());
 		}
-		else{
+        
+		else {
 			this.AirportAvailable=false;
-			System.out.println(this.getAvailableAirport());
 		}
 
 
