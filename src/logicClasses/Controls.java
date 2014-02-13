@@ -17,8 +17,8 @@ public class Controls {
 	// FIELDS
 	private TrueTypeFont font;
 
-	private TextField headingControlTextBox; //Object for heading control
-	private TextField turnRightTextBox; //Object for turn right control
+	private TextField headingControlTextBox; // Object for heading control
+	private TextField turnRightTextBox; // Object for turn right control
 	private TextField turnLeftTextBox; // Object for turn left control
 
 	private boolean selectingHeadingUsingTextBox; // Has the text box been reset?
@@ -30,16 +30,16 @@ public class Controls {
 	private final int MINIMUM_VELOCITY = 0;
 
 	private Flight selectedFlight;
-	private String text; //Used for parsing textbox inputs
-	private Image sideButton, changePlanButton;
-	private int difficultyValueOfGame; //Sets the difficulty of the control scheme
+	private String text; // Used for parsing textbox inputs
+	private Image sideButton;
+	private int difficultyValueOfGame; // Sets the difficulty of the control scheme
 
 
 	// CONSTRUCTOR
 	public Controls() {
 		//Initializes all boolean values controlling selections to false
 		this.selectingHeadingUsingTextBox = false; 
-		this.mouseHeldDownOnsideButton=false;
+		this.mouseHeldDownOnsideButton = false;
 		this.mouseHeldDownOnFlight = false;
 		this.headingAlreadyChangedByMouse = false;
 		this.selectedFlight = null;
@@ -57,7 +57,6 @@ public class Controls {
 		this.turnRightTextBox.setMaxLength(3);
 		this.headingControlTextBox.setMaxLength(3);
 		sideButton = new Image("res/graphics/side_button.png");
-		changePlanButton = new Image("res/graphics/side_button.png"); // same as altitude button
 	}
 
 
@@ -410,28 +409,26 @@ public class Controls {
 			else {
 				g.drawString("At min altitude", 10, 420);
 			}
-
-			changePlanButton.draw(0,45);
-			changePlanButton.draw(0, 75);
-			g.setColor(Color.white);
-			g.drawString("Plan Mode", 10, 45);
-			g.setColor(Color.lightGray);
-			g.drawString("Navigator Mode", 10, 75);
-
-
-			if(this.selectedFlight.getFlightPlan().getChangingPlan() == true){
+            
+			// Draw backgrounds for the Navigator Mode and Plan Mode buttons
+            sideButton.draw(0, 45);
+			sideButton.draw(0, 75);
+            
+            // If we are in Plan Mode
+			if (this.selectedFlight.getFlightPlan().getChangingPlan()) { 
 				g.setColor(Color.white);
 				g.drawString("Plan Mode", 10, 45);
 				g.setColor(Color.lightGray);
 				g.drawString("Navigator Mode", 10, 75);
 			}
-
-		}
-		else{
-			g.setColor(Color.white);
-			g.drawString("Navigator Mode", 10, 75);
-			g.setColor(Color.lightGray);
-			g.drawString("Plan Mode", 10, 45);
+            
+            // If we are in Navigator Mode
+            else {
+    			g.setColor(Color.lightGray);
+    			g.drawString("Plan Mode", 10, 45);
+    			g.setColor(Color.white);
+    			g.drawString("Navigator Mode", 10, 75);
+            }
 		}
 	}
 
