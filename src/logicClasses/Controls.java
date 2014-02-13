@@ -90,9 +90,10 @@ public class Controls {
         // Handle all remaining buttons
 		if (this.selectedFlight.getTakenOff() && !this.selectedFlight.getLanding()) { 
 
-			if(posX>10&&posX<150&&posY<290&&posY>270&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the land button and is the button being held down?
-				if(this.selectedFlight.getAirspace().getAvailableAirport()) { //Have we recently used airport?
-					this.selectedFlight.LandFlight(); //Land
+            // Handle land button
+			if (posX > 10 && posX < 150 && posY < 290 && posY > 270 && Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the land button and is the button being held down?
+				if (this.selectedFlight.getAirspace().getAvailableAirport() && this.selectedFlight.getCurrentAltitude() >= MINIMUM_ALTITUDE) {
+					this.selectedFlight.LandFlight();
 				}
 			}
 
