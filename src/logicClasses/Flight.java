@@ -110,8 +110,8 @@ public class Flight {
 	public void TakeOff (){
 		if (this.currentAltitude == 0 && 
 				this.flightPlan.getVelocity()== 0 && 
-				this.checkIfAtAirport(airspace.getAirport()) &&
-				this.airspace.getAvailableAirport()){
+				this.checkIfAtAirport(airspace.getAirport()))
+				{
 			
 			
 			this.takenoff = true;
