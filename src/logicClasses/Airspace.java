@@ -168,7 +168,7 @@ public class Airspace {
 				 * which is > 100. This decreases the likelihood of a flight being generated.
 				 */
 
-				if (checkNumber < 10) {
+				if (checkNumber < 6) {
 
 					int entry;
 
@@ -271,14 +271,6 @@ public class Airspace {
 		}
 	}
 	
-	public void updateAirportStatus(){
-		if (this.AirportAvailable == true){
-			this.AirportAvailable = false;
-		}
-		else{
-			this.AirportAvailable = true;
-		}
-	}
 
 
 
@@ -328,7 +320,12 @@ public class Airspace {
 		}
 		
 		if (this.numberOfGameLoopsSinceLastFlightAirport>500){
-			this.updateAirportStatus();
+			this.AirportAvailable=true;
+			System.out.println(this.getAvailableAirport());
+		}
+		else{
+			this.AirportAvailable=false;
+			System.out.println(this.getAvailableAirport());
 		}
 
 
