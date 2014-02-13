@@ -68,6 +68,7 @@ public class Controls {
 	 */
 
 	public void handleAndUpdatesideButtons() {
+        
 		if (this.mouseHeldDownOnsideButton) {
 			return;
 		}
@@ -89,54 +90,57 @@ public class Controls {
 
         // Handle all remaining buttons
 		if (this.selectedFlight.getTakenOff() && !this.selectedFlight.getLanding()) { 
-
+            
             // Handle land button
-			if (posX > 10 && posX < 150 && posY < 290 && posY > 270 && Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the land button and is the button being held down?
+			if (posX > 10 && posX < 150 && posY < 290 && posY > 270 && Mouse.isButtonDown(0)) {
 				if (this.selectedFlight.getAirspace().getAvailableAirport() && this.selectedFlight.getCurrentAltitude() >= MINIMUM_ALTITUDE) {
 					this.selectedFlight.LandFlight();
 				}
 			}
 
-			if(posX>10&&posX<150&&posY<350&&posY>330&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase velocity button and is the button being held down?
-				if(this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) { //Is the target velocity already at the maximum value?
-					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()+25); //Set the target velocity 25 higher
+            // Handle increase velocity button
+			if (posX > 10 && posX < 150 && posY < 350 && posY > 330 && Mouse.isButtonDown(0)) {
+				if (this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) { 
+					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget() + 25);
 				}
 			}
 
-
-			if(posX>10&&posX<150&&posY<380&&posY>360&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the decrease velocity button and is the button being held down?
-				if(this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) { //Is the target velocity already at the min value?
-					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget()-25); //Set the target velocity 25 lower
+            // Handle decrease velocity button
+			else if (posX > 10 && posX < 150 && posY < 380 && posY > 360 &&Mouse.isButtonDown(0)) {
+				if (this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) {
+					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget() - 25);
 				}
 			}
 
-			if(posX>10&&posX<150&&posY<410&&posY>390&&Mouse.isButtonDown(0)) { //Is the mouse position in the area enclosed by the increase altitude button and is the button being held down?
-				if(this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) { //Is the target altitude already at the maximum value?
-					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()+1000); //Set the target altitude 1000 higher
+            // Handle increase altitude button
+			if (posX > 10 && posX < 150 && posY < 410 && posY > 390 && Mouse.isButtonDown(0)) {
+				if (this.selectedFlight.getTargetAltitude() < MAXIMUM_ALTITUDE) {
+					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude() + 1000);
 				}
 			}
 
-			else if(posX>10&&posX<150&&posY<440&&posY>420&&Mouse.isButtonDown(0)) {//Is the mouse position in the area enclosed by the decrease altitude button and is the button being held down?
-				if(this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE) { //Is the target altitude already at the minimum value?
-					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude()-1000); //Set the target altitude 1000 lower
+            // Handle decrease altitude button
+			else if (posX > 10 && posX < 150 && posY < 440 && posY > 420 && Mouse.isButtonDown(0)) {
+				if (this.selectedFlight.getTargetAltitude() > MINIMUM_ALTITUDE) {
+					this.selectedFlight.setTargetAltitude(this.selectedFlight.getTargetAltitude() - 1000);
 				}
 			}
-		}
+		}    
 	}
+    
 	/**
 	 * changeModeByClickingOnFlight: Handles changing between plan and nav modes by clicking on the selected flight
 	 * @param nearestFlight Flight object
 	 */
-	public void changeModeByClickingOnFlight(Flight nearestFlight){
-
-
-		if (this.selectedFlight.getFlightPlan().getChangingPlan() == true){
+        
+	public void changeModeByClickingOnFlight(Flight nearestFlight) {
+		if (this.selectedFlight.getFlightPlan().getChangingPlan()) {
 			nearestFlight.getFlightPlan().setChangingPlan(false);
 		}
-		else{
+        
+		else {
 			nearestFlight.getFlightPlan().setChangingPlan(true);
 		}
-
 	}
 
 	/**
@@ -146,9 +150,9 @@ public class Controls {
 	 * @param pointY
 	 * @param airspace
 	 */
-	public void checkSelected(int pointX, int pointY, Airspace airspace ){
-
-		double minimumDistanceBetweenFlightAndMouseClick;//Distance between there you clicked on the airspace and the closest flight
+        
+	public void checkSelected(int pointX, int pointY, Airspace airspace) {
+		double minimumDistanceBetweenFlightAndMouseClick; // Distance between click location and the closest flight
 		Flight nearestFlight;
 		int indexOfNearestFlightInAirspaceListOfFlights;
 
@@ -156,9 +160,8 @@ public class Controls {
 		if (this.mouseHeldDownOnFlight){
 			return;
 		}
-		else{
-			this.mouseHeldDownOnFlight = true;
-		}
+        
+		this.mouseHeldDownOnFlight = true;
 
 		// Checking if user is dragging a waypoint they can't change flights
 		if (this.selectedFlight != null){
@@ -167,14 +170,14 @@ public class Controls {
 			}
 		}
 
-
-
-
-		// Working out nearest flight to click
-
-		if(airspace.getListOfFlights().size()>=1){ //If there is more than one flight in the airspace
-			//DONT PANIC, just pythagoras 
-			minimumDistanceBetweenFlightAndMouseClick = Math.sqrt(Math.pow(pointX-airspace.getListOfFlights().get(0).getX(), 2)+Math.pow(pointY-airspace.getListOfFlights().get(0).getY(), 2));
+		// Working out nearest flight to click. 
+        // If there is more than one flight in the airspace then use Pythagoras.
+		if (airspace.getListOfFlights().size() >= 1) { 
+			
+            minimumDistanceBetweenFlightAndMouseClick = 
+                Math.sqrt(Math.pow(pointX-airspace.getListOfFlights().get(0).getX(), 2) +
+                Math.pow(pointY-airspace.getListOfFlights().get(0).getY(), 2));
+            
 			nearestFlight = airspace.getListOfFlights().get(0);
 			indexOfNearestFlightInAirspaceListOfFlights = 0;
 
@@ -186,17 +189,17 @@ public class Controls {
 				}
 			}
 
-			// Working out whether the nearest flight to click is close enough
-			// to be selected.
+			// Working out whether the nearest flight to click is close enough to be selected.
+			if (minimumDistanceBetweenFlightAndMouseClick <= 50) { 
 
-			if (minimumDistanceBetweenFlightAndMouseClick <= 50){ // If the mouse if further from the flight than 50 then it cannot be selected
-
-				if (nearestFlight == this.selectedFlight){ //If you are clicking on the currently selected flight then change the airspace mode instead of changing flight
+                // If you are clicking on the currently selected flight then change the airspace mode instead of changing flight
+				if (nearestFlight == this.selectedFlight) { 
 					this.changeModeByClickingOnFlight(nearestFlight);
 				}
 
 				nearestFlight.setSelected(true);
 				this.setSelectedFlight(nearestFlight);//Change the selected flight for controls
+                
 				for (int i =0; i< airspace.getListOfFlights().size(); i++){ //Loop through all flights
 					if(i != indexOfNearestFlightInAirspaceListOfFlights){ //If the flight is not the currently selected flight
 						airspace.getListOfFlights().get(i).setSelected(false); //Set that flight to not selected
