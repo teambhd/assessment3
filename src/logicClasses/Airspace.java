@@ -359,7 +359,7 @@ public class Airspace {
 			this.listOfWayppoints.get(i).render(g, this);
 		}
 		this.airport.render(g,this);
-		g.drawOval((int) 550, (int) 180, 45, 45);
+		g.drawRect((int) 545, (int) 170, 45, 45);
 
 
 		for (int i = 0; i < this.listOfExitPoints.size(); i++) { // Draws exit points
