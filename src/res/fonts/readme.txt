@@ -1,1 +1,0 @@
-The fonts in this directory are from the [Fira Sans](https://github.com/buildingfirefoxos/Building-Blocks/tree/gh-pages/fonts/FiraSans) set, which was released under the [Apache License](https://github.com/buildingfirefoxos/Building-Blocks/blob/gh-pages/LICENSE) as part of the Firefox OS project.
