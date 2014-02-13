@@ -388,7 +388,7 @@ public class Controls {
                     
     				sideButton.draw(0, 330);
     
-                    if (this.selectedFlight.getFlightPlan().getTarget() + 25 < 400) {
+                    if (this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) {
         				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
         			}
                 
@@ -398,7 +398,7 @@ public class Controls {
                     
     				sideButton.draw(0, 360);
 
-        			if (this.selectedFlight.getFlightPlan().getTarget() - 25 > 0){
+        			if (this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) {
         				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
         			}
     			
