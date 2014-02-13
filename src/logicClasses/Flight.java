@@ -95,7 +95,7 @@ public class Flight {
 		if (this.currentAltitude <= 4000 && 
 				this.flightPlan.getVelocity()<100 && 
 				this.checkIfAtAirport(airspace.getAirport()) && 
-				this.airspace.getNumberOfGameLoopsSinceLastFlightAirport()>250){
+				this.airspace.getAvailableAirport()){
 			
 			
 			this.takenoff = false;
@@ -111,7 +111,7 @@ public class Flight {
 		if (this.currentAltitude == 0 && 
 				this.flightPlan.getVelocity()== 0 && 
 				this.checkIfAtAirport(airspace.getAirport()) &&
-				this.airspace.getNumberOfGameLoopsSinceLastFlightAirport() > 250){
+				this.airspace.getAvailableAirport()){
 			
 			
 			this.takenoff = true;

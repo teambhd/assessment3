@@ -21,11 +21,13 @@ public class Airspace {
 	private List<ExitPoint> listOfExitPoints;
 	private SeparationRules separationRules;
 	private Airport airport;
+	private boolean AirportAvailable;
 	private int difficultyValueOfGame; 
 	private Controls controls;
 
 	// CONSTRUCTOR
 	public Airspace() {
+		this.AirportAvailable = true;
 		this.maximumNumberOfFlightsInAirspace = 10;
 		this.score = 0;
 		this.listOfFlightsInAirspace = new ArrayList<Flight>();
@@ -49,6 +51,7 @@ public class Airspace {
 	 */
 
 	public void resetAirspace() {		
+		this.AirportAvailable = true;
 		this.listOfFlightsInAirspace = new ArrayList<Flight>();
 		this.numberOfGameLoopsSinceLastFlightAdded = 0; 
 		this.numberOfGameLoopsSinceLastFlightAirport = 500;
@@ -171,7 +174,8 @@ public class Airspace {
 
 					entry = rand.nextInt (5);
 
-					if (entry == 4){
+					if (entry == 4 && this.AirportAvailable){
+						this.AirportAvailable = false;
 						Flight tempFlight = new Flight (this, 4);
 						tempFlight.setFlightName(this.generateFlightName());
 						tempFlight.setTargetAltitude (0);
@@ -266,6 +270,15 @@ public class Airspace {
 			this.randomNumberForFlightGeneration -= 50;
 		}
 	}
+	
+	public void updateAirportStatus(){
+		if (this.AirportAvailable == true){
+			this.AirportAvailable = false;
+		}
+		else{
+			this.AirportAvailable = true;
+		}
+	}
 
 
 
@@ -308,10 +321,14 @@ public class Airspace {
 		this.numberOfGameLoops++;
 		System.out.println(this.getNumberOfGameLoops());
 		System.out.println(this.numberOfGameLoopsSinceLastFlightAdded);
-		System.out.println(this.getNumberOfGameLoopsSinceLastFlightAirport());
+		System.out.println(this.numberOfGameLoopsSinceLastFlightAirport);
 
 		if (this.numberOfGameLoops >= this.numberOfGameLoopsWhenDifficultyIncreases) {
 			this.increaseDifficulty();
+		}
+		
+		if (this.numberOfGameLoopsSinceLastFlightAirport>500){
+			this.updateAirportStatus();
 		}
 
 
@@ -402,8 +419,8 @@ public class Airspace {
 		return this.airport;
 	}
 
-	public int getNumberOfGameLoopsSinceLastFlightAirport (){
-		return this.numberOfGameLoopsSinceLastFlightAirport;
+	public boolean getAvailableAirport (){
+		return this.AirportAvailable;
 	}
 
 	public void resetNumberOfGameLoopsSinceLastFlightAirport (){
