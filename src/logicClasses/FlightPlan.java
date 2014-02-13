@@ -164,12 +164,12 @@ public class FlightPlan {
 	}
 
 	/**
-	 * generateVelocity: Creates a velocity from a range of values
+	 * generateVelocity: Creates a random velocity between 100 and 400mph, in multiples of 25mph
 	 */
 
 	public int generateVelocity() {
 		Random rand = new Random();
-		return (rand.nextInt(200) + 200);
+		return (rand.nextInt(12) + 4) * 25;
 	}
 
 	/**

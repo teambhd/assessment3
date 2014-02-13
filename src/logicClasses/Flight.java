@@ -110,7 +110,7 @@ public class Flight {
 	public void TakeOff (){
 		if (!this.takenOff) {
 			this.takenOff = true;
-			this.flightPlan.setTarget(80);
+			this.flightPlan.setTarget(100);
 			this.setTargetAltitude(1000);
 		}
 	}

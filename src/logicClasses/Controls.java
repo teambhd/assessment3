@@ -27,7 +27,7 @@ public class Controls {
 	private final int MAXIMUM_ALTITUDE = 9000;
 	private final int MINIMUM_ALTITUDE = 1000;
 	private final int MAXIMUM_VELOCITY = 400;
-	private final int MINIMUM_VELOCITY = 0;
+	private final int MINIMUM_VELOCITY = 75;
 
 	private Flight selectedFlight;
 	private String text; // Used for parsing textbox inputs
@@ -82,7 +82,7 @@ public class Controls {
         
         // Handle clicking the Take Off button
         if (!this.selectedFlight.getTakenOff()) {
-    		if (posX > 10 && posX < 150 && posY < 270 && posY > 290 && Mouse.isButtonDown(0)) {
+    		if (posX > 10 && posX < 150 && posY < 290 && posY > 270 && Mouse.isButtonDown(0)) {
     			this.selectedFlight.TakeOff();
     		}  
         }
@@ -447,9 +447,12 @@ public class Controls {
 		posY = 600-Mouse.getY();
 
 		if (this.selectedFlight != null) {
-			// Only allow controls if user isn't changing a plan
+			
+            // Only allow controls if user isn't changing a plan
 			if (!this.selectedFlight.getFlightPlan().getChangingPlan()) {
-				if (posX >10 && posX < 150 && posY < 65 && posY > 45 && Mouse.isButtonDown(0)) {
+			
+                // Handle clicking on the Plan Mode button
+            	if (posX > 10 && posX < 150 && posY < 65 && posY > 45 && Mouse.isButtonDown(0)) {
 					this.selectedFlight.getFlightPlan().setChangingPlan(true);
 				}
 
@@ -477,7 +480,8 @@ public class Controls {
 					this.getHeadingControlTB().setText(
 							String.valueOf(Math.round(this.selectedFlight.getTargetHeading())));
 				}
-			}
+			
+            }
 
 			else {
                 // Handle clicking of the Navigator Mode button
