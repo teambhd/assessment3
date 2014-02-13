@@ -103,7 +103,6 @@ public class Flight {
 			this.getFlightPlan().setTarget(0);
 			this.setTargetAltitude(0);
 			this.airspace.resetNumberOfGameLoopsSinceLastFlightAirport();
-			this.airspace.changeScore(200);
 		}
 	}
 	
@@ -209,7 +208,6 @@ public class Flight {
 	public boolean checkIfAtAirport(Point airport) {		
 		if (((Math.abs(Math.round(this.x) - Math.round(airport.getX()))) <= 45)
 				&& (Math.abs(Math.round(this.y) - Math.round(airport.getY()))) <= 45) {
-			this.airspace.changeScore(100);
 			return true;
 		}
         

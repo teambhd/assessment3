@@ -337,13 +337,7 @@ public class Airspace {
 			if (this.listOfFlightsInAirspace.get(i).getLanding()==true && this.numberOfGameLoopsSinceLastFlightAirport>250){
 				this.removeSpecificFlight(i);		//remove a flight ported at airport after it has taxied for a while.
 			}
-			if(this.listOfFlightsInAirspace.get(i).getFlightPlan().getCurrentRoute().size()==0) {
-				this.removeSpecificFlight(i);
-			}
 			else if (this.checkIfFlightHasLeftAirspace(this.getListOfFlights().get(i))) {
-				if (this.listOfFlightsInAirspace.get(i).getFlightPlan().getCurrentRoute().size() != 0){ //Checks if a flight has gone by all of its waypoints.
-					this.changeScore (-200); // if not, -200 to score.
-				}
 				this.removeSpecificFlight(i);
 			}
 
@@ -368,7 +362,7 @@ public class Airspace {
 			this.listOfWayppoints.get(i).render(g, this);
 		}
 		this.airport.render(g,this);
-		g.drawOval((int) 572, (int) 197, 45, 45);
+		g.drawOval((int) 550, (int) 180, 45, 45);
 
 
 		for (int i = 0; i < this.listOfExitPoints.size(); i++) { // Draws exit points
@@ -473,6 +467,13 @@ public class Airspace {
 	}
 
 	public void removeSpecificFlight(int flight) {
+		if (this.listOfFlightsInAirspace.get(flight).getFlightPlan().getCurrentRoute().size()==0){
+			this.changeScore(200);
+		}
+		else{
+			this.changeScore(-200);
+		}
+
 		this.listOfFlightsInAirspace.remove(flight);
 
 		// If flight was selected, de-select it
