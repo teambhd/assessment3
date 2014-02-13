@@ -12,7 +12,7 @@ public class Flight {
 	// FIELDS
 	private double x, y, currentHeading, targetHeading;
 	private int currentAltitude, targetAltitude, flightNumber;
-	private boolean turningRight, turningLeft, landing, takenOff, selected;
+	private boolean turningRight, turningLeft, landing, takenoff, selected;
 	private String flightName;
 	private FlightPlan flightPlan;
 	private Image regularFlightImage, selectedFlightInformationBackgroundImage, slowFlightImage, fastFlightImage, shadowImage;
@@ -31,15 +31,7 @@ public class Flight {
 		this.turningRight = false;
 		this.turningLeft = false;
 		this.landing = false;
-        
-        if (this.currentAltitude == 0) {
-            this.takenOff = false;
-        } 
-        
-        else {
-    		this.takenOff = true;
-        }
-		
+		this.takenoff = true;
         this.airspace = airspace;
 		this.flightPlan = new FlightPlan(airspace, this, entry);
 		this.selected = false;
@@ -94,12 +86,19 @@ public class Flight {
 	}
 	
 	/**
-	 * Land: Removes a flight from the airspace. 
-	 * Only works if a flight is positioned at the airport waypoint and has a low altitude and speed.
+	 * LandFlight: Sets the landed flag, which will remove the flight from the airpsace
+	 * after 250 game loops. Only works if a flight is positioned at the airport waypoint 
+	 * and has a low altitude and speed.
 	 */
 	
 	public void LandFlight (){
-		if (this.currentAltitude <= 1000 && this.flightPlan.getVelocity() < 100 && this.checkIfAtAirport(airspace.getAirport()) && this.airspace.getAvailableAirport() && this.takenOff) {
+		if (this.currentAltitude <= 4000 && 
+				this.flightPlan.getVelocity()<100 && 
+				this.checkIfAtAirport(airspace.getAirport()) && 
+				this.airspace.getAvailableAirport()){
+			
+			
+			this.takenoff = false;
 			this.landing = true;
 			this.getFlightPlan().setTarget(0);
 			this.setTargetAltitude(0);
@@ -107,11 +106,22 @@ public class Flight {
 		}
 	}
 	
+	/**
+	 * TakeOff: Sets the takenoff flag and targets the flight towards the lowest altitiude and
+	 * velocity obtainable via user controls.
+	 */
+	
 	public void TakeOff (){
-		if (!this.takenOff) {
-			this.takenOff = true;
-			this.flightPlan.setTarget(100);
+		if (this.currentAltitude == 0 && 
+				this.flightPlan.getVelocity()== 0 && 
+				this.checkIfAtAirport(airspace.getAirport()))
+				{
+			
+			
+			this.takenoff = true;
+			this.flightPlan.setTarget(25);
 			this.setTargetAltitude(1000);
+			
 		}
 	}
 
@@ -510,8 +520,12 @@ public class Flight {
 		return this.landing;
 	}
 	
-	public boolean getTakenOff(){
-		return this.takenOff;
+	public boolean getTakeoff(){
+		return this.takenoff;
+	}
+	
+	public void setTakeoff (){
+		this.takenoff = false;
 	}
 
 	public void setTurningRight(boolean turningRight) {

@@ -56,6 +56,7 @@ public class FlightPlan {
 
 		// Setting flights x and y to the coordinates of it's entrypoint
 		if (entry == 4){ //20% chance to initialize the flight at the airport.
+			this.flight.setTakeoff();
 			flight.setX(airspace.getAirport().getX());
 			flight.setY(airspace.getAirport().getY());
 		}
@@ -164,12 +165,12 @@ public class FlightPlan {
 	}
 
 	/**
-	 * generateVelocity: Creates a random velocity between 100 and 400mph, in multiples of 25mph
+	 * generateVelocity: Creates a velocity from a range of values
 	 */
 
 	public int generateVelocity() {
 		Random rand = new Random();
-		return (rand.nextInt(12) + 4) * 25;
+		return (rand.nextInt(200) + 200);
 	}
 
 	/**

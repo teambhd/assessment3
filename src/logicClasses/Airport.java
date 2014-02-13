@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 
 
 public class Airport extends Point {
+	
 	Image airportImage;
 	
 	public Airport (double xcoord, double ycoord, String name) {
@@ -14,13 +15,28 @@ public class Airport extends Point {
 	    System.out.println("Airport " + pointRef + " set:(" + x + "," + y +").");
 	}
 	
+	/*
+	 * init: Initialises the parameters needed to render the airport waypoint.     
+	 * @param gc Game container required by Slick2d
+     * @throws SlickException 
+     */
+
+	
 	public void init(GameContainer gc) throws SlickException {
 		airportImage = new Image("res/graphics/airport.png");
 	}
 	
+	/**
+	 * render: Render method for the Airport object.
+	 * @param g Graphics required by Slick2d 
+	 * @param airspace Airspace object
+	 * @throws SlickException 
+	 */
+
+	
     public void render(Graphics g, Airspace airspace) throws SlickException {
         // In order to be centered - the airport.png is a multi-pixel image
-    	this.airportImage.draw(572-121,197-64);
+    	this.airportImage.draw(451,133);
     }
     
 }
