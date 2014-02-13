@@ -53,7 +53,7 @@ public class Flight {
 	 */
 
 	public int generateAltitude(int entry) {
-		if (entry == 4){
+		if (entry == 4){ //If the flight is spawned at the aiport.
 			return 0;
 		}
 		else{
@@ -67,7 +67,7 @@ public class Flight {
 		case 2:
 			return 7000;
 		}
-		return 7000; // Default state (this won't ever be returned)
+		return 9000; // Default state (this won't ever be returned)
 	}
 	}
 
@@ -94,7 +94,7 @@ public class Flight {
 	}
 	
 	/**
-	 * Land: Removes a flight from the airspace. 
+	 * LandFlight: Sets a flight's landing flag to true and the target Altitude to 0. 
 	 * Only works if a flight is positioned at the airport waypoint and has a low altitude and speed.
 	 */
 	
@@ -106,6 +106,11 @@ public class Flight {
 			this.airspace.resetNumberOfGameLoopsSinceLastFlightAirport();
 		}
 	}
+	
+	/**
+	 * TakeOff: sets the flight's takenOff flag to true and the target altitude to 1000.
+	 * Only works if a flight is not taken off.
+	 */
 	
 	public void TakeOff (){
 		if (!this.takenOff) {

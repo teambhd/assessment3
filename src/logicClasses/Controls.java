@@ -63,8 +63,8 @@ public class Controls {
 	// METHODS
 
 	/**
-	 * handleAndUpdatesideButtons: Deals with analysing and updating the selected flights altitude
-	 * based on the altitude adjustment buttons
+	 * handleAndUpdatesideButtons: Deals with analysing and updating the selected flights altitude,
+	 * velocity and land/takeoff, based on the respective buttons.
 	 */
 
 	public void handleAndUpdatesideButtons() {
@@ -440,6 +440,14 @@ public class Controls {
 			}
     	}
 	}
+
+	
+	/**
+	 * update: Update the controls
+	 * @param g The slick2d graphics object
+	 * @param gc The slick2d game container
+	 * @throws SlickException
+	 */
 
 
 	public void update(GameContainer gc, Airspace airspace) {

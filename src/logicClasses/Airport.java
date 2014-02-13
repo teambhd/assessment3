@@ -15,7 +15,7 @@ public class Airport extends Point {
 	    System.out.println("Airport " + pointRef + " set:(" + x + "," + y +").");
 	}
 	
-	/*
+	/**
 	 * init: Initialises the parameters needed to render the airport waypoint.     
 	 * @param gc Game container required by Slick2d
      * @throws SlickException 

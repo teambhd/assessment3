@@ -87,7 +87,15 @@ public class Airspace {
 			}
 		} return false;
 	}
+	
+	/**
+	 * newAirport: Add a new airport to the airspace
+	 * @param x The x coordinate of the airport
+	 * @param y The y coordinate of the airport
+	 */
 
+	
+	
 	public boolean newAirport(int x, int y)  {
 		if (x < 1250 && x > 150 && y < 650 && y > -50){ // x and y must be within these bounds to be within screen space
 
@@ -162,7 +170,7 @@ public class Airspace {
 
 				/* 
 				 * The random number is generated in the range [0, 100) if the airspace is empty, as this increases 
-				 * the likelihood of a value < 10 being returned, and therefore a flight being generated; this stops the user
+				 * the likelihood of a value < 6 being returned, and therefore a flight being generated; this stops the user
 				 * having to potentially wait a long period of time for a flight to be generated. 
 				 * If the airspace is not empty, the random number generated is in the range [0, randomNumberForFlight Generation)
 				 * which is > 100. This decreases the likelihood of a flight being generated.
@@ -174,7 +182,7 @@ public class Airspace {
 
 					entry = rand.nextInt (5);
 
-					if (entry == 4 && this.AirportAvailable){
+					if (entry == 4 && this.AirportAvailable){ //Check if we should create the flight at the airport.
 						this.AirportAvailable = false;
 						Flight tempFlight = new Flight (this, 4);
 						tempFlight.setFlightName(this.generateFlightName());
