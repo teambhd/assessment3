@@ -10,6 +10,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.util.ResourceLoader;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.Image;
@@ -22,7 +23,8 @@ public class PlayState extends BasicGameState {
 	Image cursorImg;
 	public static float time;
 	private Sound endOfGameSound;
-	public static TrueTypeFont font, smallButtonFont, titleFont;
+	public static TrueTypeFont font;
+    private static UnicodeFont smallButtonFont, titleFont;
 	private Image controlBarImage, clockImage, scoreImage, backgroundImage, difficultyBackground;
 	private String stringTime, stringScore;
 	private boolean settingDifficulty, gameEnded;
@@ -50,10 +52,15 @@ public class PlayState extends BasicGameState {
 			awtFont1 = awtFont1.deriveFont(16f);
 			font = new TrueTypeFont(awtFont1, true);
             
-			InputStream inputStream2 = ResourceLoader.getResourceAsStream("res/fonts/fira-sans-bold.ttf");
-			Font awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream2);
-			titleFont = new TrueTypeFont(awtFont2.deriveFont(60f), true);
-            smallButtonFont = new TrueTypeFont(awtFont2.deriveFont(30f), true);
+            titleFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 72, false, false);
+            titleFont.addAsciiGlyphs(); 
+            titleFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+            titleFont.loadGlyphs();
+                        
+            smallButtonFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 30, false, false);
+            smallButtonFont.addAsciiGlyphs(); 
+            smallButtonFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+            smallButtonFont.loadGlyphs();
 		}
         
         catch(Exception e){

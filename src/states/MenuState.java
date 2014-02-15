@@ -1,23 +1,21 @@
 package states;
 
-import java.awt.Font;
-import java.io.InputStream;
 import java.awt.Desktop;
 import java.net.URI;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.util.ResourceLoader;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.font.effects.ColorEffect;
 
 
 public class MenuState extends BasicGameState {
     
     private int stateID;
 
-	public static TrueTypeFont titleFont, mainButtonFont, smallButtonFont;
+    private static UnicodeFont titleFont, mainButtonFont, smallButtonFont;
 	private Image menuBackground;
     private String playString, websiteString, controlsString;
     private int playStringWidth, playStringHeight;
@@ -33,12 +31,21 @@ public class MenuState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		menuBackground = new Image("res/graphics/menu_background.png");
         
-		try {
-			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/fira-sans-bold.ttf");
-			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			titleFont = new TrueTypeFont(awtFont.deriveFont(60f), true);
-			mainButtonFont = new TrueTypeFont(awtFont.deriveFont(50f), true);
-            smallButtonFont = new TrueTypeFont(awtFont.deriveFont(30f), true);
+		try {            
+            titleFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 72, false, false);
+            titleFont.addAsciiGlyphs(); 
+            titleFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+            titleFont.loadGlyphs();
+            
+            mainButtonFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 50, false, false);
+            mainButtonFont.addAsciiGlyphs(); 
+            mainButtonFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+            mainButtonFont.loadGlyphs();
+            
+            smallButtonFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 30, false, false);
+            smallButtonFont.addAsciiGlyphs(); 
+            smallButtonFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+            smallButtonFont.loadGlyphs();
 		}
         
         catch (Exception e) {
@@ -50,8 +57,8 @@ public class MenuState extends BasicGameState {
 		menuBackground.draw(0, 0);
         
         // Draw the title and subtitle
-        titleFont.drawString(18, 10, sbg.getTitle(), Color.lightGray);
-        smallButtonFont.drawString(20, 80, "by Team BHD", Color.lightGray);
+        titleFont.drawString(17, 10, sbg.getTitle(), Color.lightGray);
+        smallButtonFont.drawString(20, 90, "by Team BHD", Color.lightGray);
 
         // Get the mouse position for reference below
 		int posX = Mouse.getX();

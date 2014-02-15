@@ -1,21 +1,19 @@
 package states;
 
-import java.awt.Font;
-import java.io.InputStream;
-
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.util.ResourceLoader;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.font.effects.ColorEffect;
 
 
 public class GameOverState extends BasicGameState {
 	
     private int stateID;
 	private Image menuBackground;
-	public static TrueTypeFont titleFont, bodyFont, smallButtonFont;
+	public static UnicodeFont titleFont, smallButtonFont;
     private String againString, menuString;
     private int againStringWidth, againStringHeight;
     private int menuStringWidth, menuStringHeight;
@@ -30,11 +28,15 @@ public class GameOverState extends BasicGameState {
 		menuBackground = new Image("res/graphics/game_over_background.png");
         		        
 		try {
-			InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/fira-sans-bold.ttf");
-			Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			titleFont = new TrueTypeFont(awtFont.deriveFont(60f), true);
-			bodyFont = new TrueTypeFont(awtFont.deriveFont(20f), true);
-            smallButtonFont = new TrueTypeFont(awtFont.deriveFont(30f), true);
+            titleFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 72, false, false);
+            titleFont.addAsciiGlyphs(); 
+            titleFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+            titleFont.loadGlyphs();
+                        
+            smallButtonFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 30, false, false);
+            smallButtonFont.addAsciiGlyphs(); 
+            smallButtonFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+            smallButtonFont.loadGlyphs();
 		}
         
         catch (Exception e) {
