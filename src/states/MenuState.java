@@ -113,30 +113,28 @@ public class MenuState extends BasicGameState {
 		if (this.mouseBeenReleased) {
             
             // Handle clicking of play button
-    		if (posX >= 20 && posX <= (20 + playStringWidth) && posY >= 480 && posY <= (480 + playStringHeight)) {
-				if (Mouse.isButtonDown(0)) {
-					this.mouseBeenReleased = false;
-					sbg.enterState(1); //PlayState
-				}
+    		if (posX >= 20 && posX <= (20 + playStringWidth) && posY >= 480 && posY <= (480 + playStringHeight) && Mouse.isButtonDown(0)) {
+				this.mouseBeenReleased = false;
+				sbg.enterState(1); //PlayState
 			} 
 
             // Handle clicking of controls button
-    		if (posX >= 20 && posX <= (20 + controlsStringWidth) && posY >= 550 && posY <= (550 + controlsStringHeight)) {
-				if (Mouse.isButtonDown(0)) {
-					this.mouseBeenReleased = false;
-					sbg.enterState(4); //ControlsState
-				}
+    		if (posX >= 20 && posX <= (20 + controlsStringWidth) && posY >= 550 && posY <= (550 + controlsStringHeight) && Mouse.isButtonDown(0)) {
+				this.mouseBeenReleased = false;
+				sbg.enterState(4); //ControlsState
 			} 
 
             // Handle clicking of website button
-    		if (posX >= (40 + controlsStringWidth) && posX <= (40 + controlsStringWidth + websiteStringWidth) && posY >= 550 && posY <= (550 + websiteStringHeight)) {
-				this.mouseBeenReleased=false;
-                // try {
-                //     Desktop.getDesktop().browse(new URI("http://bhdwebsite.example/credits.html")); 
-                // }
-                // catch(Exception ex) {
-                //        ex.printStackTrace();
-                // }
+    		if (posX >= (40 + controlsStringWidth) && posX <= (40 + controlsStringWidth + websiteStringWidth) && posY >= 550 && posY <= (550 + websiteStringHeight) && Mouse.isButtonDown(0)) {
+				this.mouseBeenReleased = false;
+                
+                // Open the team website in the user's default browser
+                try {
+                    Desktop.getDesktop().browse(new URI("http://teambhd.github.io")); 
+                }
+                catch(Exception ex) {
+                       ex.printStackTrace();
+                }
 			}
 		}
 	}
