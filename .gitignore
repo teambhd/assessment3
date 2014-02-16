@@ -7,6 +7,9 @@ junit
 # Ignore runnables output directory
 dist
 
+# Ignore JavaDoc output directory
+doc
+
 # Ignore local eclipse configuration
 .settings
 

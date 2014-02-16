@@ -31,6 +31,7 @@
         <delete dir="bin"/>
         <delete dir="${junit.output.dir}"/>
         <delete dir="dist"/>
+        <delete dir="doc"/>
     </target>
                 
     <target depends="init" name="build">
@@ -85,4 +86,7 @@
         </jar>
     </target>
     
+    <target name="javadoc">
+        <javadoc sourcepath="src/" destdir="doc/" />
+    </target>
 </project>
