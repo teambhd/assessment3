@@ -42,10 +42,10 @@ public class PlayState extends BasicGameState {
 		settingDifficulty = true;
 		time = 0;
 		airspace = new Airspace();
-		this.stringTime="";
-		this.stringScore="";
+		this.stringTime = "";
+		this.stringScore = "";
 				
-		// Font
+		// Load the fonts
 		try {
 			InputStream inputStream1 = ResourceLoader.getResourceAsStream("res/fonts/fira-sans.ttf");
 			Font awtFont1 = Font.createFont(Font.TRUETYPE_FONT, inputStream1);
@@ -55,7 +55,7 @@ public class PlayState extends BasicGameState {
             smallButtonFont = new AngelCodeFont("res/fonts/fsb30.fnt", "res/fonts/fsb30.png");
 		}
         
-        catch(Exception e){
+        catch (Exception e) {
 			e.printStackTrace();
 		}        
 		
@@ -95,8 +95,9 @@ public class PlayState extends BasicGameState {
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		if (settingDifficulty) {
-			difficultyBackground.draw(0,0);
+		
+        if (settingDifficulty) {
+			difficultyBackground.draw(0, 0);
             
             // Draw the page title
             titleFont.drawString(18, 10, "Set the difficulty", Color.lightGray);
@@ -148,9 +149,9 @@ public class PlayState extends BasicGameState {
 		else {
 			g.setFont(font);
 			
-			// Drawing Side Images
-			backgroundImage.draw(150,0);
-			controlBarImage.draw(0,0);
+			// Drawing the backgrounds for the main game area and the sidebar
+			backgroundImage.draw(150, 0);
+			controlBarImage.draw(0, 0);
 			
 			// Drawing Airspace and elements within it
 			airspace.render(g, gc);
@@ -169,7 +170,8 @@ public class PlayState extends BasicGameState {
 	}
 
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		// Checks if the game has been retried and if it has resets the airspace
+		
+        // Checks if the game has been retried and if it has resets the airspace
 		if (gameEnded) {
 			airspace.resetAirspace();
 	    	time = 0;
@@ -209,52 +211,44 @@ public class PlayState extends BasicGameState {
 		}
 		
 		else {
-			
 			// Updating Clock and Time
-			
 			time += delta;
-			float decMins=time/1000/60;
+			float decMins = time / 1000 / 60;
 			int mins = (int) decMins;
-			float decSecs=decMins-mins;
+			float decSecs = decMins - mins;
 				
-			int secs = Math.round(decSecs*60);
-				
-			String stringMins="";
-			String stringSecs="";
-			if(secs==60){
-				secs=0;
-				mins+=1;
-			}
-			if(mins<10) {
-				stringMins="0"+mins;
-			}
-			else {
-				stringMins=String.valueOf(mins);
-			}
-			if(secs<10) {
-				stringSecs="0"+secs;
-			}
-			else {
-				stringSecs=String.valueOf(secs);
-			}
-						
-			this.stringTime=stringMins+":"+stringSecs;
-			this.stringScore=Integer.toString(this.airspace.getScore());
-						
+			int secs = Math.round(decSecs * 60);
+            
+			if (secs == 60) {
+				secs = 0;
+				mins += 1;
+            }
+            
+            // Get a 2 character version of the minutes count
+			String stringMins;
+            stringMins = ("0" + mins);
+            stringMins = stringMins.substring(stringMins.length() - 2);
+            
+            // Get a 2 character version of the seconds count
+			String stringSecs;
+            stringSecs = ("0" + secs);
+            stringSecs = stringSecs.substring(stringSecs.length() - 2);
+            						
+			this.stringTime = stringMins + ":" + stringSecs;
+            
+			this.stringScore = Integer.toString(this.airspace.getScore());
 						
 			// Updating Airspace
-						
 			airspace.newFlight(gc);
 			airspace.update(gc);
-			if (airspace.getSeparationRules().getGameOverViolation() == true){
+            
+			if (airspace.getSeparationRules().getGameOverViolation()) {
 				airspace.getSeparationRules().setGameOverViolation(false);
 				airspace.resetAirspace();
 				endOfGameSound.play();
-				sbg.enterState(2);
+				sbg.enterState(2); //GameOverState
 				gameEnded = true;
-							
 			}
-						
 						
 			Input input = gc.getInput();
 						
@@ -262,6 +256,7 @@ public class PlayState extends BasicGameState {
 			if (input.isKeyPressed(Input.KEY_P) || input.isKeyPressed(Input.KEY_SPACE)) {
 				sbg.enterState(3); //PauseState
 			}
+            
 		}
 	}
 
