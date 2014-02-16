@@ -10,7 +10,9 @@ Once Ant is installed the game can be launched by opening a terminal window in t
 
 The included unit tests can be run with `ant test`. Running `ant report` will generate a html version of the test report within the junit directory.
 
-The `ant clean` command will clean-up the working directory, by removing both the generated binaries and JUnit reports.
+The `ant javadoc` command will generate JavaDoc documentation within the doc directory.
+
+The `ant clean` command will clean-up the working directory, by removing both the generated binaries, JUnit reports, and JavaDoc documentation.
 
 ### Using Eclipse
 
