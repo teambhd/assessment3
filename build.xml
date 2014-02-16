@@ -87,6 +87,6 @@
     </target>
     
     <target name="javadoc">
-        <javadoc sourcepath="src/" destdir="doc/" />
+        <javadoc sourcepath="src/" classpathref="Game.classpath" destdir="doc/" />
     </target>
 </project>
