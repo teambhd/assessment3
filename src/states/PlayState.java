@@ -10,9 +10,9 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.util.ResourceLoader;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Image;
 
 
@@ -24,7 +24,7 @@ public class PlayState extends BasicGameState {
 	public static float time;
 	private Sound endOfGameSound;
 	public static TrueTypeFont font;
-    private static UnicodeFont smallButtonFont, titleFont;
+    private static AngelCodeFont smallButtonFont, titleFont;
 	private Image controlBarImage, clockImage, scoreImage, backgroundImage, difficultyBackground;
 	private String stringTime, stringScore;
 	private boolean settingDifficulty, gameEnded;
@@ -51,16 +51,8 @@ public class PlayState extends BasicGameState {
 			Font awtFont1 = Font.createFont(Font.TRUETYPE_FONT, inputStream1);
 			awtFont1 = awtFont1.deriveFont(16f);
 			font = new TrueTypeFont(awtFont1, true);
-            
-            titleFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 72, false, false);
-            titleFont.addAsciiGlyphs(); 
-            titleFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
-            titleFont.loadGlyphs();
-                        
-            smallButtonFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 30, false, false);
-            smallButtonFont.addAsciiGlyphs(); 
-            smallButtonFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
-            smallButtonFont.loadGlyphs();
+            titleFont = new AngelCodeFont("res/fonts/fsb60.fnt", "res/fonts/fsb60.png");
+            smallButtonFont = new AngelCodeFont("res/fonts/fsb30.fnt", "res/fonts/fsb30.png");
 		}
         
         catch(Exception e){

@@ -3,16 +3,15 @@ package states;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.font.effects.ColorEffect;
 
 
 public class ControlsState extends BasicGameState {
 	
     private int stateID;
 	private Image menuBackground;
-	private static UnicodeFont titleFont, bodyFont, smallButtonFont;
+	private static AngelCodeFont titleFont, bodyFont, smallButtonFont;
     private String backString;
     private int backStringHeight, backStringWidth;
     private boolean mouseBeenReleased;
@@ -26,20 +25,9 @@ public class ControlsState extends BasicGameState {
 		menuBackground = new Image("res/graphics/menu_background.png");
         		        
 		try {
-            titleFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 60, false, false);
-            titleFont.addAsciiGlyphs(); 
-            titleFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
-            titleFont.loadGlyphs();
-            
-            bodyFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 20, false, false);
-            bodyFont.addAsciiGlyphs(); 
-            bodyFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
-            bodyFont.loadGlyphs();
-            
-            smallButtonFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 30, false, false);
-            smallButtonFont.addAsciiGlyphs(); 
-            smallButtonFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
-            smallButtonFont.loadGlyphs();
+            titleFont = new AngelCodeFont("res/fonts/fsb60.fnt", "res/fonts/fsb60.png");
+            bodyFont = new AngelCodeFont("res/fonts/fsb20.fnt", "res/fonts/fsb20.png");
+            smallButtonFont = new AngelCodeFont("res/fonts/fsb30.fnt", "res/fonts/fsb30.png");
 		}
         
         catch (Exception e) {
@@ -51,7 +39,7 @@ public class ControlsState extends BasicGameState {
 		menuBackground.draw(0, 0);
         
         // Draw the page title
-        titleFont.drawString(18, 10, "Help", Color.lightGray);
+        titleFont.drawString(16, 10, "Help", Color.lightGray);
         
         // Get the mouse position for reference below
 		int posX = Mouse.getX();

@@ -6,16 +6,14 @@ import java.net.URI;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.font.effects.ColorEffect;
-
 
 public class MenuState extends BasicGameState {
     
     private int stateID;
 
-    private static UnicodeFont titleFont, mainButtonFont, smallButtonFont;
+    private static AngelCodeFont titleFont, mainButtonFont, smallButtonFont;
 	private Image menuBackground;
     private String playString, websiteString, controlsString;
     private int playStringWidth, playStringHeight;
@@ -32,20 +30,9 @@ public class MenuState extends BasicGameState {
 		menuBackground = new Image("res/graphics/menu_background.png");
         
 		try {            
-            titleFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 72, false, false);
-            titleFont.addAsciiGlyphs(); 
-            titleFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
-            titleFont.loadGlyphs();
-            
-            mainButtonFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 50, false, false);
-            mainButtonFont.addAsciiGlyphs(); 
-            mainButtonFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
-            mainButtonFont.loadGlyphs();
-            
-            smallButtonFont = new UnicodeFont("res/fonts/fira-sans-bold.ttf", 30, false, false);
-            smallButtonFont.addAsciiGlyphs(); 
-            smallButtonFont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
-            smallButtonFont.loadGlyphs();
+            titleFont = new AngelCodeFont("res/fonts/fsb72.fnt", "res/fonts/fsb72.png");
+            mainButtonFont = new AngelCodeFont("res/fonts/fsb50.fnt", "res/fonts/fsb50.png");
+            smallButtonFont = new AngelCodeFont("res/fonts/fsb30.fnt", "res/fonts/fsb30.png");
 		}
         
         catch (Exception e) {
@@ -57,7 +44,7 @@ public class MenuState extends BasicGameState {
 		menuBackground.draw(0, 0);
         
         // Draw the title and subtitle
-        titleFont.drawString(17, 10, sbg.getTitle(), Color.lightGray);
+        titleFont.drawString(15, 10, sbg.getTitle(), Color.lightGray);
         smallButtonFont.drawString(20, 90, "by Team BHD", Color.lightGray);
 
         // Get the mouse position for reference below
