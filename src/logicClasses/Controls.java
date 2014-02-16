@@ -50,9 +50,9 @@ public class Controls {
 	public void init(GameContainer gc) throws SlickException {
 		Font awtFont = new Font("Courier", Font.BOLD, 15); // Setting up fonts used in text boxes
 		font = new TrueTypeFont(awtFont, false);
-		this.turnLeftTextBox = new TextField(gc, font, 10, 120, 100, 23); //Creating textboxes
-		this.headingControlTextBox = new TextField(gc, font, 10, 170, 100, 23);
-		this.turnRightTextBox = new TextField(gc, font, 10, 220, 100, 23);
+		this.turnLeftTextBox = new TextField(gc, font, 10, 145, 100, 23); //Creating textboxes
+		this.headingControlTextBox = new TextField(gc, font, 10, 195, 100, 23);
+		this.turnRightTextBox = new TextField(gc, font, 10, 245, 100, 23);
 		this.turnLeftTextBox.setMaxLength(3); //Makes sure that user cannot enter more than three letters as a heading (360 is max)
 		this.turnRightTextBox.setMaxLength(3);
 		this.headingControlTextBox.setMaxLength(3);
@@ -83,7 +83,7 @@ public class Controls {
         
         // Handle clicking the Take Off button
         if (!this.selectedFlight.getTakenOff()) {
-    		if (posX > 10 && posX < 150 && posY < 290 && posY > 270 && Mouse.isButtonDown(0)) {
+    		if (posX > 10 && posX < 150 && posY < 320 && posY > 300 && Mouse.isButtonDown(0)) {
     			this.selectedFlight.TakeOff();
     		}  
         }
@@ -92,7 +92,7 @@ public class Controls {
 		if (this.selectedFlight.getTakenOff() && !this.selectedFlight.getLanding()) { 
             
             // Handle land button
-			if (posX > 10 && posX < 150 && posY < 290 && posY > 270 && Mouse.isButtonDown(0)) {
+			if (posX > 10 && posX < 150 && posY < 320 && posY > 300 && Mouse.isButtonDown(0)) {
 				if (this.selectedFlight.getAirspace().getAvailableAirport() && this.selectedFlight.getCurrentAltitude() >= MINIMUM_ALTITUDE) {
 					this.selectedFlight.LandFlight();
 				}
@@ -220,17 +220,17 @@ public class Controls {
 	 * @param airspace
 	 */
 
-	public void giveHeadingWithMouse(int pointX, int pointY, Airspace airspace){
-
-
+	public void giveHeadingWithMouse(int pointX, int pointY, Airspace airspace) {
 		double deltaX, deltaY;
 		double distanceBetweenMouseAndPlane;
-		if (this.selectedFlight.getTakenOff()==true && this.selectedFlight.getLanding()==false){
+        
+		if (this.selectedFlight.getTakenOff() && !this.selectedFlight.getLanding()) {
 			// If mouse is being held down don't change selected flight. 
-			if (this.headingAlreadyChangedByMouse){
+			if (this.headingAlreadyChangedByMouse) {
 				return;
 			}
-			else{
+            
+			else {
 				this.headingAlreadyChangedByMouse = true;
 			}
 
@@ -369,33 +369,32 @@ public class Controls {
                                 
                 if (!this.selectedFlight.getTakenOff()) {
     				g.setColor(Color.white);
-    				sideButton.draw(0, 270);
-    				g.drawString("Take Off", 10, 270);
+    				sideButton.draw(0, 300);
+    				g.drawString("Take Off", 10, 300);
                 }
                 
                 else {
     				g.setColor(Color.white);
 
-    				g.drawString("Turn Left:", 10, 100);
+    				g.drawString("Turn Left:", 10, 125);
     				this.turnLeftTextBox.render(gc, g);
-    				g.drawString("DEG", 114, 125);
+    				g.drawString("DEG", 114, 150);
 
-    				g.drawString("Target Heading:", 10, 150);
+    				g.drawString("Target Heading:", 10, 175);
     				this.headingControlTextBox.render(gc, g);
-    				g.drawString("DEG", 114, 175);
+    				g.drawString("DEG", 114, 200);
 
-    				g.drawString("Turn Right:", 10, 200);
+    				g.drawString("Turn Right:", 10, 225);
     				this.turnRightTextBox.render(gc, g);
-    				g.drawString("DEG", 114, 225);
+    				g.drawString("DEG", 114, 250);
                     
-    				sideButton.draw(0, 270);
-    				
-                    g.drawString("Land", 10, 270);
+    				sideButton.draw(0, 300);
+                    g.drawString("Land", 10, 300);
                     
     				sideButton.draw(0, 330);
     
                     if (this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) {
-        				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()+25), 10, 330);
+        				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget() + 25), 10, 330);
         			}
                 
         			else {
@@ -405,7 +404,7 @@ public class Controls {
     				sideButton.draw(0, 360);
 
         			if (this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) {
-        				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget()-25), 10, 360);
+        				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget() - 25), 10, 360);
         			}
     			
                     else {
@@ -456,9 +455,8 @@ public class Controls {
 
 	public void update(GameContainer gc, Airspace airspace) {
 		Input input = gc.getInput();
-		int posX=Mouse.getX();
-		int posY=Mouse.getY();
-		posY = 600-Mouse.getY();
+		int posX = Mouse.getX();
+		int posY = 600 - Mouse.getY();
 
 		if (this.selectedFlight != null) {
 			
