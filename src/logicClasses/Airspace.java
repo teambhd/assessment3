@@ -291,7 +291,6 @@ public class Airspace {
 	 */
 
 	public void init(GameContainer gc) throws SlickException {
-
 		this.controls.init(gc);
 		this.airport.init(gc);
 
@@ -306,7 +305,6 @@ public class Airspace {
 		for (int i = 0; i < this.listofEntrypoints.size(); i++) { // Initialising entry point
 			this.listofEntrypoints.get(i).init(gc);
 		}
-
 	}
 
 	/**
@@ -315,7 +313,6 @@ public class Airspace {
 	 */
 
 	public void update(GameContainer gc) {
-
 		this.numberOfGameLoopsSinceLastFlightAdded++;
 		this.numberOfGameLoopsSinceLastFlightAirport++;
 		this.numberOfGameLoops++;
@@ -346,7 +343,6 @@ public class Airspace {
 
 		this.separationRules.update(this);
 		this.controls.update(gc, this);
-
 	}
 	/**
 	 * render: Render all of the graphics in the airspace
@@ -355,37 +351,40 @@ public class Airspace {
 	 * 
 	 * @throws SlickException
 	 */
+        
 	public void render(Graphics g, GameContainer gc) throws SlickException { 
 
-		//	this.airport.render(g, gc);
-
-		for (int i = 0; i < this.listOfWayppoints.size(); i++) { // Draws waypoints
+        // Draw waypoints
+		for (int i = 0; i < this.listOfWayppoints.size(); i++) { 
 			this.listOfWayppoints.get(i).render(g, this);
 		}
-		this.airport.render(g,this);
-		g.drawRect((int) 545, (int) 170, 45, 45);
 
+        // Draw the airport
+		this.airport.render(g, this);
 
-		for (int i = 0; i < this.listOfExitPoints.size(); i++) { // Draws exit points
+        // Draw exit points
+		for (int i = 0; i < this.listOfExitPoints.size(); i++) { 
 			this.listOfExitPoints.get(i).render(g, this);
 		}
-		for (int i = 0; i < this.listofEntrypoints.size(); i++) { // Draws entry points
+        
+        // Draw entry points
+		for (int i = 0; i < this.listofEntrypoints.size(); i++) { 
 			this.listofEntrypoints.get(i).render(g);
 		}
-		for (int i = 0; i < this.listOfFlightsInAirspace.size(); i++) { // Draws flights in airspace
+        
+        // Draws entry point
+		for (int i = 0; i < this.listOfFlightsInAirspace.size(); i++) { 
 			this.listOfFlightsInAirspace.get(i).render(g, gc);
 		}
 
 
 		this.separationRules.render(g, gc, this);
 		this.controls.render(gc,g);
-
 	}
 
 
 
 	// MUTATORS AND ACCESSORS
-
 	public int getMaxNumberOfFlights() {
 		return this.maximumNumberOfFlightsInAirspace;
 	}
