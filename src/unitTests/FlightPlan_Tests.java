@@ -50,9 +50,23 @@ public class FlightPlan_Tests {
 		// Testing that the function generates a entrypoint that is contained within the entrypoint list
     	EntryPoint result = flight1.getFlightPlan().generateEntryPoint(airspace, 2);
     	assertTrue(result == airspace.getListOfEntryPoints().get(0) || result == airspace.getListOfEntryPoints().get(1) || result == airspace.getListOfEntryPoints().get(2));
+    	
+
 		
 	}
 	
+	
+	@Test
+	public void generateEntryPointTest2(){
+		// Testing that the function generates a entrypoint at the airport.
+    	EntryPoint result = flight1.getFlightPlan().generateEntryPoint(airspace, 4);
+    	assertTrue(result == airspace.getListOfEntryPoints().get(0) || result == airspace.getListOfEntryPoints().get(1) || result == airspace.getListOfEntryPoints().get(2));
+    	assertEquals(flight1.getX(),airspace.getAirport().getX(),0.1);
+    	assertEquals(flight1.getY(),airspace.getAirport().getY(),0.1);
+
+	}
+
+    	
 	@Test
 	public void generateVelocityTest(){
 		// Testing that the velocity generated is always within the constraints applied.
@@ -158,6 +172,8 @@ public class FlightPlan_Tests {
 		flight1.setY(flight1.getFlightPlan().getCurrentRoute().get(0).getY());
 		flight1.getFlightPlan().updateFlightPlan();
 		assertEquals(previousSize - 1, flight1.getFlightPlan().getCurrentRoute().size(), 0 );
+		assertEquals (100, airspace.getScore(),0.1);
+
 		
 		
 	}

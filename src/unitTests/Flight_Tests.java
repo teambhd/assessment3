@@ -483,6 +483,7 @@ public class Flight_Tests {
 		flight1.LandFlight();
 		flight1.update();
 		assertTrue (flight1.getLanding());
+
 		
 	}
 
