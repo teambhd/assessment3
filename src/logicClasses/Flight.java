@@ -101,7 +101,7 @@ public class Flight {
 	public void LandFlight (){
 		if (this.currentAltitude <= 1000 && this.flightPlan.getVelocity() < 100 && this.checkIfAtAirport(airspace.getAirport()) && this.airspace.getAvailableAirport() && this.takenOff) {
 			this.landing = true;
-			this.getFlightPlan().setTarget(0);
+			this.getFlightPlan().setTargetVelocity(0);
 			this.setTargetAltitude(0);
 			this.airspace.resetNumberOfGameLoopsSinceLastFlightAirport();
 		}
@@ -115,7 +115,7 @@ public class Flight {
 	public void TakeOff (){
 		if (!this.takenOff) {
 			this.takenOff = true;
-			this.flightPlan.setTarget(100);
+			this.flightPlan.setTargetVelocity(100);
 			this.setTargetAltitude(1000);
 		}
 	}
@@ -165,7 +165,7 @@ public class Flight {
 	
 	public void changeVelocity (double newTarget) {
 		if ((newTarget <= 400) && (newTarget >= 0)){
-			flightPlan.setTarget(newTarget);
+			flightPlan.setTargetVelocity(newTarget);
 		}
 	}
 	

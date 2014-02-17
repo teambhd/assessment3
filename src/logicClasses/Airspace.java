@@ -188,7 +188,7 @@ public class Airspace {
 						tempFlight.setFlightName(this.generateFlightName());
 						tempFlight.setTargetAltitude (0);
 						tempFlight.getFlightPlan().setVelocity(0);
-						tempFlight.getFlightPlan().setTarget(0);
+						tempFlight.getFlightPlan().setTargetVelocity(0);
 						double heading = tempFlight.calculateHeadingToFirstWaypoint(
 								tempFlight.getFlightPlan().getPointByIndex(0).getX() ,
 								tempFlight.getFlightPlan().getPointByIndex(0).getY());
