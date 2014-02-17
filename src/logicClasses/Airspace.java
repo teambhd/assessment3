@@ -34,7 +34,7 @@ public class Airspace {
 		this.listOfWayppoints = new ArrayList<Waypoint>();
 		this.listofEntrypoints = new ArrayList<EntryPoint>();
 		this.listOfExitPoints = new ArrayList<ExitPoint>();
-		this.airport = new Airport(572, 197, "Airport");
+		this.airport = new Airport(572, 197, "BHD");
 		this.numberOfGameLoopsSinceLastFlightAdded = 0; // Stores how many loops since the last flight was spawned
 		this.numberOfGameLoopsSinceLastFlightAirport = 500; // Stores how many loops since the last flight interacted with airport
 		this.numberOfGameLoops = 0; // Stores how many loops there have been in total
