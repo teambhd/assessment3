@@ -108,7 +108,7 @@ public class Flight {
 	}
 	
 	/**
-	 * TakeOff: sets the flight's takenOff flag to true and the target altitude to 1000.
+	 * TakeOff: sets the flight's takenOff flag to true, target velocity to 100 and the target altitude to 1000.
 	 * Only works if a flight is not taken off.
 	 */
 	

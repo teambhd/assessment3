@@ -58,7 +58,7 @@ public class FlightPlan_Tests {
 		// Testing that the velocity generated is always within the constraints applied.
 		for (int i = 0; i < 100; i++){
 			double velocity = flightplan.generateVelocity();
-			assertTrue(velocity < 400 && velocity >= 200);
+			assertTrue(velocity < 400 && velocity >= 100);
 			
 		}
 		

@@ -8,7 +8,7 @@ import org.junit.Before;
 public class Flight_Tests {
 	
 	private Airspace airspace;
-	private  Flight flight1;
+	private  Flight flight1, flight2;
 	
 	@Before
 	public void setUp(){
@@ -33,6 +33,7 @@ public class Flight_Tests {
     	airspace.newExitPoint(150, 200, "2");
     	airspace.newExitPoint(1200, 300, "3");
     	flight1 = new Flight(airspace, 0);
+    	flight2 = new Flight(airspace, 4);
 		
 	}
 	
@@ -247,6 +248,9 @@ public class Flight_Tests {
 		
 	}
 	
+	
+	
+	
 	@Test
 	public void updateAltitudeTest2(){
 		// Testing that the Flight doesn't move when at the target altitude.
@@ -286,6 +290,60 @@ public class Flight_Tests {
 		assertEquals(8000, flight1.getAltitude(), 0.1);
 		
 	}
+	
+	//Testing updateVelocity()
+	
+	@Test
+	public void updateVelocityTest1(){
+		// Testing that the Flight moves towards the target velocity.
+		flight1.getFlightPlan().setVelocity(200);
+		flight1.getFlightPlan().setTargetVelocity(225);
+		flight1.updateVelocity();
+		assertEquals(200.25, flight1.getFlightPlan().getVelocity(), 0.1);
+		
+	}
+	@Test
+	public void updateVelocityTest2(){
+		// Testing that the Flight moves towards the target velocity.
+		flight1.getFlightPlan().setVelocity(100);
+		flight1.getFlightPlan().setTargetVelocity(225);
+		flight1.updateVelocity();
+		assertEquals(100.25, flight1.getFlightPlan().getVelocity(), 0.1);
+		
+	}
+
+	@Test
+	public void updateVelocityTest3(){
+		// Testing that the Flight moves towards the target velocity.
+		flight1.getFlightPlan().setVelocity(400);
+		flight1.getFlightPlan().setTargetVelocity(225);
+		flight1.updateVelocity();
+		assertEquals(399.75, flight1.getFlightPlan().getVelocity(), 0.1);
+		
+	}
+
+	@Test
+	public void updateVelocityTest4(){
+		// Testing that the Flight moves towards the target velocity.
+		flight1.getFlightPlan().setVelocity(200);
+		flight1.getFlightPlan().setTargetVelocity(100);
+		flight1.updateVelocity();
+		assertEquals(199.75, flight1.getFlightPlan().getVelocity(), 0.1);
+		
+	}
+
+	@Test
+	public void updateVelocityTest5(){
+		// Testing that the Flight doesn't move when at target velocity.
+		flight1.getFlightPlan().setVelocity(225);
+		flight1.getFlightPlan().setTargetVelocity(225);
+		flight1.updateVelocity();
+		assertEquals(225, flight1.getFlightPlan().getVelocity(), 0.1);
+		
+	}
+
+	
+
 	
 	
 	//Testing update_current_heading()
@@ -386,10 +444,48 @@ public class Flight_Tests {
 		
 	}
 	
+	//Testing Takeoff and Land()
 	
-	
-	
-	
+	@Test
+	public void TakeoffTest1(){
+		// Testing that the flight takes off properly.
+		flight2.TakeOff();
+		flight2.update();
+		assertEquals(100, flight2.getFlightPlan().getTargetVelocity(), 0.1);
+		assertEquals (1000, flight2.getTargetAltitude(), 0.1);
+		
+	}
+	@Test
+	public void TakeOffTest2(){
+		// Testing that a flight that has takenoff cannot use the TakeOff function.
+		flight1.TakeOff();
+		flight1.update();
+		assertEquals(flight2.getFlightPlan().getVelocity(), flight2.getFlightPlan().getTargetVelocity(), 0.1);
+		assertEquals (flight2.getAltitude(), flight2.getTargetAltitude(), 0.1);
+		
+	}
+
+	@Test
+	public void LandTest1(){
+		// Testing that a flight not at the airport cannot land.
+		flight1.LandFlight();
+		flight1.update();
+		assertFalse (flight1.getLanding());
+	}
+
+	@Test
+	public void LandTest2(){
+		// Testing that a flight at the airport lands.
+		flight1.setX(572);
+		flight1.setY(197);
+		flight1.setAltitude(0);
+		flight1.getFlightPlan().setVelocity(0);
+		flight1.LandFlight();
+		flight1.update();
+		assertTrue (flight1.getLanding());
+		
+	}
+
 
 
 }
