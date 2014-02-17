@@ -28,7 +28,7 @@
     
     <target name="clean">
         <delete dir="bin"/>
-        <delete dir="${junit.output.dir}"/>
+        <delete dir="junit"/>
         <delete dir="dist"/>
         <delete dir="doc"/>
     </target>
