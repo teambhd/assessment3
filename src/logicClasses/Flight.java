@@ -235,12 +235,12 @@ public class Flight {
         shadowImage.draw((int) this.x-35, (int) this.y, shadowScale);
 
         // Depending on a plane's speed, different images for the plane are drawn
-        if(this.flightPlan.getVelocity() <= 275){
+        if(this.flightPlan.getVelocity() <= 200){
         	slowFlightImage.setRotation((int) currentHeading);
         	slowFlightImage.draw((int) this.x-10, (int) this.y-10);
         }
 
-        else if((this.flightPlan.getVelocity() > 270) && (this.flightPlan.getVelocity() < 340)) {
+        else if((this.flightPlan.getVelocity() > 200) && (this.flightPlan.getVelocity() < 300)) {
         	regularFlightImage.setRotation((int) currentHeading);
         	regularFlightImage.draw((int) this.x-10, (int) this.y-10);
         }
