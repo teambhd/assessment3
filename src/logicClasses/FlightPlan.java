@@ -17,7 +17,7 @@ public class FlightPlan {
 	private ArrayList<Point> currentRoute = new ArrayList<Point>(); // Array that stores the current list of waypoints
 	private ArrayList<Point> waypointsAlreadyVisited; // Array that stores all the waypoints the flight has passed through
 	private double velocity; // velocity of the aircraft
-	private double targetVelo; //target velocity for the aircraft.
+	private double targetVelocity; //target velocity for the aircraft.
 	private Flight flight; // The flight object associated with the flight plan
 	private Point waypointMouseIsOver; // What waypoint is the mouse currently hovering over
 	private Point waypointClicked;
@@ -32,7 +32,7 @@ public class FlightPlan {
 	public FlightPlan(Airspace airspace, Flight flight, int entry) {
 		this.flight = flight;
 		this.velocity = generateVelocity();
-		this.targetVelo = this.velocity;
+		this.targetVelocity = this.velocity;
 		this.entryPoint = generateEntryPoint(airspace, entry);
 		this.currentRoute = buildRoute(airspace, this.entryPoint, entry);
 		this.waypointsAlreadyVisited = new ArrayList<Point>();
@@ -177,7 +177,7 @@ public class FlightPlan {
 	 */
 
 	public void setTargetVelocity(double target){
-		this.targetVelo = target;
+		this.targetVelocity = target;
 	}
 
 	/**
@@ -389,8 +389,8 @@ public class FlightPlan {
 		return this.velocity;
 	}
 
-	public double getTarget() {
-		return this.targetVelo;
+	public double getTargetVelocity() {
+		return this.targetVelocity;
 	}
 
 	public ArrayList<Point> getCurrentRoute() {

@@ -100,15 +100,15 @@ public class Controls {
 
             // Handle increase velocity button
 			if (posX > 10 && posX < 150 && posY < 350 && posY > 330 && Mouse.isButtonDown(0)) {
-				if (this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) { 
-					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget() + 25);
+				if (this.selectedFlight.getFlightPlan().getTargetVelocity() < MAXIMUM_VELOCITY) { 
+					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTargetVelocity() + 25);
 				}
 			}
 
             // Handle decrease velocity button
 			else if (posX > 10 && posX < 150 && posY < 380 && posY > 360 &&Mouse.isButtonDown(0)) {
-				if (this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) {
-					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTarget() - 25);
+				if (this.selectedFlight.getFlightPlan().getTargetVelocity() > MINIMUM_VELOCITY) {
+					this.selectedFlight.changeVelocity(this.selectedFlight.getFlightPlan().getTargetVelocity() - 25);
 				}
 			}
 
@@ -393,8 +393,8 @@ public class Controls {
                     
     				sideButton.draw(0, 330);
     
-                    if (this.selectedFlight.getFlightPlan().getTarget() < MAXIMUM_VELOCITY) {
-        				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget() + 25), 10, 330);
+                    if (this.selectedFlight.getFlightPlan().getTargetVelocity() < MAXIMUM_VELOCITY) {
+        				g.drawString("Accelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTargetVelocity() + 25), 10, 330);
         			}
                 
         			else {
@@ -403,8 +403,8 @@ public class Controls {
                     
     				sideButton.draw(0, 360);
 
-        			if (this.selectedFlight.getFlightPlan().getTarget() > MINIMUM_VELOCITY) {
-        				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTarget() - 25), 10, 360);
+        			if (this.selectedFlight.getFlightPlan().getTargetVelocity() > MINIMUM_VELOCITY) {
+        				g.drawString("Decelerate to " + Math.round(this.selectedFlight.getFlightPlan().getTargetVelocity() - 25), 10, 360);
         			}
     			
                     else {

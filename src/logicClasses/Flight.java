@@ -324,11 +324,11 @@ public class Flight {
 	 * updateVeloity: updates the velocity of the plane depending on user input.
 	 */
 	public void updateVelocity (){
-		if (this.flightPlan.getVelocity() > this.flightPlan.getTarget()){
+		if (this.flightPlan.getVelocity() > this.flightPlan.getTargetVelocity()){
 			this.flightPlan.setVelocity(this.flightPlan.getVelocity()-0.25);
 		}
 	
-    	else if (this.flightPlan.getVelocity()<this.flightPlan.getTarget()){
+    	else if (this.flightPlan.getVelocity()<this.flightPlan.getTargetVelocity()){
 			this.flightPlan.setVelocity(this.flightPlan.getVelocity()+0.25);
 		}
 	}
