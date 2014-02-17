@@ -172,13 +172,6 @@ public class FlightPlan {
 		return (rand.nextInt(12) + 4) * 25;
 	}
 
-	/**
-	 * setTargetVelocity: Sets target velocity according to user input
-	 */
-
-	public void setTargetVelocity(double target){
-		this.targetVelocity = target;
-	}
 
 	/**
 	 * isMouseOnWaypoint: Used to tell what waypoint the mouse is currently over
@@ -392,6 +385,11 @@ public class FlightPlan {
 	public double getTargetVelocity() {
 		return this.targetVelocity;
 	}
+	
+	public void setTargetVelocity(double target){
+		this.targetVelocity = target;
+	}
+
 
 	public ArrayList<Point> getCurrentRoute() {
 		return currentRoute;
