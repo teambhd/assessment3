@@ -389,7 +389,16 @@ public class Controls {
     				g.drawString("DEG", 114, 250);
                     
     				sideButton.draw(0, 300);
+    				
+    				if (this.selectedFlight.checkIfAtAirport(this.selectedFlight.getAirspace().getAirport()) &&
+    						this.selectedFlight.getAirspace().getAvailableAirport()){
+    				
                     g.drawString("Land", 10, 300);
+    				}
+    				
+    				else{
+    					g.drawString("Cannot land", 10, 300);
+    				}
                     
     				sideButton.draw(0, 330);
     

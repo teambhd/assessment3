@@ -206,8 +206,8 @@ public class Flight {
 	 */
 	
 	public boolean checkIfAtAirport(Point airport) {		
-		if (((Math.abs(Math.round(this.x) - Math.round(airport.getX()))) <= 45)
-				&& (Math.abs(Math.round(this.y) - Math.round(airport.getY()))) <= 45) {
+		if (((Math.abs(Math.round(this.x) - Math.round(airport.getX()))) <= 70)
+				&& (Math.abs(Math.round(this.y) - Math.round(airport.getY()))) <= 15) {
 			return true;
 		}
         

@@ -148,7 +148,29 @@ public class Airspace_Tests {
 		airspace.changeScore(score);
 		assertTrue(airspace.getScore() == oldscore + score);
 	}
+	//Testing removeSpecific ()
+	@Test
+	public void RemoveSpecificTest1(){
+		//Check if score is decremented if flight still has waypoints to pass.
+		airspace.addFlight(flight1);
+		airspace.removeSpecificFlight(0);
+		assertTrue (airspace.getScore() == -200);
+	}
+	
+	@Test
+	public void RemoveSpecificTest2(){
+		//Check if score is decremented if flight has no waypoints to pass.
+		airspace.addFlight(flight1);
+		while (flight1.getFlightPlan().getCurrentRoute().size()!=0){
+			flight1.getFlightPlan().getCurrentRoute().remove(0);
+		}
+		airspace.removeSpecificFlight(0);
+		assertTrue (airspace.getScore() == 200);
+
+	}
 }
+
+
 
 
 

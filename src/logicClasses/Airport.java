@@ -35,7 +35,7 @@ public class Airport extends Point {
 	
     public void render(Graphics g, Airspace airspace) throws SlickException {
         // In order to be centered - the airport.png is a multi-pixel image
-    	this.airportImage.draw(451,133);
+    	this.airportImage.draw(461,133);
     }
     
 }
