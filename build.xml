@@ -5,7 +5,6 @@
 <project basedir="." default="build" name="Game">
     
     <property environment="env"/>
-    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
@@ -29,7 +28,7 @@
     
     <target name="clean">
         <delete dir="bin"/>
-        <delete dir="${junit.output.dir}"/>
+        <delete dir="junit"/>
         <delete dir="dist"/>
         <delete dir="doc"/>
     </target>
@@ -50,23 +49,24 @@
     </target>
     
     <target depends="build" name="test">
-        <mkdir dir="${junit.output.dir}"/>
+        <mkdir dir="junit/"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="unitTests.Airspace_Tests" todir="${junit.output.dir}"/>
-            <test name="unitTests.FlightPlan_Tests" todir="${junit.output.dir}"/>
-            <test name="unitTests.Flight_Tests" todir="${junit.output.dir}"/>
-            <test name="unitTests.SeparationRules_Tests" todir="${junit.output.dir}"/>
+            <test name="unitTests.Airspace_Tests" todir="junit/"/>
+            <test name="unitTests.FlightPlan_Tests" todir="junit/"/>
+            <test name="unitTests.Flight_Tests" todir="junit/"/>
+            <test name="unitTests.SeparationRules_Tests" todir="junit/"/>
             <classpath refid="Game.classpath"/>
         </junit>
     </target>
     
     <target depends="test" name="report">
-        <junitreport todir="${junit.output.dir}">
-            <fileset dir="${junit.output.dir}">
+        <mkdir dir="junit/report/"/>
+        <junitreport todir="junit/report/">
+            <fileset dir="junit">
                 <include name="TEST-*.xml"/>
             </fileset>
-            <report format="frames" todir="${junit.output.dir}"/>
+            <report format="frames" todir="junit/report/"/>
         </junitreport>
     </target>
     
