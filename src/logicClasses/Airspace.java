@@ -178,11 +178,21 @@ public class Airspace {
 
 				if (checkNumber < 6) {
 
-					int entry;
+					int entry; //Used to indicate if the plane enters from the aiport.
+					int index = 0; //Used to iterate over the index of aircraft.
 
 					entry = rand.nextInt (5);
 
 					if (entry == 4 && this.AirportAvailable){ //Check if we should create the flight at the airport.
+						while (index<this.listOfFlightsInAirspace.size()){ //Check if there is another flight at the airport already.
+							if (!this.listOfFlightsInAirspace.get(index).getTakenOff()){
+								this.changeScore(-200); //If there is already a flight at the airport, decrement score.
+								return false;
+							}
+							else {
+								index+=1; //Else, go on iterating.
+							}
+						}
 						this.AirportAvailable = false;
 						Flight tempFlight = new Flight (this, 4);
 						tempFlight.setFlightName(this.generateFlightName());

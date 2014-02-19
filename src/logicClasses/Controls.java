@@ -391,8 +391,10 @@ public class Controls {
     				sideButton.draw(0, 300);
     				
     				if (this.selectedFlight.checkIfAtAirport(this.selectedFlight.getAirspace().getAirport()) &&
-    						this.selectedFlight.getAirspace().getAvailableAirport()){
-    				
+    						this.selectedFlight.getAirspace().getAvailableAirport() &&
+    						this.selectedFlight.getAltitude() == 1000 &&
+    						this.selectedFlight.getFlightPlan().getVelocity()<100){
+    				//Check if the flight can actualy land and only draw the "Land" string in that case.
                     g.drawString("Land", 10, 300);
     				}
     				
