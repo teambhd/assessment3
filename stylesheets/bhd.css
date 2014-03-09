@@ -1,0 +1,148 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family:'Fira Sans', sans-serif;
+    font-weight:bold;
+}
+
+kbd, pre, code {
+    font-family:'Fira Mono';
+}
+
+body {
+    font-family:'Fira Sans', sans-serif;
+}
+
+#header {
+    background-color:#3F4141;
+    padding-top:25px;
+    height:105px;
+}
+
+#title {
+    float:left;
+}
+
+#title h1 {
+    color:#F3F3F3;
+    font-size:70px;
+    margin-left:-2px;
+}
+
+#title span {
+    color:#F3F3F3;
+    font-size:26px;
+}
+
+#icon i {
+    color:#F3F3F3;
+    font-size:100px;
+    position:absolute;
+    top:-5px;
+    right:10px;
+}
+
+#screenshot {
+    margin-top:20px;
+    margin-bottom:20px;
+    height:487px;
+}
+
+.buttons .button {
+    font-family:'Fira Sans', sans-serif;
+    position:relative;
+    text-align:left;
+    height:40px;
+}
+
+.buttons a.button, .buttons a.button:visited {
+    color:#444444;
+}
+
+.buttons a.button:hover, .buttons a.button:visited:hover {
+    color:#333333;
+}
+
+.buttons .button span {
+    display:block;
+    margin-left:15px;
+}
+
+.buttons .button .big {
+    font-size:20px;
+    height:20px;
+    line-height:20px;
+    margin-top:2px;
+    margin-bottom:4px;
+    text-transform:uppercase;
+}
+
+.buttons .button .small {
+    font-size:14px;
+    height:14px;
+    line-height:14px;
+}
+
+.buttons .button i {
+    position:absolute;
+    top:8px;
+    right:15px;
+    font-size:40px;
+}
+
+#read-on {
+    font-size:18px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.grey-bg {
+    background-color:#F3F3F3;
+}
+
+.why {
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.why-icon {
+    font-size:78px; /* equal to a width of 100px in fixed width mode */
+}
+
+#menu-text {
+    margin-top:13px;
+}
+
+.example {
+    padding:10px;
+    border:1px solid #D3D3D3;
+    border-radius:5px;
+    background-color:#F3F3F3;
+}
+
+#menu .example {
+    margin-top:13px;
+}
+
+.grey-bg .example {
+    background-color:white;
+}
+
+.example h3 {
+    font-size:20px;
+    line-height:20px;
+}
+
+.example p:last-child, .why p:last-child {
+    margin-bottom:0px;
+}
+
+#problems {
+    font-size:18px;
+    text-align:center;
+    margin-bottom:20px;
+    margin-top:20px;
+}
+
+#bottom-links {
+    text-align:center;
+    margin-bottom:20px;
+}

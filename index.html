@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Don't Crash by Team BHD</title>
+
+    <!-- Skeleton -->
+	<link rel="stylesheet" media="screen" href="stylesheets/base.css" />
+	<link rel="stylesheet" media="screen" href="stylesheets/skeleton.css" />
+    
+    <!-- Fonts -->
+	<link rel="stylesheet" media="screen" href="stylesheets/fira.css" />
+	<link rel="stylesheet" media="screen" href="stylesheets/font-awesome.min.css" />
+	
+    <link rel="stylesheet" media="screen" href="stylesheets/bhd.css" />
+</head>
+
+<body>
+    <div id="header">
+    	<div class="container">
+            <div class="sixteen columns">
+                <div id="title">
+                    <h1>Don't Crash</h1>
+                    <span>by Team BHD</span>
+                </div>
+                <div id="icon">
+                    <i class="fa fa-plane"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="screenshot">
+        <div class="container">
+            <div class="sixteen columns">
+                <img class="scale-with-grid" src="images/screenshot.png" alt="gameplay screenshot" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="buttons">
+        <div class="container">                
+                <div class="one-third column">
+                    <a class="button full-width" href="https://github.com/teambhd/assessment3">
+                        <i class="fa fa-github"></i>
+                    	<span class="big">Get the source code</span>
+                    	<span class="small">from our GitHub repository</span>
+                    </a>
+                </div>
+                <div class="one-third column">
+                    <a class="button full-width" href="downloads/bhdgame.jar">
+                        <i class="fa fa-cloud-download"></i>
+                    	<span class="big">Download the game</span>
+                    	<span class="small">bhdgame.jar &ndash; 7.3MB</span>
+                    </a>
+                </div>
+                <div class="one-third column">
+                    <a class="button full-width" href="downloads/bhdmanual.pdf">
+                    	<i class="fa fa-book"></i>
+                    	<span class="big">Read the manual</span>
+                        <span class="small">bhdmanual.pdf &ndash; 6.6MB</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="read-on">
+        <div class="container">
+            <div class="sixteen columns">
+                &hellip;or read on for more reasons why you should choose our project
+            </div>
+        </div>
+    </div>
+    
+    <div id="coding-and-testing" class="why grey-bg">
+        <div class="container">
+            <div class="two columns">
+                <i class="why-icon fa fa-fw fa-code"></i>
+            </div>
+            <div class="six columns">
+                <h2>Elegantly Coded</h2>
+                
+                <p>
+                    Our game is built on the solid foundations of <a href="http://lwjgl.org/">LWJGL</a>, 
+                    <a href="http://slick.ninjacave.com">Slick2D</a> and Team WAW's Assessment 2 project.
+                </p>
+                
+                <p>
+                    We've taken special care to write 
+                    <a href="http://google-styleguide.googlecode.com/svn/trunk/javaguide.html">consistently-formatted</a> 
+                    code that's as self-documenting as possible.
+                </p>
+                
+                <p>
+                    We've also ensured that everything is well documented in both comments and 
+                    <a href="javadoc/">our JavaDoc documentation</a>.
+                </p>
+                
+                <p>
+                    Read more about our approach to extending the game in 
+                    <a href="downloads/extension-report.pdf">our extension report</a>.
+                </p>
+            </div>
+            <div class="two columns">
+                <i class="why-icon fa fa-fw fa-bug"></i>
+            </div>
+            <div class="six columns">
+                <h2>Meticulously Tested</h2>
+                
+                <p>
+                    Our code has been exhaustively tested, so you can safely assume that every edge-case has 
+                    been covered, and that you'll not have to spend time fixing any pre-existing bugs.
+                </p>
+                
+                <p>
+                    Our <a href="downloads/test-plan.pdf">test plan</a> contains details of all our tests, 
+                    both automated and manual. You can also read <a href="report/">our latest JUnit report</a>, 
+                    which gives full details of the results of all our automated tests.
+                </p>
+                
+                <p>
+                    We've also conducted extensive 
+                    <a href="downloads/acceptance-testing.pdf">user acceptance testing</a> 
+                    with the customer, so you can rest assured that all Assessment 3 requirements have been met.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="menu" class="why">
+        <div class="container">
+            <div class="sixteen columns">
+                <h2>Flexible Menus</h2>
+            </div>
+            
+            <div class="clear"></div>
+            
+            <div class="one-third column">
+                <img class="scale-with-grid" src="images/menu-screen.png" alt="main menu screenshot" />
+            </div>
+            
+            <div class="one-third column">
+                <img class="scale-with-grid" src="images/help-screen.png" alt="help screen screenshot" />
+            </div>
+            
+            <div class="one-third column">
+                <img class="scale-with-grid" src="images/game-over-screen.png" alt="game over screenshot" />
+            </div>
+            
+            <div class="clear"></div>
+            
+            <div id="menu-text" class="two-thirds column">
+                <p>
+                    We've rebuilt all the game menu screens to use actual text elements instead of images of text.
+                </p>
+                    
+                <p>
+                    This will make it much easier for you to change things to match your team's branding 
+                    and to add whatever new options are required for Assessment 4. No image editor required.
+                </p>
+                    
+                <p>
+                    In addition, we've made sure that all click-handlers use dynamic dimensions, 
+                    meaning you can change the text of buttons, or their font size, and the associated
+                    hover effects and click actions will seamlessly adjust to the new width and height.
+                </p>
+            </div>
+            
+            <div class="one-third column">
+                <div class="example">
+                    <h3><i class="fa fa-info-circle"></i> Example</h3>
+                    <p>
+                        To change the game title (currently "Don't Crash") just amend the <kbd>NAME</kbd> constant 
+                        on line 17 of <kbd>stateContainer/Game.java</kbd>. 
+                        All screens in the game, as well as the application title, will automatically change.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="simple-build-system" class="why grey-bg">
+        <div class="container">
+            <div class="two columns">
+                <i class="why-icon fa fa-fw fa-magic"></i>
+            </div>
+            <div class="eight columns">
+                <h2>Simple Build System</h2>
+                
+                <p>
+                    Included with our source code is a comprehensive <a href="http://ant.apache.org">Ant</a>
+                    buildfile, so compiling and running the game needs only a single console command. 
+                    There's no external dependencies other than the standard JRE.
+                </p>
+                
+                <p>
+                    We also provide full instructions for importing the project into 
+                    <a href="http://eclipse.org">Eclipse</a>. The required <kbd>.project</kbd> and 
+                    <kbd>.classpath</kbd> files are contained in our repository, as
+                    well as run configuration files for both the game and the unit tests.
+                </p>
+                
+                <p>
+                    There's also clear instructions in <a href="readme.html">our Readme</a> for creating 
+                    standalone .jar files like the one available for download on this website.
+                </p>
+            </div>
+            <div class="six columns">
+                <div class="example">
+                    <h3><i class="fa fa-info-circle"></i> Example</h3>
+                    
+                    <p>
+                        To build and run the game simply run <kbd>ant play</kbd> 
+                        from within the game directory. 
+                    </p>
+                    
+                    <p>
+                        The command <kbd>ant test</kbd> will run the unit tests while
+                        <kbd>ant report</kbd> will generate the test report.
+                    </p>
+                    
+                    <p>
+                        For full details of all build commands, including commands for 
+                        generating documentation and standalone executables, 
+                        see <a href="readme.html">the project's Readme</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="problems">
+        <div class="container">
+            <div class="sixteen columns">
+                Having problems? Send us an email on 
+                <a href="mailto:teambhd-group@york.ac.uk">teambhd-group@york.ac.uk</a> 
+                and we'll be happy to help
+            </div>
+        </div>
+    </div>
+    
+    <div class="buttons">
+        <div class="container">                
+                <div class="one-third column">
+                    <a class="button full-width" href="https://github.com/teambhd/assessment3">
+                        <i class="fa fa-github"></i>
+                    	<span class="big">Get the source code</span>
+                    	<span class="small">from our GitHub repository</span>
+                    </a>
+                </div>
+                <div class="one-third column">
+                    <a class="button full-width" href="downloads/bhdgame.jar">
+                        <i class="fa fa-cloud-download"></i>
+                    	<span class="big">Download the game</span>
+                    	<span class="small">bhdgame.jar &ndash; 7.3MB</span>
+                    </a>
+                </div>
+                <div class="one-third column">
+                    <a class="button full-width" href="downloads/bhdmanual.pdf">
+                    	<i class="fa fa-book"></i>
+                    	<span class="big">Read the manual</span>
+                        <span class="small">bhdmanual.pdf &ndash; 6.6MB</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div id="bottom-links">
+        <div class="container">
+            <div class="sixteen columns">
+                <a href="javadoc/">JavaDoc</a> &bull;
+                <a href="downloads/extension-report.pdf">Extension Report</a> &bull;
+                <a href="downloads/test-plan.pdf">Test Plan</a> &bull;
+                <a href="downloads/acceptance-testing.pdf">Acceptance Testing</a> &bull;
+                <a href="report/">JUnit Report</a> &bull;
+                <a href="readme.html">Readme</a> &bull;
+                <a href="attribution.html">Attribution</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
